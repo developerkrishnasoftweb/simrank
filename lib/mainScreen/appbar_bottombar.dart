@@ -7,6 +7,8 @@ import 'package:simrank/mainScreen/menu.dart';
 import 'package:simrank/mainScreen/overview.dart';
 import 'package:simrank/mainScreen/shoutout.dart';
 import 'package:simrank/mainScreen/videos.dart';
+import '../constant/colors.dart';
+import '../constant/strings.dart';
 Widget lead(BuildContext context){
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -16,13 +18,14 @@ Widget lead(BuildContext context){
         width: 40.0,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Color.fromRGBO(158, 138, 191, 1),
-            boxShadow: <BoxShadow> [
-              BoxShadow(offset: const Offset(2.0, 2.0),
-                blurRadius: 5.0,
-                spreadRadius: 2.0,)
-            ]
-        ),
+            color: MyColors.btncolorsprimary,
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  offset: const Offset(2.0, 2.0),
+                  blurRadius: 5.0,
+                  spreadRadius: 2.0,
+                  color: MyColors.btnsho)
+            ]),
         child: GestureDetector(
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => Menu()));
@@ -44,14 +47,15 @@ Widget titlename(BuildContext context){
         height: 40.0,
         width: 40.0,
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Color.fromRGBO(158, 138, 191, 1),
-            boxShadow: <BoxShadow> [
-              BoxShadow(offset: const Offset(2.0, 2.0),
-                blurRadius: 5.0,
-                spreadRadius: 2.0,)
-            ]
-        ),
+            shape: BoxShape.rectangle,
+            color: MyColors.btncolorsprimary,
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  offset: const Offset(2.0, 2.0),
+                  blurRadius: 5.0,
+                  spreadRadius: 2.0,
+                  color: MyColors.btnsho)
+            ]),
         child: GestureDetector(
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => Tablayout()));
@@ -62,10 +66,25 @@ Widget titlename(BuildContext context){
           ),
         ),
       ),
-      Text(
-        "Simran K" + '\n' + "Official app",
-        textAlign: TextAlign.center,
-        style: TextStyle(),
+      Column(
+        children: [
+          Text(
+            Strings.title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: "LogoFont",
+                fontSize: 30.0,fontWeight: FontWeight.bold
+            ),
+          ),
+          Text(
+            Strings.subtitle,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontFamily: "LogoText",
+              fontSize: 15.0
+            ),
+          ),
+        ],
       ),
       GestureDetector(
         onTap: (){
@@ -77,7 +96,17 @@ Widget titlename(BuildContext context){
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
             ),
-            child: Image.asset('assets/images/diamond.png')),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Image.asset('assets/images/diamond.png'),
+                Text(
+                  "999",
+                  style: TextStyle(fontSize: 11.0,fontWeight: FontWeight.bold),
+                )
+              ],
+            )
+        ),
       )
     ],
   );
@@ -89,14 +118,16 @@ Widget action(BuildContext context){
     child: Container(
       height: 40.0,
       width: 40.0,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Color.fromRGBO(158, 138, 191, 1),
-          boxShadow: <BoxShadow> [
-            BoxShadow(offset: const Offset(2.0, 2.0),
-              blurRadius: 5.0,
-              spreadRadius: 2.0,)
-          ]),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: MyColors.btncolorsprimary,
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  offset: const Offset(2.0, 2.0),
+                  blurRadius: 5.0,
+                  spreadRadius: 2.0,
+                  color: MyColors.btnsho)
+            ]),
       child: GestureDetector(
         onTap: () {},
         child: Icon(
@@ -154,20 +185,21 @@ class _BottomBarState extends State<BottomBar> {
               width: 40.0,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color.fromRGBO(158, 138, 191, 1),
+                  color: MyColors.btncolorsprimary,
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                      offset: const Offset(2.0, 2.0),
-                      blurRadius: 5.0,
-                      spreadRadius: 2.0,
-                    )
+                        offset: const Offset(2.0, 2.0),
+                        blurRadius: 5.0,
+                        spreadRadius: 2.0,
+                        color: MyColors.btnsho)
                   ]),
               child: Icon(
                 Icons.photo,
                 size: 25.0,
               ),
             ),
-            title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("Photo")),
+            title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("Photo",style:
+            TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0))),
             backgroundColor: Color.fromRGBO(158, 138, 191, 1)
         ),
         BottomNavigationBarItem(
@@ -176,20 +208,21 @@ class _BottomBarState extends State<BottomBar> {
             width: 40.0,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color.fromRGBO(158, 138, 191, 1),
+                color: MyColors.btncolorsprimary,
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    offset: const Offset(2.0, 2.0),
-                    blurRadius: 5.0,
-                    spreadRadius: 2.0,
-                  )
+                      offset: const Offset(2.0, 2.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 2.0,
+                      color: MyColors.btnsho)
                 ]),
             child: Icon(
               Icons.ondemand_video,
               size:25.0,
             ),
           ),
-          title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("Video")),
+          title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("Video",style:
+          TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0))),
           backgroundColor: Color.fromRGBO(158, 138, 191, 1)
         ),
         BottomNavigationBarItem(
@@ -198,20 +231,21 @@ class _BottomBarState extends State<BottomBar> {
             width: 40.0,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color.fromRGBO(158, 138, 191, 1),
+                color: MyColors.btncolorsprimary,
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    offset: const Offset(2.0, 2.0),
-                    blurRadius: 5.0,
-                    spreadRadius: 2.0,
-                  )
+                      offset: const Offset(2.0, 2.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 2.0,
+                      color: MyColors.btnsho)
                 ]),
             child: Icon(
               Icons.local_library,
               size: 25.0,
             ),
           ),
-          title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("Live")),
+          title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("Live",style:
+          TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0))),
             backgroundColor: Color.fromRGBO(158, 138, 191, 1)
         ),
         BottomNavigationBarItem(
@@ -220,20 +254,21 @@ class _BottomBarState extends State<BottomBar> {
             width: 40.0,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color.fromRGBO(158, 138, 191, 1),
+                color: MyColors.btncolorsprimary,
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    offset: const Offset(2.0, 2.0),
-                    blurRadius: 5.0,
-                    spreadRadius: 2.0,
-                  )
+                      offset: const Offset(2.0, 2.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 2.0,
+                      color: MyColors.btnsho)
                 ]),
             child: Icon(
               Icons.live_tv,
               size: 25.0,
             ),
           ),
-          title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("Shout Out")),
+          title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("Shout Out",style:
+          TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0))),
             backgroundColor: Color.fromRGBO(158, 138, 191, 1)
         ),
         BottomNavigationBarItem(
@@ -242,20 +277,21 @@ class _BottomBarState extends State<BottomBar> {
             width: 40.0,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color.fromRGBO(158, 138, 191, 1),
+                color: MyColors.btncolorsprimary,
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    offset: const Offset(2.0, 2.0),
-                    blurRadius: 5.0,
-                    spreadRadius: 2.0,
-                  )
+                      offset: const Offset(2.0, 2.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 2.0,
+                      color: MyColors.btnsho)
                 ]),
             child: Icon(
               Icons.chat,
               size: 25.0,
             ),
           ),
-          title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("DM")),
+          title: Padding(padding:EdgeInsets.only(top: 5.0),child: Text("DM",style:
+          TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0))),
             backgroundColor: Color.fromRGBO(158, 138, 191, 1)
         )
       ],
