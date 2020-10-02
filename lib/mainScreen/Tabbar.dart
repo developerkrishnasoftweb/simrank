@@ -27,12 +27,16 @@ class _TablayoutState extends State<Tablayout> {
           leading: lead(context),
           actions: [action(context)],
           title: titlename(context),
-          bottom: TabBar(tabs: [
+          bottom: TabBar(indicatorColor: Colors.white, indicatorWeight: 4.0,tabs: [
             Tab(
-              child: Text("HomeFeed"),
+              child: Text("HomeFeed",
+              style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold),
+              ),
             ),
             Tab(
-              child: Text("OverView"),
+              child: Text("OverView",
+                  style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold),
+              ),
             ),
           ]),
         ),
@@ -52,13 +56,13 @@ class _TablayoutState extends State<Tablayout> {
                           width: size.height * 0.05,
                           decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              color: MyColors.primarycolors,
+                              color: MyColors.btncolorsprimary,
                               boxShadow: <BoxShadow>[
                                 BoxShadow(
-                                  offset: const Offset(2.0, 2.0),
-                                  blurRadius: 5.0,
-                                  spreadRadius: 2.0,
-                                )
+                                    offset: const Offset(2.0, 2.0),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 2.0,
+                                    color: MyColors.btnsho)
                               ]),
                           child: GestureDetector(
                             onTap: () {
@@ -76,13 +80,13 @@ class _TablayoutState extends State<Tablayout> {
                           width: size.height * 0.05,
                           decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              color: MyColors.primarycolors,
+                              color: MyColors.btncolorsprimary,
                               boxShadow: <BoxShadow>[
                                 BoxShadow(
-                                  offset: const Offset(2.0, 2.0),
-                                  blurRadius: 5.0,
-                                  spreadRadius: 2.0,
-                                )
+                                    offset: const Offset(2.0, 2.0),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 2.0,
+                                    color: MyColors.btnsho)
                               ]),
                           child: GestureDetector(
                             onTap: () {},
@@ -98,13 +102,13 @@ class _TablayoutState extends State<Tablayout> {
                           width: size.height * 0.05,
                           decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              color: MyColors.primarycolors,
+                              color: MyColors.btncolorsprimary,
                               boxShadow: <BoxShadow>[
                                 BoxShadow(
-                                  offset: const Offset(2.0, 2.0),
-                                  blurRadius: 5.0,
-                                  spreadRadius: 2.0,
-                                )
+                                    offset: const Offset(2.0, 2.0),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 2.0,
+                                    color: MyColors.btnsho)
                               ]),
                           child: GestureDetector(
 
@@ -123,64 +127,84 @@ class _TablayoutState extends State<Tablayout> {
                     width: size.width,
                     child: SingleChildScrollView(
                         child: Container(
-                      height: size.height * 0.63,
-                      child: GridView.builder(
-                        itemCount: 20,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                        itemBuilder: (BuildContext context, int index) {
-                          return new Card(
-                            child: new GridTile(
-                              header: IconButton(
-                                alignment: Alignment.topRight,
-                                icon: Icon(Icons.more_horiz),
-                                color: MyColors.whiteColor,
-                                onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutMess()));
-                                },
-                              ),
-                              footer: Container(
-                                color: MyColors.blackcolor,
-                                child: new Row(
-                                  mainAxisAlignment:
+                          color: Color(0xFF987bb0),
+                          height: size.height * 0.628,
+                          width: size.width,
+                          child: GridView.builder(
+                            itemCount: 20,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3),
+                            itemBuilder: (BuildContext context, int index) {
+                              return new Card(
+                                margin: EdgeInsets.all(5.0),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                color: MyColors.btndarkcolor,
+                                shadowColor: Colors.black,elevation: 21.0,
+                                child: new GridTile(
+                                  header: IconButton(
+                                    alignment: Alignment.topRight,
+                                    icon: Icon(Icons.more_horiz),
+                                    color: MyColors.whiteColor,
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutMess()));
+                                    },
+                                  ),
+                                  footer: Container(
+                                    padding: EdgeInsets.only(left: 1.0, right: 1.0),
+                                    decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.2),
+                                        borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(10.0),
+                                            bottomRight: Radius.circular(10.0))),
+                                    child: new Row(
+                                      mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
                                       children: [
-                                        Icon(
-                                          Icons.favorite,
-                                          color: MyColors.whiteColor,
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.favorite,
+                                              color: MyColors.whiteColor,
+                                            ),
+                                            Text("1.5K",
+                                                style: TextStyle(
+                                                    color: MyColors.whiteColor))
+                                          ],
                                         ),
-                                        Text("1.5K",
-                                            style: TextStyle(
-                                                color: MyColors.whiteColor))
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.chat,
-                                          color: MyColors.whiteColor,
-                                        ),
-                                        Text(
-                                          "1.5K",
-                                          style: TextStyle(
-                                              color: MyColors.whiteColor),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.chat,
+                                              color: MyColors.whiteColor,
+                                            ),
+                                            Text(
+                                              "1.5K",
+                                              style: TextStyle(
+                                                  color: MyColors.whiteColor),
+                                            )
+                                          ],
                                         )
                                       ],
-                                    )
-                                  ],
+                                    ),
+                                  ),
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/images/avatar.jpg"),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+
+                                    // child:
+                                    //     Image.asset('assets/images/avatar.jpg'),
+                                  ), //just for testing, will fill with image later
                                 ),
-                              ),
-                              child: Container(
-                                child:
-                                    new Image.asset('assets/images/avatar.jpg'),
-                              ), //just for testing, will fill with image later
-                            ),
-                          );
-                        },
-                      ),
-                    )),
+                              );
+                            },
+                          ),
+                        )),
                   ),
                 ],
               ),
@@ -226,16 +250,16 @@ class _TablayoutState extends State<Tablayout> {
                               decoration: BoxDecoration(
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
-                                      offset: const Offset(2.0, 2.0),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 2.0,
-                                    )
+                                        offset: const Offset(2.0, 2.0),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 2.0,
+                                        color: MyColors.btnsho)
                                   ],
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                       colors: [
-                                        MyColors.darkprimarycolor,
+                                        MyColors.btndarkcolor,
                                         MyColors.primarycolors
                                       ]),
                                   borderRadius: BorderRadius.circular(15.0),
@@ -292,10 +316,10 @@ class _TablayoutState extends State<Tablayout> {
                                 decoration: BoxDecoration(
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
-                                        offset: const Offset(2.0, 2.0),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 2.0,
-                                      )
+                                          offset: const Offset(2.0, 2.0),
+                                          blurRadius: 5.0,
+                                          spreadRadius: 2.0,
+                                          color: MyColors.btnsho)
                                     ],
                                     gradient: LinearGradient(
                                         begin: Alignment.topLeft,
@@ -347,16 +371,16 @@ class _TablayoutState extends State<Tablayout> {
                               decoration: BoxDecoration(
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
-                                      offset: const Offset(2.0, 2.0),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 2.0,
-                                    )
+                                        offset: const Offset(2.0, 2.0),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 2.0,
+                                        color: MyColors.btnsho)
                                   ],
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                       colors: [
-                                        MyColors.darkprimarycolor,
+                                        MyColors.btndarkcolor,
                                         MyColors.primarycolors
                                       ]),
                                   borderRadius: BorderRadius.circular(15.0),
@@ -409,10 +433,10 @@ class _TablayoutState extends State<Tablayout> {
                                 decoration: BoxDecoration(
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
-                                        offset: const Offset(2.0, 2.0),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 2.0,
-                                      )
+                                          offset: const Offset(2.0, 2.0),
+                                          blurRadius: 5.0,
+                                          spreadRadius: 2.0,
+                                          color: MyColors.btnsho)
                                     ],
                                     gradient: LinearGradient(
                                         begin: Alignment.topLeft,
@@ -464,16 +488,16 @@ class _TablayoutState extends State<Tablayout> {
                               decoration: BoxDecoration(
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
-                                      offset: const Offset(2.0, 2.0),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 2.0,
-                                    )
+                                        offset: const Offset(2.0, 2.0),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 2.0,
+                                        color: MyColors.btnsho)
                                   ],
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                       colors: [
-                                        MyColors.darkprimarycolor,
+                                        MyColors.btndarkcolor,
                                         MyColors.primarycolors
                                       ]),
                                   borderRadius: BorderRadius.circular(15.0),
@@ -539,10 +563,10 @@ class _TablayoutState extends State<Tablayout> {
                                         decoration: BoxDecoration(
                                             boxShadow: <BoxShadow>[
                                               BoxShadow(
-                                                offset: const Offset(2.0, 2.0),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 2.0,
-                                              )
+                                                  offset: const Offset(2.0, 2.0),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 2.0,
+                                                  color: MyColors.btnsho)
                                             ],
                                             gradient: LinearGradient(
                                                 begin: Alignment.topLeft,
@@ -597,16 +621,16 @@ class _TablayoutState extends State<Tablayout> {
                               decoration: BoxDecoration(
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
-                                      offset: const Offset(2.0, 2.0),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 2.0,
-                                    )
+                                        offset: const Offset(2.0, 2.0),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 2.0,
+                                        color: MyColors.btnsho)
                                   ],
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                       colors: [
-                                        MyColors.darkprimarycolor,
+                                        MyColors.btndarkcolor,
                                         MyColors.primarycolors
                                       ]),
                                   borderRadius: BorderRadius.circular(15.0),
@@ -678,11 +702,10 @@ class _TablayoutState extends State<Tablayout> {
                                           decoration: BoxDecoration(
                                               boxShadow: <BoxShadow>[
                                                 BoxShadow(
-                                                  offset:
-                                                      const Offset(2.0, 2.0),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 2.0,
-                                                )
+                                                    offset: const Offset(2.0, 2.0),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 2.0,
+                                                    color: MyColors.btnsho)
                                               ],
                                               gradient: LinearGradient(
                                                   begin: Alignment.topLeft,
@@ -724,16 +747,16 @@ class _TablayoutState extends State<Tablayout> {
                               decoration: BoxDecoration(
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
-                                      offset: const Offset(2.0, 2.0),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 2.0,
-                                    )
+                                        offset: const Offset(2.0, 2.0),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 2.0,
+                                        color: MyColors.btnsho)
                                   ],
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                       colors: [
-                                        MyColors.darkprimarycolor,
+                                        MyColors.btndarkcolor,
                                         MyColors.primarycolors
                                       ]),
                                   borderRadius: BorderRadius.circular(15.0),
@@ -757,10 +780,10 @@ class _TablayoutState extends State<Tablayout> {
                               decoration: BoxDecoration(
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
-                                      offset: const Offset(2.0, 2.0),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 2.0,
-                                    )
+                                        offset: const Offset(2.0, 2.0),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 2.0,
+                                        color: MyColors.btnsho)
                                   ],
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
@@ -805,16 +828,16 @@ class _TablayoutState extends State<Tablayout> {
                       decoration: BoxDecoration(
                           boxShadow: <BoxShadow>[
                             BoxShadow(
-                              offset: const Offset(2.0, 2.0),
-                              blurRadius: 5.0,
-                              spreadRadius: 2.0,
-                            )
+                                offset: const Offset(2.0, 2.0),
+                                blurRadius: 5.0,
+                                spreadRadius: 2.0,
+                                color: MyColors.btnsho)
                           ],
                           gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                MyColors.darkprimarycolor,
+                                MyColors.btndarkcolor,
                                 MyColors.primarycolors
                               ]),
                           borderRadius: BorderRadius.circular(5.0),
@@ -891,9 +914,10 @@ class _TablayoutState extends State<Tablayout> {
                         Column(
                           children: [
                             Container(
-                                height: size.height * 0.28,
-                                width: size.height * 0.25,
-                                child: Image.asset('assets/images/pichart.jpeg'))
+                                height: size.height * 0.25,
+                                width: size.height * 0.24,
+                                child:
+                                Image.asset('assets/images/pichart.jpeg'))
                           ],
                         ),
                         Column(
@@ -907,7 +931,7 @@ class _TablayoutState extends State<Tablayout> {
                                       return Text(
                                         "[$index] Post Month",
                                         style: TextStyle(
-                                            fontSize: 15.0,
+                                            fontSize: 13.0,
                                             color: MyColors.whiteColor,
                                             fontWeight: FontWeight.bold),
                                       );
@@ -943,7 +967,7 @@ class _TablayoutState extends State<Tablayout> {
                                           return Text(
                                             "[$index] Post Month",
                                             style: TextStyle(
-                                                fontSize: 15.0,
+                                                fontSize: 13.0,
                                                 color: MyColors.whiteColor,
                                                 fontWeight: FontWeight.bold),
                                           );

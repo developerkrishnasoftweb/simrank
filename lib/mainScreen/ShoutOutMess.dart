@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simrank/mainScreen/shoutout_message.dart';
 import 'appbar_bottombar.dart';
-import '../constant/Colors.dart';
+import '../constant/colors.dart';
 
 class ShoutOutMess extends StatefulWidget {
   @override
@@ -29,30 +29,51 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
               width: size.width,
               decoration: BoxDecoration(
                 color: MyColors.darkprimarycolor,
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        MyColors.btndarkcolor,
+                        MyColors.primarycolors
+                      ])
               ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: 35.0, bottom: 35.0, left: 25.0, right: 25.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(35.0),
-                    image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/avatar.jpg',
-                        ),
-                        fit: BoxFit.fill),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 35.0, left: 25.0, right: 25.0),
+                    child: Container(
+                      height: 320,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(35.0),
+                        image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/avatar.jpg',
+                            ),
+                            fit: BoxFit.fill),
+                      ),
+                    ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 5),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5,top: 10.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text('ShoutOut',style: TextStyle(color: MyColors.whiteColor,fontSize: 25,fontWeight: FontWeight.bold),),
+                        Text(
+                          'ShoutOut',
+                          style: TextStyle(
+                              color: MyColors.whiteColor,
+                              fontSize: 26,
+                              fontFamily: "LogoText",
+                              letterSpacing: 4.0,
+                          //    fontWeight: FontWeight.bold
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                ),
+                ],
               ),
             ),
             GestureDetector(
@@ -67,16 +88,16 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
                   borderRadius: BorderRadius.circular(10.0),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                      offset: const Offset(2.0, 2.0),
-                      blurRadius: 5.0,
-                      spreadRadius: 2.0,
-                    )
+                        offset: const Offset(2.0, 2.0),
+                        blurRadius: 5.0,
+                        spreadRadius: 2.0,
+                        color: MyColors.btnsho)
                   ],
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        MyColors.darkprimarycolor,
+                        MyColors.btndarkcolor,
                         MyColors.primarycolors
                       ]),
                 ),
@@ -116,10 +137,19 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
                         shape: BoxShape.rectangle,
                         color: MyColors.primarycolors,
                         boxShadow: <BoxShadow> [
-                          BoxShadow(offset: const Offset(2.0, 2.0),
-                            blurRadius: 5.0,
-                            spreadRadius: 2.0,)
-                        ]
+                          BoxShadow(
+                              offset: const Offset(2.0, 2.0),
+                              blurRadius: 5.0,
+                              spreadRadius: 2.0,
+                              color: MyColors.btnsho)
+                        ],
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            MyColors.btndarkcolor,
+                            MyColors.primarycolors
+                          ]),
                     ),
                     child: GestureDetector(
                       onTap: () {},
@@ -143,10 +173,19 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
                         shape: BoxShape.rectangle,
                         color: MyColors.primarycolors,
                         boxShadow: <BoxShadow> [
-                          BoxShadow(offset: const Offset(2.0, 2.0),
-                            blurRadius: 5.0,
-                            spreadRadius: 2.0,)
-                        ]
+                          BoxShadow(
+                              offset: const Offset(2.0, 2.0),
+                              blurRadius: 5.0,
+                              spreadRadius: 2.0,
+                              color: MyColors.btnsho)
+                        ],
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            MyColors.btndarkcolor,
+                            MyColors.primarycolors
+                          ]),
                     ),
                     child: GestureDetector(
                       onTap: () {},
@@ -170,10 +209,19 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
                         borderRadius: BorderRadius.circular(10.0),
                         color: MyColors.primarycolors,
                         boxShadow: <BoxShadow> [
-                          BoxShadow(offset: const Offset(2.0, 2.0),
-                            blurRadius: 5.0,
-                            spreadRadius: 2.0,)
-                        ]
+                          BoxShadow(
+                              offset: const Offset(2.0, 2.0),
+                              blurRadius: 5.0,
+                              spreadRadius: 2.0,
+                              color: MyColors.btnsho)
+                        ],
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            MyColors.btndarkcolor,
+                            MyColors.primarycolors
+                          ]),
                     ),
                     child: GestureDetector(
                       onTap: () {},
@@ -216,16 +264,16 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
                 borderRadius: BorderRadius.circular(10.0),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    offset: const Offset(2.0, 2.0),
-                    blurRadius: 5.0,
-                    spreadRadius: 2.0,
-                  )
+                      offset: const Offset(2.0, 2.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 2.0,
+                      color: MyColors.btnsho)
                 ],
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      MyColors.darkprimarycolor,
+                      MyColors.btndarkcolor,
                       MyColors.primarycolors
                     ]),
               ),
@@ -258,10 +306,19 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
                         borderRadius: BorderRadius.circular(10.0),
                         color: MyColors.primarycolors,
                         boxShadow: <BoxShadow> [
-                          BoxShadow(offset: const Offset(2.0, 2.0),
-                            blurRadius: 5.0,
-                            spreadRadius: 2.0,)
-                        ]
+                          BoxShadow(
+                              offset: const Offset(2.0, 2.0),
+                              blurRadius: 5.0,
+                              spreadRadius: 2.0,
+                              color: MyColors.btnsho),
+                        ],
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            MyColors.btndarkcolor,
+                            MyColors.primarycolors
+                          ]),
                     ),
                     child: GestureDetector(
                       onTap: () {},
