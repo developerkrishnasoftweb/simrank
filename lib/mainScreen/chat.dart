@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import './constant/color.dart';
-import './Common/chatAppbar.dart';
+import '../constant/colors.dart';
+import 'appbar_bottombar.dart';
 // import 'package:holistic/blog_articles/complete_profile.dart';
 import 'package:intl/intl.dart';
 class Chat extends StatefulWidget{
@@ -20,8 +20,8 @@ class _ChatState extends State<Chat>{
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        leading: lead(),
-        title: titlename(),
+        leading: lead(context),
+        title: titlename(context),
         backgroundColor: MyColors.purple,
       ),
       body: Stack(

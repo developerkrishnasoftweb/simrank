@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simrabk/constant/Colors.dart';
-import 'appbar.dart';
-import 'package:search_widget/search_widget.dart';
+import '../constant/colors.dart';
+import 'appbar_bottombar.dart';
 
 class DMessage extends StatefulWidget {
   @override
@@ -20,9 +19,9 @@ class _DMessageState extends State<DMessage> {
       backgroundColor: MyColors.primarycolors,
       appBar: AppBar(
         backgroundColor: MyColors.primarycolors,
-        leading: lead(),
-        title: titlename(),
-        actions: [action()],
+        leading: lead(context),
+        title: titlename(context),
+        actions: [action(context)],
         elevation: 0.1,
       ),
       body: SingleChildScrollView(
@@ -199,7 +198,7 @@ class _DMessageState extends State<DMessage> {
           ),
         ),
       ),
-      bottomNavigationBar: Bottombar(),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
