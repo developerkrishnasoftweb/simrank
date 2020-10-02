@@ -27,5 +27,6 @@ class MyColors{
   static Color darkpurple = Color(0xFF800080);
   static Color lightpurple = Color(0xFFbf80ff);
   static Color lightblue = Color(0xFF2696ff);
+  static Color red = Color(0xFFC70039);
 
 }
