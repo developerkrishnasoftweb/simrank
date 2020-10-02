@@ -30,13 +30,13 @@ class _ChatState extends State<Chat> {
               right: 0,
                   child: Container(
                     color: MyColors.lightpurple,
-                    height: size.height*0.13,
+                    height: size.height*0.11,
                     width: size.width,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Container(
-
                           child: GestureDetector(
                             onTap: () {},
                             child: Icon(
@@ -48,6 +48,7 @@ class _ChatState extends State<Chat> {
                         ),
                         Container(
                           width: size.width*0.4,
+                          margin: EdgeInsets.only(left: 50),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -91,7 +92,8 @@ class _ChatState extends State<Chat> {
                               ),
                               Container(
                                 height: 30,
-                                decoration: BoxDecoration(
+                                width: 85,
+                                  decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   gradient: LinearGradient(
                                     colors: [MyColors.red, MyColors.lightOrangeText],
@@ -120,7 +122,7 @@ class _ChatState extends State<Chat> {
                   )
             ),
             Positioned(
-              top: size.height*0.13,
+              top: size.height*0.11,
               left: 0,
               right: 0,
               child: Container(
@@ -296,7 +298,7 @@ class _ChatState extends State<Chat> {
                                   margin: EdgeInsets.only(
                                       bottom: 5, left: size.width * 0.15),
                                   decoration: BoxDecoration(
-                                    color: Color.fromRGBO(157, 179, 63, 1),
+                                    color: MyColors.lightpurple.withOpacity(0.3),
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(15),
                                         topLeft: Radius.circular(15),
@@ -313,168 +315,6 @@ class _ChatState extends State<Chat> {
                                     ],
                                   )),
                             ),
-                            Text(
-                              DateFormat('h:mm a')
-                                  .format(DateTime.now())
-                                  .toString(),
-                              style: TextStyle(fontSize: 13),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment(1.0, 0.0),
-                        margin: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                  padding: EdgeInsets.only(
-                                      top: 10, bottom: 10, left: 20, right: 20),
-                                  margin: EdgeInsets.only(
-                                      bottom: 5, left: size.width * 0.15),
-                                  decoration: BoxDecoration(
-                                    color: Color.fromRGBO(157, 179, 63, 1),
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(15),
-                                        topLeft: Radius.circular(15),
-                                        bottomLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(2)),
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        "Hii...",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.white),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            Text(
-                              DateFormat('h:mm a')
-                                  .format(DateTime.now())
-                                  .toString(),
-                              style: TextStyle(fontSize: 13),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment(1.0, 0.0),
-                        margin: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                  padding: EdgeInsets.only(
-                                      top: 10, bottom: 10, left: 20, right: 20),
-                                  margin: EdgeInsets.only(
-                                      bottom: 5, left: size.width * 0.15),
-                                  decoration: BoxDecoration(
-                                    color: Color.fromRGBO(157, 179, 63, 1),
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(15),
-                                        topLeft: Radius.circular(15),
-                                        bottomLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(2)),
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        "Hii...",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.white),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            Text(
-                              DateFormat('h:mm a')
-                                  .format(DateTime.now())
-                                  .toString(),
-                              style: TextStyle(fontSize: 13),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment(1.0, 0.0),
-                        margin: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                  padding: EdgeInsets.only(
-                                      top: 10, bottom: 10, left: 20, right: 20),
-                                  margin: EdgeInsets.only(
-                                      bottom: 5, left: size.width * 0.15),
-                                  decoration: BoxDecoration(
-                                    color: Color.fromRGBO(157, 179, 63, 1),
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(15),
-                                        topLeft: Radius.circular(15),
-                                        bottomLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(2)),
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        "Hii...",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.white),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            Text(
-                              DateFormat('h:mm a')
-                                  .format(DateTime.now())
-                                  .toString(),
-                              style: TextStyle(fontSize: 13),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment(1.0, 0.0),
-                        margin: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                  padding: EdgeInsets.only(
-                                      top: 10, bottom: 10, left: 20, right: 20),
-                                  margin: EdgeInsets.only(
-                                      bottom: 5, left: size.width * 0.15),
-                                  decoration: BoxDecoration(
-                                    color: Color.fromRGBO(157, 179, 63, 1),
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(15),
-                                        topLeft: Radius.circular(15),
-                                        bottomLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(2)),
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        "Hii...",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.white),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            Text(
-                              DateFormat('h:mm a')
-                                  .format(DateTime.now())
-                                  .toString(),
-                              style: TextStyle(fontSize: 13),
-                            )
                           ],
                         ),
                       ),
