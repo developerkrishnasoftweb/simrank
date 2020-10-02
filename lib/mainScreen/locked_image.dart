@@ -143,7 +143,7 @@ class _LockedImageState extends State<LockedImage> {
                                                 width: size.width*0.32,
                                                 decoration: BoxDecoration(
                                                     gradient: LinearGradient(
-                                                        List: [MyColors.pinkvariaance, Colors.red]
+                                                        colors: [MyColors.pinkvariaance, Colors.red]
                                                     ),
                                                     borderRadius: BorderRadius.circular(10.0)
                                                 ),

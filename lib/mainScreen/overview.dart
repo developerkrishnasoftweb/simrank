@@ -94,7 +94,7 @@ class _OverViewState extends State<OverView> {
                           // stops: [
                           //   0.1,0.4,0.6,0.9
                           // ],
-                          List: [
+                          colors: [
                             MyColors.primarycolors,
                             MyColors.darkprimarycolor,
                             MyColors.primarycolors,
@@ -254,7 +254,7 @@ class _OverViewState extends State<OverView> {
                       gradient: LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
-                          List: [
+                          colors: [
                             MyColors.primarycolors,
                             MyColors.darkprimarycolor,
                             MyColors.primarycolors,

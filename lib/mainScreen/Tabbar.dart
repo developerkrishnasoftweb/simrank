@@ -234,7 +234,7 @@ class _TablayoutState extends State<Tablayout> {
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      List: [
+                                      colors: [
                                         MyColors.darkprimarycolor,
                                         MyColors.primarycolors
                                       ]),
@@ -300,7 +300,7 @@ class _TablayoutState extends State<Tablayout> {
                                     gradient: LinearGradient(
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
-                                        List: [
+                                        colors: [
                                           MyColors.pinkColor,
                                           MyColors.lightOrangeText
                                         ]),
@@ -355,7 +355,7 @@ class _TablayoutState extends State<Tablayout> {
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      List: [
+                                      colors: [
                                         MyColors.darkprimarycolor,
                                         MyColors.primarycolors
                                       ]),
@@ -417,7 +417,7 @@ class _TablayoutState extends State<Tablayout> {
                                     gradient: LinearGradient(
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
-                                        List: [
+                                        colors: [
                                           MyColors.pinkColor,
                                           MyColors.lightOrangeText
                                         ]),
@@ -472,7 +472,7 @@ class _TablayoutState extends State<Tablayout> {
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      List: [
+                                      colors: [
                                         MyColors.darkprimarycolor,
                                         MyColors.primarycolors
                                       ]),
@@ -547,7 +547,7 @@ class _TablayoutState extends State<Tablayout> {
                                             gradient: LinearGradient(
                                                 begin: Alignment.topLeft,
                                                 end: Alignment.bottomRight,
-                                                List: [
+                                                colors: [
                                                   MyColors.pinkColor,
                                                   MyColors.lightOrangeText
                                                 ]),
@@ -605,7 +605,7 @@ class _TablayoutState extends State<Tablayout> {
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      List: [
+                                      colors: [
                                         MyColors.darkprimarycolor,
                                         MyColors.primarycolors
                                       ]),
@@ -687,7 +687,7 @@ class _TablayoutState extends State<Tablayout> {
                                               gradient: LinearGradient(
                                                   begin: Alignment.topLeft,
                                                   end: Alignment.bottomRight,
-                                                  List: [
+                                                  colors: [
                                                     MyColors.pinkColor,
                                                     MyColors.lightOrangeText
                                                   ]),
@@ -732,7 +732,7 @@ class _TablayoutState extends State<Tablayout> {
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      List: [
+                                      colors: [
                                         MyColors.darkprimarycolor,
                                         MyColors.primarycolors
                                       ]),
@@ -765,7 +765,7 @@ class _TablayoutState extends State<Tablayout> {
                                   gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      List: [
+                                      colors: [
                                         MyColors.pinkColor,
                                         MyColors.lightOrangeText
                                       ]),
@@ -813,7 +813,7 @@ class _TablayoutState extends State<Tablayout> {
                           gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
-                              List: [
+                              colors: [
                                 MyColors.darkprimarycolor,
                                 MyColors.primarycolors
                               ]),

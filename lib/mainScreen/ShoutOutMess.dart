@@ -75,7 +75,7 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      List: [
+                      colors: [
                         MyColors.darkprimarycolor,
                         MyColors.primarycolors
                       ]),
@@ -224,7 +224,7 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    List: [
+                    colors: [
                       MyColors.darkprimarycolor,
                       MyColors.primarycolors
                     ]),

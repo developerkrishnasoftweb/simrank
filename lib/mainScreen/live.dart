@@ -68,7 +68,7 @@ class _LiveState extends State<Live> {
                       width: 250,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
-                              List: [MyColors.pinkvariaance, Colors.red]),
+                              colors: [MyColors.pinkvariaance, Colors.red]),
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +98,7 @@ class _LiveState extends State<Live> {
                       width: 250,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
-                              List: [MyColors.pinkvariaance, Colors.red]),
+                              colors: [MyColors.pinkvariaance, Colors.red]),
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

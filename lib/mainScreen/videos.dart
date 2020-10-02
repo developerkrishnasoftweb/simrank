@@ -209,7 +209,7 @@ class _VideosState extends State<Videos> {
                                               width: size.width * 0.32,
                                               decoration: BoxDecoration(
                                                   gradient: LinearGradient(
-                                                      List: [
+                                                      colors: [
                                                         MyColors.pinkvariaance,
                                                         Colors.red
                                                       ]),
@@ -361,7 +361,7 @@ class RadiantGradientMask extends StatelessWidget {
       shaderCallback: (bounds) => RadialGradient(
         center: Alignment.center,
         radius: 0.5,
-        List: [MyColors.blueColor, MyColors.transparent],
+        colors: [MyColors.blueColor, MyColors.transparent],
       ).createShader(bounds),
       child: child,
     );
