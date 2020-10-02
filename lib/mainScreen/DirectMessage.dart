@@ -36,10 +36,40 @@ class _DMessageState extends State<DMessage> {
                   ),
                   Container(
                     margin: EdgeInsets.all(size.width * 0.04),
-                    height: 35,
-                    width: size.width * 0.85,
-                    child: Text("helo"
-                        ""),
+                    height: 40,
+                    width: size.width * 0.9,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all(color: MyColors.whiteColor,width: 2
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 10.0),
+                          width: size.width * 0.6,
+                          child: TextField(
+                            decoration: InputDecoration(
+                                hintText: "Search of name",
+                                hintStyle: TextStyle(
+                                  color: Colors.white,
+                                ),border: InputBorder.none
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(Icons.search),
+                                color: Colors.white,
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                        )
+                      ],),
                   ),
                 ],
               ),
@@ -48,33 +78,33 @@ class _DMessageState extends State<DMessage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      height: 35,
-                      width: size.width * 0.4,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: MyColors.btncolorsprimary,
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                offset: const Offset(2.0, 2.0),
-                                blurRadius: 5.0,
-                                spreadRadius: 2.0,
-                                color: MyColors.btnsho)
-                          ]),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _counter++;
-                          });
-                        },
-                        child: Center(
+                    GestureDetector(onTap: (){
+                      setState(() {
+                        _counter++;
+                      });
+                    },
+                      child: Container(
+                        height: 35,
+                        width: size.width * 0.4,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: MyColors.btncolorsprimary,
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  offset: const Offset(2.0, 2.0),
+                                  blurRadius: 5.0,
+                                  spreadRadius: 2.0,
+                                  color: MyColors.btnsho)
+                            ]),
+                        child:  Center(
                             child: Text(
-                          "Latest Chats",
-                          style: TextStyle(
-                              color: MyColors.whiteColor,
-                              fontWeight: FontWeight.bold),
-                        )),
+                              "Latest Chats",
+                              style: TextStyle(
+                                  color: MyColors.whiteColor,
+                                  fontWeight: FontWeight.bold),
+                            )
+                        ),
                       ),
                     ),
                     Container(
@@ -142,55 +172,80 @@ class _DMessageState extends State<DMessage> {
                   child: ListView.builder(
                       itemCount: 10,
                       itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.all(15.0),
-                          width: size.width,
-                          child: ListTile(
-                            leading: Container(
-                              child: CircleAvatar(
-                                radius: 30,
-                                backgroundImage:
-                                    AssetImage('assets/images/avatar.jpg'),
-                              ),
-                            ),
-                            title: Text(
-                              "hitesh Patil",
-                              style: TextStyle(
-                                  color: MyColors.whiteColor,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            subtitle: Container(
-                              margin: EdgeInsets.all(size.width * 0.01),
-                              child: Text(
-                                "Hey devs, today I'll show how to implement a search bar in flutter.",
-                                style: TextStyle(color: MyColors.whiteColor),
-                              ),
-                            ),
-                            trailing: Container(
-                              padding: EdgeInsets.all(2),
-                              decoration: new BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              constraints: BoxConstraints(
-                                minWidth: 16,
-                                minHeight: 16,
-                              ),
-                              child: Text(
-                                "$_counter",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 11,
+                        return ListTile(
+                          title: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(top:size.width * 0.05,bottom: size.width * 0.05),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      height: size.height * 0.09,
+                                      width:size.height * 0.09,
+                                      child: CircleAvatar(
+                                        radius: 30,
+                                        backgroundImage:
+                                        AssetImage('assets/images/avatar.jpg'),
+                                      ),
+                                    ),
+                                    SizedBox(width: 10,),
+                                    Expanded(flex: 1,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "hitesh Patil",
+                                            style: TextStyle(
+                                              color: MyColors.whiteColor,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold,),
+                                          ),
+                                          Wrap(children: [
+                                            Text(
+                                              "Hey devs, today I'll show how toI'll show how to.Hey devs, today I'll show how toI'll show how toHey devs, today I'll show ",
+                                              style: TextStyle(fontSize: 14.0,color: MyColors.whiteColor),
+                                            ),
+                                          ],
+                                          ),
+
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(2),
+                                      decoration: new BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      constraints: BoxConstraints(
+                                        minWidth: 16,
+                                        minHeight: 16,
+                                      ),
+                                      child: Text(
+                                        "$_counter",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                textAlign: TextAlign.center,
                               ),
-                            ),
+                              Divider(
+                                thickness: 0.5,
+                                color: Colors.white,
+                              )
+                            ],
                           ),
                         );
+
                       })),
               Divider(
-
                 thickness: 2,
                 color: Colors.white,
               )

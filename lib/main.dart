@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simrank/constant/strings.dart';
-import 'mainScreen/simran_home.dart';
 import 'package:simrank/login_register/holistic_login.dart';
 import 'package:simrank/login_register/login.dart';
+import 'package:simrank/mainScreen/chat.dart';
 import 'package:simrank/mainScreen/daimond.dart';
 import 'package:simrank/mainScreen/menu.dart';
 import 'package:simrank/mainScreen/overview.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Home(),
+      home: Chat(),
     );
   }
 }

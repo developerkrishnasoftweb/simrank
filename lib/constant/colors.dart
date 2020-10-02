@@ -4,6 +4,7 @@ class MyColors{
   static Color primarycolors = Color(0xFF9E8ABF);
   static Color darkprimarycolor = Color(0xFF7e6e99);
   static Color btncolorsprimary = Color(0xFF9072b8);
+  static Color btndarkcolor = Color(0xFF705987);
   static Color btnsho = Color(0xFF5b4a77);
   static Color whiteColor = Color(0xFFFFFFFF);
   static Color pinkColor = Color(0xFFfb3c53);
@@ -26,5 +27,7 @@ class MyColors{
   static Color transparent = Colors.transparent;
   static Color darkpurple = Color(0xFF800080);
   static Color lightpurple = Color(0xFFbf80ff);
+  static Color lightblue = Color(0xFF2696ff);
+  static Color red = Color(0xFFC70039);
 
 }
