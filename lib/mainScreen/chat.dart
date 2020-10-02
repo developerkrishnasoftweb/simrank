@@ -19,10 +19,14 @@ class _ChatState extends State<Chat>{
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        leading: lead(),
-        title: titlename(),
-        backgroundColor: MyColors.purple,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80.0),
+        child: AppBar(
+          leading: lead(),
+          title: titlename(),
+          actions: [action(context)],
+          backgroundColor: MyColors.purple,
+        ),
       ),
       body: Stack(
         children: <Widget>[

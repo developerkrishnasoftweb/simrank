@@ -50,6 +50,7 @@ flutter:
   assets:
     - assets/images/download.jpg
     - assets/images/diamond.png
+    - assets/images/diamond2.png
     - assets/images/dia.jpg
     - assets/images/di2.png
     - assets/images/avatar.jpg
