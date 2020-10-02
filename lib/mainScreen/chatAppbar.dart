@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../constant/colors.dart';
 import '../constant/strings.dart';
@@ -32,10 +33,9 @@ Widget titlename() {
             Strings.title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: "LogoFont",
-              fontSize: 30,
-              fontWeight: FontWeight.bold
-            ),
+                fontFamily: "LogoFont",
+                fontSize: 30,
+                fontWeight: FontWeight.bold),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20),
@@ -43,44 +43,44 @@ Widget titlename() {
               Strings.subtitle,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: "LogoText",
-                  fontSize: 18,
-                letterSpacing: 0.3
-              ),
+                  fontFamily: "LogoText", fontSize: 18, letterSpacing: 0.3),
             ),
           ),
         ],
       ),
-
     ],
   );
 }
 
-Widget action(BuildContext context){
-  return Padding(
-    padding: EdgeInsets.all(8.0),
-    child: Column(
-      children: [
-        Container(
-          child: GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.search,
-              size: 20.0,
+Widget action(BuildContext context) {
+  return Column(
+    children: [
+      Container(
+        child: GestureDetector(
+          onTap: () {},
+          child: FlatButton.icon(
+            onPressed: () {},
+            icon: Icon(
+              Icons.remove_red_eye,
+              size: 20,
               color: MyColors.whiteColor,
             ),
-          ),
-        ),
-        Container(
-          child: GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.search,
-              size: 20.0,
+            label: Text(
+              '1213',
+              style: TextStyle(color: MyColors.whiteColor),
             ),
           ),
         ),
-      ],
-    ),
+      ),
+      Container(
+        child: GestureDetector(
+          onTap: () {},
+          child: Icon(
+            Icons.search,
+            size: 20.0,
+          ),
+        ),
+      ),
+    ],
   );
 }

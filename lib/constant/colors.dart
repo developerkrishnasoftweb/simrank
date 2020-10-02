@@ -26,5 +26,6 @@ class MyColors{
   static Color transparent = Colors.transparent;
   static Color darkpurple = Color(0xFF800080);
   static Color lightpurple = Color(0xFFbf80ff);
+  static Color lightblue = Color(0xFF2696ff);
 
 }
