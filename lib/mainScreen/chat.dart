@@ -4,7 +4,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import '../constant/colors.dart';
 import './chatAppbar.dart';
-// import 'package:holistic/blog_articles/complete_profile.dart';
 import 'package:intl/intl.dart';
 class Chat extends StatefulWidget{
   @override
