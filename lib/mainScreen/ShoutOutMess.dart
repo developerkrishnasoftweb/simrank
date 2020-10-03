@@ -14,6 +14,7 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: drawer(context),
       backgroundColor: MyColors.primarycolors,
       appBar: AppBar(
         leading: lead(context),

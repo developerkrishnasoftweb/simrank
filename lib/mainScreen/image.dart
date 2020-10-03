@@ -35,6 +35,7 @@ class _ImagesState extends State<Images> {
     }
 
     return Scaffold(
+      drawer: drawer(context),
       appBar: AppBar(
         leading: lead(context),
         actions: [action(context)],

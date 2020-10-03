@@ -143,6 +143,118 @@ Widget action(BuildContext context){
   );
 }
 
+
+Widget drawer(BuildContext context) {
+  return Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: <Widget>[
+        DrawerHeader(margin: EdgeInsets.all(0.0),
+          decoration: BoxDecoration(
+            color: MyColors.btncolorsprimary,
+          ),
+          child: Row(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.09,
+                width:MediaQuery.of(context).size.height * 0.09,
+                child: CircleAvatar(
+                  radius: 30,
+                  backgroundImage:
+                  AssetImage('assets/images/avatar.jpg'),
+                ),
+              ),
+              SizedBox(width: 10,),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "hitesh Patil",
+                    style: TextStyle(
+                      color: MyColors.whiteColor,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,),
+                  ),
+
+                  Text("+91 9638527412",
+                    style: TextStyle(fontSize: 14.0,color: MyColors.whiteColor),
+                  ),
+                  Text("user12@gmail.com",
+                    style: TextStyle(fontSize: 14.0,color: MyColors.whiteColor),
+                  ),
+
+                ],
+              ),
+            ],
+          ),),
+        ListTile(
+          onTap: (){
+            //Navigator.push(context, MaterialPageRoute(builder: (context)=> Tablayout() ));
+          },
+          leading: Icon(Icons.home),
+          title: Text("Home"),
+        ),
+        ListTile(
+          onTap: (){
+            //Navigator.push(context, MaterialPageRoute(builder: (context)=> Tablayout() ));
+          },
+          leading: Icon(Icons.account_circle),
+          title: Text("My Account"),
+        ),
+        ListTile(
+          onTap: (){
+            //Navigator.push(context, MaterialPageRoute(builder: (context)=> Tablayout() ));
+          },
+          leading: Icon(Icons.account_balance_wallet),
+          title: Text("Wallet"),
+        ),
+        ListTile(
+          onTap: (){
+            //Navigator.push(context, MaterialPageRoute(builder: (context)=> Tablayout() ));
+          },
+          leading: Icon(Icons.graphic_eq),
+          title: Text("Recharge Gems"),
+        ),
+        ListTile(
+          onTap: (){
+            //Navigator.push(context, MaterialPageRoute(builder: (context)=> Tablayout() ));
+          },
+          leading: Icon(Icons.headset_mic),
+          title: Text("Help & Supports"),
+        ),
+        ListTile(
+          onTap: (){
+            //Navigator.push(context, MaterialPageRoute(builder: (context)=> Tablayout() ));
+          },
+          leading: Icon(Icons.pregnant_woman),
+          title: Text("Super Fan"),
+        ),
+        ListTile(
+          onTap: (){
+            //Navigator.push(context, MaterialPageRoute(builder: (context)=> Tablayout() ));
+          },
+          leading: Icon(Icons.settings),
+          title: Text("Settings"),
+        ),
+        ListTile(
+          onTap: (){
+            //Navigator.push(context, MaterialPageRoute(builder: (context)=> Tablayout() ));
+          },
+          leading: Icon(Icons.share),
+          title: Text("Share"),
+        ),
+        ListTile(
+          onTap: (){
+          },
+          leading: Icon(Icons.exit_to_app),
+          title: Text("LogOut"),
+        ),
+
+      ],
+    ),);
+}
+
 class BottomBar extends StatefulWidget {
   @override
   _BottomBarState createState() => _BottomBarState();

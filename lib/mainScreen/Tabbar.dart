@@ -21,6 +21,7 @@ class _TablayoutState extends State<Tablayout> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        drawer: drawer(context),
         backgroundColor: MyColors.primarycolors,
         appBar: AppBar(
           backgroundColor: MyColors.primarycolors,

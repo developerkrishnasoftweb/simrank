@@ -34,6 +34,7 @@ class _VideosState extends State<Videos> {
     }
 
     return Scaffold(
+      drawer: drawer(context),
       appBar: AppBar(
         leading: lead(context),
         actions: [action(context)],

@@ -21,6 +21,7 @@ class _ShoutOutMessageState extends State<ShoutOutMessage> {
     print("Public shoutout - $publicshoutout");
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: drawer(context),
       appBar: AppBar(
         leading: lead(context),
         actions: [action(context)],

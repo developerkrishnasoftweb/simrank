@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:simrank/mainScreen/appbar_bottombar.dart';
 import '../constant/colors.dart';
 import '../constant/strings.dart';
 
@@ -23,6 +24,7 @@ class _ChatState extends State<Chat> {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: drawer(context),
       body: SafeArea(
         child: Stack(
           children: <Widget>[

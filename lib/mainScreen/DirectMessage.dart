@@ -16,6 +16,7 @@ class _DMessageState extends State<DMessage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      drawer: drawer(context),
       backgroundColor: MyColors.primarycolors,
       appBar: AppBar(
         backgroundColor: MyColors.primarycolors,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:simrank/mainScreen/appbar_bottombar.dart';
 import '../constant/strings.dart';
 import '../constant/colors.dart';
 
@@ -13,6 +14,7 @@ class _VideoDownloadState extends State<VideoDownload> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: drawer(context),
       appBar: AppBar(
         backgroundColor: MyColors.primarycolors,
         centerTitle: true,

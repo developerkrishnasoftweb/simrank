@@ -16,6 +16,7 @@ class _Menu extends State<Menu>{
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        drawer: drawer(context),
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(158, 138, 191, 1),
           leading: lead(context),

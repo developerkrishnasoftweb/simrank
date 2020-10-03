@@ -15,6 +15,7 @@ class _Home_FeedState extends State<Home_Feed> {
     return DefaultTabController(
       length: 2,
       child:  Scaffold(
+        drawer: drawer(context),
           backgroundColor: MyColors.purple,
           appBar: AppBar(
             backgroundColor: MyColors.purple,

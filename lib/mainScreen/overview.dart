@@ -13,6 +13,7 @@ class _OverViewState extends State<OverView> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: drawer(context),
       appBar: AppBar(
         backgroundColor: MyColors.primarycolors,
         elevation: 0,

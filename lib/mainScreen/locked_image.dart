@@ -14,6 +14,7 @@ class _LockedImageState extends State<LockedImage> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: drawer(context),
       appBar: AppBar(
         leading: lead(context),
         actions: [action(context)],
