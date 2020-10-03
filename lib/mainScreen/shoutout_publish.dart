@@ -12,8 +12,8 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
   @override
   Color backGroundColor = Colors.orange[700];
   Alignment align = Alignment.centerRight;
-  double radioInnerCircleHeight = 10;
-  double radioInnerCircleWidth = 10;
+  double radioInnerCircleHeight = 18;
+  double radioInnerCircleWidth = 18;
   String uploadDropDown = "PHOTOS";
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
