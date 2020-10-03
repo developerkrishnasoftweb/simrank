@@ -10,6 +10,11 @@ class ShoutOutPublish extends StatefulWidget{
 }
 class _ShoutOutPublish extends State<ShoutOutPublish>{
   @override
+  Color backGroundColor = Colors.orange[700];
+  Alignment align = Alignment.centerRight;
+  double radioInnerCircleHeight = 10;
+  double radioInnerCircleWidth = 10;
+  String uploadDropDown = "PHOTOS";
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -348,15 +353,127 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
                             ),
                           ),
                           Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Container(
+                                  height: 50,
+                                  width: size.width * 0.7,
+                                  alignment: Alignment.center,
+                                  child: Text("SELECT FOLDER TO UPLOAD IN : ",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 50,
+                                  width: size.width * 0.25,
+                                  alignment: Alignment.center,
+                                  child: DropdownButtonFormField(
+                                    style: TextStyle(
+                                      color: Colors.white
+                                    ),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                    ),
+                                    isExpanded: true,
+                                    value: uploadDropDown,
+                                    onChanged: (value){
+                                      setState(() {
+                                        uploadDropDown = value;
+                                      });
+                                    },
+                                    dropdownColor: Color.fromRGBO(158, 138, 191, 1),
+                                    icon: Icon(Icons.keyboard_arrow_down_outlined, color: Colors.white, size: 20,),
+                                    items: [
+                                      DropdownMenuItem(child: Text("PHOTOS"), value: "PHOTOS",),
+                                      DropdownMenuItem(child: Text("VIDEOS"), value: "VIDEO",),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: size.width,
+                            height: 60,
+                            child: ListTile(
+                              onTap: (){
+                                setState(() {
+                                  if(align == Alignment.centerLeft) {
+                                    align = Alignment.centerRight;
+                                    radioInnerCircleHeight = 18;
+                                    radioInnerCircleWidth = 18;
+                                  }
+                                  else {
+                                    align = Alignment.centerLeft;
+                                    radioInnerCircleHeight = 0;
+                                    radioInnerCircleWidth = 0;
+                                  }
+                                });
+                              },
+                              leading: AnimatedContainer(
+                                duration: Duration(milliseconds: 500),
+                                height: 25,
+                                width: 45,
+                                alignment: align,
+                                padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                                decoration: BoxDecoration(
+                                  color: (align == Alignment.centerRight) ? backGroundColor : Colors.black54,
+                                  borderRadius: BorderRadius.circular(25)
+                                ),
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  height: radioInnerCircleHeight,
+                                  width: radioInnerCircleWidth,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20)
+                                  ),
+                                ),
+                              ),
+                              title: Text("NOTIFICATION"),
+                              isThreeLine: false,
+                            ),
+                          ),
+                          Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Container(
+                                  height: 100,
+                                  width: size.width * 0.25,
+                                  alignment: Alignment.center,
+                                  child: Text("POSITION LOGO", textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 100,
+                                  width: size.width * 0.7,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.black.withOpacity(0.1),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
                             width: size.width,
                             alignment: Alignment.centerRight,
                             padding: EdgeInsets.only(bottom: 10, right: 20, top: 10),
                             child: FlatButton(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15), side: BorderSide(color: Colors.white60,)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10), side: BorderSide(color: Colors.white60,)),
                               child: Text("Publish",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14
+                                    color: Colors.deepPurple.withBlue(100),
+                                    fontSize: 16
                                 ),
                               ),
                               color: Colors.orangeAccent,

@@ -86,6 +86,7 @@ class _VideosState extends State<Videos> {
                 ),
                 Container(
                   height: size.height * 0.8,
+                  padding: EdgeInsets.only(bottom: 120),
                   child: ListView.builder(
                     itemCount: 5,
                     itemBuilder: (BuildContext context, int index) {
