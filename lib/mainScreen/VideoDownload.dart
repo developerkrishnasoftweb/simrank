@@ -156,7 +156,7 @@ class _VideoDownloadState extends State<VideoDownload> {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             child: Text(
-                              "Share",
+                              "Delete",
                               style:
                               TextStyle(color: Colors.white, fontSize: 16),
                             ),
