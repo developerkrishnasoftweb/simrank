@@ -10,6 +10,7 @@ import 'package:simrank/mainScreen/overview.dart';
 import 'package:simrank/mainScreen/shoutout.dart';
 import 'package:simrank/mainScreen/shoutout_publish.dart';
 import 'package:simrank/mainScreen/shoutout_upload_photo.dart';
+import 'package:simrank/mainScreen/videos.dart';
 import './mainScreen/simran_home.dart';
 void main() {
   runApp(MyApp());
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(),
+      home: Videos(),
     );
   }
 }

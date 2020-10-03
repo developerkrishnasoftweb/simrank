@@ -242,12 +242,13 @@ class _VideosState extends State<Videos> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: <Widget>[
-                                                  RadiantGradientMask(
-                                                    child: Icon(
-                                                      Icons.play_arrow,
-                                                      size: 100,
-                                                      color:
-                                                          MyColors.whiteColor,
+                                                  Container(
+                                                    margin: EdgeInsets.only(top: 45),
+                                                    height: 60,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: AssetImage('assets/images/play.png')
+                                                      )
                                                     ),
                                                   ),
                                                   Text(
