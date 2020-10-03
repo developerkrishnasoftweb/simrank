@@ -12,8 +12,8 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
   @override
   Color backGroundColor = Colors.orange[700];
   Alignment align = Alignment.centerRight;
-  double radioInnerCircleHeight = 10;
-  double radioInnerCircleWidth = 10;
+  double radioInnerCircleHeight = 18;
+  double radioInnerCircleWidth = 18;
   String uploadDropDown = "PHOTOS";
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -386,7 +386,7 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
                                       });
                                     },
                                     dropdownColor: Color.fromRGBO(158, 138, 191, 1),
-                                    icon: Icon(Icons.keyboard_arrow_down_outlined, color: Colors.white, size: 20,),
+                                    icon: Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 20,),
                                     items: [
                                       DropdownMenuItem(child: Text("PHOTOS"), value: "PHOTOS",),
                                       DropdownMenuItem(child: Text("VIDEOS"), value: "VIDEO",),
