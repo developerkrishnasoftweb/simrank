@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:simrank/constant/colors.dart';
+import '../constant/colors.dart';
 import '../constant/strings.dart';
 
 class Chat extends StatefulWidget {
@@ -19,116 +18,119 @@ class _ChatState extends State<Chat> {
   Icon sendIcon = Icon(Icons.mic);
 
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: <Widget>[
             Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  color: MyColors.lightpurple,
-                  height: size.height * 0.11,
-                  width: size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Container(
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            size: 20.0,
-                            color: MyColors.whiteColor,
-                          ),
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: MyColors.lightpurple.withOpacity(0.6),
+                height: size.height * 0.11,
+                width: size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Container(
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 20.0,
+                          color: MyColors.whiteColor,
                         ),
                       ),
-                      Container(
-                        width: size.width * 0.4,
-                        margin: EdgeInsets.only(left: 50),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              Strings.title,
+                    ),
+                    Container(
+                      width: size.width * 0.4,
+                      margin: EdgeInsets.only(left: 50),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            Strings.title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: "LogoFont",
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: MyColors.whiteColor),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              Strings.subtitle,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontFamily: "LogoFont",
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: MyColors.whiteColor),
+                                  color: MyColors.whiteColor,
+                                  fontFamily: "LogoText",
+                                  fontSize: 18,
+                                  letterSpacing: 0.3),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                Strings.subtitle,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: MyColors.whiteColor,
-                                    fontFamily: "LogoText",
-                                    fontSize: 18,
-                                    letterSpacing: 0.3),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Container(
-                        width: size.width * 0.3,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                child: FlatButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.remove_red_eye,
-                                    size: 20,
-                                    color: MyColors.whiteColor,
-                                  ),
-                                  label: Text(
-                                    '1213',
-                                    style:
-                                        TextStyle(color: MyColors.whiteColor),
-                                  ),
-                                ),
+                    ),
+                    Container(
+                      width: size.width * 0.3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            child: FlatButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.remove_red_eye,
+                                size: 20,
+                                color: MyColors.whiteColor,
                               ),
-                              Container(
-                                height: 30,
-                                width: 85,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      MyColors.red,
-                                      MyColors.lightOrangeText
-                                    ],
-                                    begin: FractionalOffset.centerLeft,
-                                    end: FractionalOffset.centerRight,
-                                  ),
-                                ),
-                                child: FlatButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.video_call,
-                                    size: 20,
-                                    color: MyColors.whiteColor,
-                                  ),
-                                  label: Text(
-                                    'LIVE',
-                                    style:
-                                        TextStyle(color: MyColors.whiteColor),
-                                  ),
-                                ),
+                              label: Text(
+                                '1213',
+                                style: TextStyle(color: MyColors.whiteColor),
                               ),
-                            ]),
-                      )
-                    ],
-                  ),
-                )),
+                            ),
+                          ),
+                          Container(
+                            height: 30,
+                            width: 85,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(
+                                colors: [
+                                  MyColors.red,
+                                  MyColors.lightOrangeText
+                                ],
+                                begin: FractionalOffset.centerLeft,
+                                end: FractionalOffset.centerRight,
+                              ),
+                            ),
+                            child: FlatButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.video_call,
+                                size: 20,
+                                color: MyColors.whiteColor,
+                              ),
+                              label: Text(
+                                'LIVE',
+                                style: TextStyle(color: MyColors.whiteColor),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
             Positioned(
               top: size.height * 0.11,
               left: 0,
@@ -144,25 +146,69 @@ class _ChatState extends State<Chat> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      GestureDetector(
-                        child: Container(
-                          height: 40,
-                          width: size.width,
-                          alignment: Alignment(0.0, 1.0),
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                top: 4, bottom: 4, left: 7, right: 7),
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(0, 0, 0, 0.05),
-                                borderRadius: BorderRadius.circular(3)),
-                            child: Text(
-                              DateFormat('yyyy-MM-dd')
-                                  .format(DateTime.now())
-                                  .toString(),
-                              style: TextStyle(fontSize: 14),
+                      Row(
+                        children: [
+                          GestureDetector(
+                            child: Container(
+                              height: 40,
+                              width: size.width *0.85,
+                              alignment: Alignment(0.0, 1.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color:
+                                            MyColors.lightpurple.withOpacity(0.3),
+                                        borderRadius: BorderRadius.circular(15)),
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Row(
+                                          children: <Widget>[
+                                            Container(
+                                              child: Icon(
+                                                Icons.av_timer,
+                                                color: MyColors.whiteColor,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: Text(
+                                                DateFormat('yyyy-MM-dd')
+                                                    .format(DateTime.now())
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: MyColors.whiteColor),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
+                          GestureDetector(
+                            onTap: () {
+                              print('Clicked');
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                  color:
+                                  MyColors.lightpurple.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(15)),
+                              // color: MyColors.whiteColor
+                              child: Icon(
+                                Icons.volume_up,color: MyColors.whiteColor,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                       Container(
                         width: size.width,
@@ -224,156 +270,6 @@ class _ChatState extends State<Chat> {
                                 ),
                               ),
                             ),
-
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: size.width,
-                        alignment: Alignment(-1.0, 0.0),
-                        margin: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    top: 10, bottom: 10, left: 20, right: 20),
-                                margin: EdgeInsets.only(
-                                    bottom: 5, right: size.width * 0.05),
-                                decoration: BoxDecoration(
-                                  color: MyColors.lightpurple.withOpacity(0.3),
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(15),
-                                      topLeft: Radius.circular(15),
-                                      bottomRight: Radius.circular(15),
-                                      bottomLeft: Radius.circular(2)),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/John.jpg"),
-                                            fit: BoxFit.fill,
-                                            alignment: Alignment.center),
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                    ),
-
-                                      Column(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(left:5,),
-                                            child: Text(
-                                              "Shilpa :",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  letterSpacing: 0.3,
-                                                  color: MyColors.whiteColor),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 160,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(3.0),
-                                          child: Text(
-                                            "Can You Dance For me :D NOW",
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: MyColors.whiteColor),
-                                          ),
-                                        ),
-                                      ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: size.width,
-                        alignment: Alignment(-1.0, 0.0),
-                        margin: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    top: 10, bottom: 10, left: 20, right: 20),
-                                margin: EdgeInsets.only(
-                                    bottom: 5, right: size.width * 0.05),
-                                decoration: BoxDecoration(
-                                  color: MyColors.lightpurple.withOpacity(0.3),
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(15),
-                                      topLeft: Radius.circular(15),
-                                      bottomRight: Radius.circular(15),
-                                      bottomLeft: Radius.circular(2)),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/John.jpg"),
-                                            fit: BoxFit.fill,
-                                            alignment: Alignment.center),
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                         Padding(
-                                          padding: const EdgeInsets.only(left:5,),
-                                          child: Text(
-                                            "Allwyn :",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                                letterSpacing: 0.3,
-                                                color: MyColors.whiteColor),
-                                          ),
-                                        ),
-                                      ],
-
-                                    ),
-                                    Container(
-                                      width: 160,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Text(
-                                          "I want to tell you that i live in Ulwe And that I am a programmer and a developer",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                              color: MyColors.whiteColor),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-
                           ],
                         ),
                       ),
@@ -417,7 +313,157 @@ class _ChatState extends State<Chat> {
                                     Column(
                                       children: <Widget>[
                                         Padding(
-                                          padding: const EdgeInsets.only(left:5,),
+                                          padding: const EdgeInsets.only(
+                                            left: 5,
+                                          ),
+                                          child: Text(
+                                            "Shilpa :",
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 0.3,
+                                                color: MyColors.whiteColor),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      width: 160,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Text(
+                                          "Can You Dance For me :D NOW",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: MyColors.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: size.width,
+                        alignment: Alignment(-1.0, 0.0),
+                        margin: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 10, bottom: 10, left: 20, right: 20),
+                                margin: EdgeInsets.only(
+                                    bottom: 5, right: size.width * 0.05),
+                                decoration: BoxDecoration(
+                                  color: MyColors.lightpurple.withOpacity(0.3),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(15),
+                                      topLeft: Radius.circular(15),
+                                      bottomRight: Radius.circular(15),
+                                      bottomLeft: Radius.circular(2)),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/John.jpg"),
+                                            fit: BoxFit.fill,
+                                            alignment: Alignment.center),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 5,
+                                          ),
+                                          child: Text(
+                                            "Allwyn :",
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 0.3,
+                                                color: MyColors.whiteColor),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      width: 160,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Text(
+                                          "I want to tell you that i live in Ulwe And that I am a programmer and a developer",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: MyColors.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: size.width,
+                        alignment: Alignment(-1.0, 0.0),
+                        margin: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 10, bottom: 10, left: 20, right: 20),
+                                margin: EdgeInsets.only(
+                                    bottom: 5, right: size.width * 0.05),
+                                decoration: BoxDecoration(
+                                  color: MyColors.lightpurple.withOpacity(0.3),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(15),
+                                      topLeft: Radius.circular(15),
+                                      bottomRight: Radius.circular(15),
+                                      bottomLeft: Radius.circular(2)),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/John.jpg"),
+                                            fit: BoxFit.fill,
+                                            alignment: Alignment.center),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 5,
+                                          ),
                                           child: Text(
                                             "Robert :",
                                             style: TextStyle(
@@ -428,7 +474,6 @@ class _ChatState extends State<Chat> {
                                           ),
                                         ),
                                       ],
-
                                     ),
                                     Container(
                                       width: 160,
@@ -443,12 +488,10 @@ class _ChatState extends State<Chat> {
                                         ),
                                       ),
                                     ),
-
                                   ],
                                 ),
                               ),
                             ),
-
                           ],
                         ),
                       ),
@@ -491,9 +534,6 @@ class _ChatState extends State<Chat> {
                 ),
               ),
             ),
-            /*
-            * text area
-            * */
             Positioned(
               bottom: 0,
               right: 10,
@@ -508,6 +548,14 @@ class _ChatState extends State<Chat> {
                       width: size.width * 0.94,
                       decoration: BoxDecoration(
                         color: MyColors.purple,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.8),
+                            spreadRadius: 10,
+                            blurRadius: 5,
+                            offset: Offset(0, 7), // changes position of shadow
+                          ),
+                        ],
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Row(
@@ -526,16 +574,6 @@ class _ChatState extends State<Chat> {
                                   fontFamily: "LogoText",
                                 ),
                               ),
-                              cursorColor: Color.fromRGBO(157, 185, 63, 1),
-                              autofocus: false,
-                              cursorRadius: Radius.circular(5),
-                              onChanged: (value) {
-                                setState(() {
-                                  (value.length > 0)
-                                      ? sendIcon = Icon(Icons.send)
-                                      : sendIcon = Icon(Icons.mic);
-                                });
-                              },
                             ),
                           ),
                           Container(
@@ -586,10 +624,19 @@ class _ChatState extends State<Chat> {
                   ],
                 ),
               ),
-            )
+            ),
+            // Positioned(
+            //   child: Container(
+            //     height: 25,
+            //     width: size.width,
+            //     child: Icon(Icons.volume_up),
+            //   ),
+            // ),
           ],
         ),
       ),
     );
   }
 }
+
+
