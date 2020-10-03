@@ -409,13 +409,13 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
                                   }
                                   else {
                                     align = Alignment.centerLeft;
-                                    radioInnerCircleHeight = 0;
-                                    radioInnerCircleWidth = 0;
+                                    radioInnerCircleHeight = 13;
+                                    radioInnerCircleWidth = 13;
                                   }
                                 });
                               },
                               leading: AnimatedContainer(
-                                duration: Duration(milliseconds: 500),
+                                duration: Duration(milliseconds: 250),
                                 height: 25,
                                 width: 45,
                                 alignment: align,
@@ -425,7 +425,7 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
                                   borderRadius: BorderRadius.circular(25)
                                 ),
                                 child: AnimatedContainer(
-                                  duration: Duration(milliseconds: 300),
+                                  duration: Duration(milliseconds: 200),
                                   height: radioInnerCircleHeight,
                                   width: radioInnerCircleWidth,
                                   decoration: BoxDecoration(
