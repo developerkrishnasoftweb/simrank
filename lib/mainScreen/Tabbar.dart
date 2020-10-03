@@ -130,6 +130,7 @@ class _TablayoutState extends State<Tablayout> {
                           color: Color(0xFF987bb0),
                           height: size.height * 0.628,
                           width: size.width,
+                          padding: EdgeInsets.only(bottom: 50),
                           child: GridView.builder(
                             itemCount: 20,
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -151,7 +152,6 @@ class _TablayoutState extends State<Tablayout> {
                                     },
                                   ),
                                   footer: Container(
-                                    padding: EdgeInsets.only(left: 1.0, right: 1.0),
                                     decoration: BoxDecoration(
                                         color: Colors.black.withOpacity(0.2),
                                         borderRadius: BorderRadius.only(
@@ -166,6 +166,7 @@ class _TablayoutState extends State<Tablayout> {
                                             Icon(
                                               Icons.favorite,
                                               color: MyColors.whiteColor,
+                                              size: 15,
                                             ),
                                             Text("1.5K",
                                                 style: TextStyle(
@@ -177,6 +178,7 @@ class _TablayoutState extends State<Tablayout> {
                                             Icon(
                                               Icons.chat,
                                               color: MyColors.whiteColor,
+                                              size: 15,
                                             ),
                                             Text(
                                               "1.5K",

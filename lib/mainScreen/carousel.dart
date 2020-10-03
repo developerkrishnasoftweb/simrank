@@ -1,11 +1,11 @@
-//image format must be in : // {"asset": AssetImage("provide/local/image") or NetworkImage("provide/network/image"), "head": "The Fatty Bao", "body": "foodude has been here", "bodyColor": Colors.white, "headColor": Colors.white, "recommend": true},
-//minimal format only image : // {"asset": AssetImage("provide/local/image") or NetworkImage("provide/network/image"), "head": "", "body": "", "recommend": false},
+//image format must be in : // // {"imageUrl": AssetImage("assets/images/holistic_latest_article_1.png"), "head": "The Fatty Bao", "body": "foodude has been here", "bodyColor": Colors.white, "headColor": Colors.white, "recommend": true},
+//minimal format only image : // {"imageUrl": AssetImage("assets/images/home_model_image_1.jpg"), "head": "", "body": "", "recommend": false},
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 class Carousel extends StatefulWidget{
   Carousel({@required this.images, this.height, @required this.curve, this.margin, this.padding}) : super();
-  final List<Map<String, dynamic>> images;
+  final List<Map<dynamic, dynamic>> images;
   final double height;
   final Curve curve;
   final EdgeInsets margin;
@@ -55,7 +55,7 @@ class _Carousel extends State<Carousel>{
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 image: DecorationImage(
-                  image: AssetImage(imageLists[i]["imageUrl"]),
+                  image: imageLists[i]["imageUrl"],
                   fit: BoxFit.cover,
                 ),
               ),

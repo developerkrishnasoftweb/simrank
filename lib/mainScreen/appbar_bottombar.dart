@@ -6,6 +6,7 @@ import 'package:simrank/mainScreen/live.dart';
 import 'package:simrank/mainScreen/menu.dart';
 import 'package:simrank/mainScreen/overview.dart';
 import 'package:simrank/mainScreen/shoutout.dart';
+import 'package:simrank/mainScreen/simran_home.dart';
 import 'package:simrank/mainScreen/videos.dart';
 import '../constant/colors.dart';
 import '../constant/strings.dart';
@@ -58,7 +59,8 @@ Widget titlename(BuildContext context){
             ]),
         child: GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Tablayout()));
+            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
           },
           child: Icon(
             Icons.home,
@@ -92,14 +94,16 @@ Widget titlename(BuildContext context){
         },
         child: Container(
             height: 50.0,
-            width: 50.0,
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.asset('assets/images/diamond.png'),
+                Image.asset('assets/images/diamond.png',
+                  height: 35,
+                  width: 35,
+                ),
                 Text(
                   "999",
                   style: TextStyle(fontSize: 11.0,fontWeight: FontWeight.bold),
@@ -149,9 +153,13 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       currentIndex: widget.index,
       showSelectedLabels: true,
       showUnselectedLabels: true,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.black54,
+      backgroundColor: Color.fromRGBO(158, 138, 191, 1),
       onTap: (index){
         setState(() {
           switch(index){

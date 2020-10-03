@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:simrank/constant/strings.dart';
 import 'package:simrank/login_register/otp.dart';
-
+import 'package:simrank/login_register/register.dart';
+import 'package:simrank/mainScreen/simran_home.dart';
 class Login extends StatefulWidget{
   @override
   _Login createState() => _Login();
 }
 Alignment radioButton = Alignment.centerRight;
 Color circleIndicator;
-String hintText = "Enter Mobile No";
+String hintMobileText = "Enter Mobile No";
+String hintOtpPassword = "Enter OTP";
 class _Login extends State<Login>{
   @override
   Widget build(BuildContext context) {
@@ -117,13 +119,15 @@ class _Login extends State<Login>{
                                             borderRadius: BorderRadius.circular(60.0),
                                             side: BorderSide(color: Color.fromRGBO(0, 0, 0, 0.5))
                                           ),
-                                          child: Text("Signup",
+                                          child: Text("Sign Up",
                                             style: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white
                                             ),
                                           ),
-                                          onPressed: (){},
+                                          onPressed: (){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
+                                          },
                                         ),
                                       )
                                   ),
@@ -165,10 +169,12 @@ class _Login extends State<Login>{
                                     setState(() {
                                       if(radioButton == Alignment.centerRight) {
                                         radioButton = Alignment.centerLeft;
-                                        hintText = "Enter Email ID";
+                                        hintMobileText = "Enter Email ID";
+                                        hintOtpPassword = "Enter Password";
                                       } else {
                                         radioButton = Alignment.centerRight;
-                                        hintText = "Enter Mobile No";
+                                        hintMobileText = "Enter Mobile No";
+                                        hintOtpPassword = "Enter OTP";
                                       }
                                     });
                                   },
@@ -235,7 +241,30 @@ class _Login extends State<Login>{
                             ),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                hintText: hintText,
+                                hintText: hintMobileText,
+                                suffixIcon: Container(
+                                    width: 2,
+                                    height: 2,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: Container(
+                                      height: 6,
+                                      width: 6,
+                                      decoration: BoxDecoration(
+                                          color: circleIndicator,
+                                          borderRadius: BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Color.fromRGBO(0, 0, 0, 0.5),
+                                                spreadRadius: 0.5,
+                                                blurRadius: 0.5
+                                            )
+                                          ]
+                                      ),
+                                    )
+                                ),
                                 hintStyle: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
@@ -270,7 +299,7 @@ class _Login extends State<Login>{
                             ),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                hintText: "Enter OTP",
+                                hintText: hintOtpPassword,
                                 suffixIcon: Container(
                                   width: 2,
                                   height: 2,
@@ -334,7 +363,7 @@ class _Login extends State<Login>{
                                 ),
                                 onPressed: (){
                                   Navigator.pop(context);
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Otp()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
                                 },
                               ),
                             ),
