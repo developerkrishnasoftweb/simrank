@@ -386,7 +386,7 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
                                       });
                                     },
                                     dropdownColor: Color.fromRGBO(158, 138, 191, 1),
-                                    icon: Icon(Icons.keyboard_arrow_down_outlined, color: Colors.white, size: 20,),
+                                    icon: Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 20,),
                                     items: [
                                       DropdownMenuItem(child: Text("PHOTOS"), value: "PHOTOS",),
                                       DropdownMenuItem(child: Text("VIDEOS"), value: "VIDEO",),
