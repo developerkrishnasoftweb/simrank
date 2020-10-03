@@ -52,6 +52,29 @@ class _ShoutOutMessState extends State<ShoutOutMess> {
                             ),
                             fit: BoxFit.fill),
                       ),
+                      child: Container(
+                        //padding: EdgeInsets.only(bottom: 11.0,right: 12.0),
+                        decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        constraints: BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
+                        ),
+                        child:  Align(
+                            alignment: Alignment.bottomRight,
+                            child: MaterialButton(height: 30.0,
+                              onPressed: () {},
+                              color: MyColors.btndarkcolor,
+                              textColor: Colors.white,
+                              child: Icon(
+                                Icons.volume_up,
+                                size: 20,
+                              ),
+                              shape: CircleBorder(),
+                            )
+                          ),
+                      ),
                     ),
                   ),
                   Padding(
