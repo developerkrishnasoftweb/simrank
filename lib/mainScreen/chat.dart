@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:simrank/constant/colors.dart';
 import '../constant/strings.dart';
@@ -19,6 +20,12 @@ class _ChatState extends State<Chat> {
   Icon sendIcon = Icon(Icons.mic);
 
   Widget build(BuildContext context) {
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -224,156 +231,6 @@ class _ChatState extends State<Chat> {
                                 ),
                               ),
                             ),
-
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: size.width,
-                        alignment: Alignment(-1.0, 0.0),
-                        margin: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    top: 10, bottom: 10, left: 20, right: 20),
-                                margin: EdgeInsets.only(
-                                    bottom: 5, right: size.width * 0.05),
-                                decoration: BoxDecoration(
-                                  color: MyColors.lightpurple.withOpacity(0.3),
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(15),
-                                      topLeft: Radius.circular(15),
-                                      bottomRight: Radius.circular(15),
-                                      bottomLeft: Radius.circular(2)),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/John.jpg"),
-                                            fit: BoxFit.fill,
-                                            alignment: Alignment.center),
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                    ),
-
-                                      Column(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(left:5,),
-                                            child: Text(
-                                              "Shilpa :",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  letterSpacing: 0.3,
-                                                  color: MyColors.whiteColor),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 160,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(3.0),
-                                          child: Text(
-                                            "Can You Dance For me :D NOW",
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: MyColors.whiteColor),
-                                          ),
-                                        ),
-                                      ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: size.width,
-                        alignment: Alignment(-1.0, 0.0),
-                        margin: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    top: 10, bottom: 10, left: 20, right: 20),
-                                margin: EdgeInsets.only(
-                                    bottom: 5, right: size.width * 0.05),
-                                decoration: BoxDecoration(
-                                  color: MyColors.lightpurple.withOpacity(0.3),
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(15),
-                                      topLeft: Radius.circular(15),
-                                      bottomRight: Radius.circular(15),
-                                      bottomLeft: Radius.circular(2)),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/John.jpg"),
-                                            fit: BoxFit.fill,
-                                            alignment: Alignment.center),
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                         Padding(
-                                          padding: const EdgeInsets.only(left:5,),
-                                          child: Text(
-                                            "Allwyn :",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                                letterSpacing: 0.3,
-                                                color: MyColors.whiteColor),
-                                          ),
-                                        ),
-                                      ],
-
-                                    ),
-                                    Container(
-                                      width: 160,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Text(
-                                          "I want to tell you that i live in Ulwe And that I am a programmer and a developer",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                              color: MyColors.whiteColor),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-
                           ],
                         ),
                       ),
@@ -417,7 +274,157 @@ class _ChatState extends State<Chat> {
                                     Column(
                                       children: <Widget>[
                                         Padding(
-                                          padding: const EdgeInsets.only(left:5,),
+                                          padding: const EdgeInsets.only(
+                                            left: 5,
+                                          ),
+                                          child: Text(
+                                            "Shilpa :",
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 0.3,
+                                                color: MyColors.whiteColor),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      width: 160,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Text(
+                                          "Can You Dance For me :D NOW",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: MyColors.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: size.width,
+                        alignment: Alignment(-1.0, 0.0),
+                        margin: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 10, bottom: 10, left: 20, right: 20),
+                                margin: EdgeInsets.only(
+                                    bottom: 5, right: size.width * 0.05),
+                                decoration: BoxDecoration(
+                                  color: MyColors.lightpurple.withOpacity(0.3),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(15),
+                                      topLeft: Radius.circular(15),
+                                      bottomRight: Radius.circular(15),
+                                      bottomLeft: Radius.circular(2)),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/John.jpg"),
+                                            fit: BoxFit.fill,
+                                            alignment: Alignment.center),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 5,
+                                          ),
+                                          child: Text(
+                                            "Allwyn :",
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 0.3,
+                                                color: MyColors.whiteColor),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      width: 160,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Text(
+                                          "I want to tell you that i live in Ulwe And that I am a programmer and a developer",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: MyColors.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: size.width,
+                        alignment: Alignment(-1.0, 0.0),
+                        margin: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 10, bottom: 10, left: 20, right: 20),
+                                margin: EdgeInsets.only(
+                                    bottom: 5, right: size.width * 0.05),
+                                decoration: BoxDecoration(
+                                  color: MyColors.lightpurple.withOpacity(0.3),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(15),
+                                      topLeft: Radius.circular(15),
+                                      bottomRight: Radius.circular(15),
+                                      bottomLeft: Radius.circular(2)),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/John.jpg"),
+                                            fit: BoxFit.fill,
+                                            alignment: Alignment.center),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 5,
+                                          ),
                                           child: Text(
                                             "Robert :",
                                             style: TextStyle(
@@ -428,7 +435,6 @@ class _ChatState extends State<Chat> {
                                           ),
                                         ),
                                       ],
-
                                     ),
                                     Container(
                                       width: 160,
@@ -443,12 +449,10 @@ class _ChatState extends State<Chat> {
                                         ),
                                       ),
                                     ),
-
                                   ],
                                 ),
                               ),
                             ),
-
                           ],
                         ),
                       ),
@@ -526,16 +530,6 @@ class _ChatState extends State<Chat> {
                                   fontFamily: "LogoText",
                                 ),
                               ),
-                              cursorColor: Color.fromRGBO(157, 185, 63, 1),
-                              autofocus: false,
-                              cursorRadius: Radius.circular(5),
-                              onChanged: (value) {
-                                setState(() {
-                                  (value.length > 0)
-                                      ? sendIcon = Icon(Icons.send)
-                                      : sendIcon = Icon(Icons.mic);
-                                });
-                              },
                             ),
                           ),
                           Container(
