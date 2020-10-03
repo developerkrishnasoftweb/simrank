@@ -378,6 +378,81 @@ class _ChatState extends State<Chat> {
                         ),
                       ),
                       Container(
+                        width: size.width,
+                        alignment: Alignment(-1.0, 0.0),
+                        margin: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 10, bottom: 10, left: 20, right: 20),
+                                margin: EdgeInsets.only(
+                                    bottom: 5, right: size.width * 0.05),
+                                decoration: BoxDecoration(
+                                  color: MyColors.lightpurple.withOpacity(0.3),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(15),
+                                      topLeft: Radius.circular(15),
+                                      bottomRight: Radius.circular(15),
+                                      bottomLeft: Radius.circular(2)),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/John.jpg"),
+                                            fit: BoxFit.fill,
+                                            alignment: Alignment.center),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(left:5,),
+                                          child: Text(
+                                            "Robert :",
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 0.3,
+                                                color: MyColors.whiteColor),
+                                          ),
+                                        ),
+                                      ],
+
+                                    ),
+                                    Container(
+                                      width: 160,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Text(
+                                          "Hi ! How are You Today ?",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: MyColors.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      Container(
                         alignment: Alignment(1.0, 0.0),
                         margin: EdgeInsets.only(top: 10, bottom: 10),
                         child: Column(
