@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+class color{
+  static Color loaderColor = Color(0xFF9E8ABF);
+}
 class MyColors{
   static Color primarycolors = Color(0xFF9E8ABF);
   static Color darkprimarycolor = Color(0xFF7e6e99);

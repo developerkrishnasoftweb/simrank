@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simrank/constant/strings.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:simrank/login_register/holistic_login.dart';
-import 'package:simrank/login_register/login.dart';
+import './login_register/login.dart';
+import './login_register/register.dart';
 import 'package:simrank/mainScreen/chat.dart';
 import 'package:simrank/mainScreen/daimond.dart';
 import 'package:simrank/mainScreen/menu.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Videos(),
+      home: Login(),
     );
   }
 }

@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:simrank/mainScreen/appbar_bottombar.dart';
 import '../constant/colors.dart';
 import '../constant/strings.dart';
-
 class Chat extends StatefulWidget {
   @override
   _ChatState createState() => _ChatState();
