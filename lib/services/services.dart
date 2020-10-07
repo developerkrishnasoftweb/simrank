@@ -65,7 +65,7 @@ class Services{
       Loader(context: context, text: "Please Wait ...");
       final response = await dio.post(url, data: body, options: Options(contentType: Headers.jsonContentType));
       Navigator.pop(context);
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       if (response.statusCode == 200) {
         Data data = new Data();
         // print(response.data);
