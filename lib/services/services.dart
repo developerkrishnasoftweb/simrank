@@ -1,6 +1,4 @@
-import 'package:dio/adapter_browser.dart';
 import 'package:dio/dio.dart';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';

@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:simrank/constant/strings.dart';
-import 'package:simrank/mainScreen/daimond.dart';
-import 'package:simrank/mainScreen/overview.dart';
+import '../constant/strings.dart';
+import 'daimond.dart';
 import 'appbar_bottombar.dart';
 class Menu extends StatefulWidget {
   @override

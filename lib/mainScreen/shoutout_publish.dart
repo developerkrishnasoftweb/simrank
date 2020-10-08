@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:simrank/constant/strings.dart';
-import 'package:simrank/mainScreen/shoutout_publish_confirm.dart';
+import '../constant/strings.dart';
+import 'shoutout_publish_confirm.dart';
 import 'appbar_bottombar.dart';
 class ShoutOutPublish extends StatefulWidget{
   @override

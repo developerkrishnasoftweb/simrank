@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:simrank/constant/strings.dart';
-import 'package:simrank/mainScreen/shoutout_detail.dart';
+import '../constant/strings.dart';
+import 'shoutout_detail.dart';
 import 'appbar_bottombar.dart';
 class ShoutOutUploadPhotos extends StatefulWidget{
   @override

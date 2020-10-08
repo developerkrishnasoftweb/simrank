@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:simrank/constant/strings.dart';
+import '../constant/strings.dart';
 import 'appbar_bottombar.dart';
 class ShoutOut extends StatefulWidget {
   @override

@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simrank/mainScreen/Tabbar.dart';
-import 'package:simrank/mainScreen/daimond.dart';
-import 'package:simrank/mainScreen/live.dart';
-import 'package:simrank/mainScreen/menu.dart';
-import 'package:simrank/mainScreen/overview.dart';
-import 'package:simrank/mainScreen/shoutout.dart';
-import 'package:simrank/mainScreen/simran_home.dart';
-import 'package:simrank/mainScreen/videos.dart';
+import 'Tabbar.dart';
+import 'daimond.dart';
+import 'live.dart';
+import 'menu.dart';
+import 'overview.dart';
+import 'shoutout.dart';
+import 'simran_home.dart';
+import 'videos.dart';
 import '../constant/colors.dart';
 import '../constant/strings.dart';
 

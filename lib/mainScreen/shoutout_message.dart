@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simrank/mainScreen/shoutout_upload_photo.dart';
+import 'shoutout_upload_photo.dart';
 import 'appbar_bottombar.dart';
 import '../constant/colors.dart';
 import '../constant/strings.dart';

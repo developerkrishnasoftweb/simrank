@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simrank/mainScreen/ShoutOutMess.dart';
-import 'package:simrank/mainScreen/home_feed.dart';
-import 'package:simrank/mainScreen/image.dart';
+import 'ShoutOutMess.dart';
+import 'home_feed.dart';
+import 'image.dart';
 import '../constant/colors.dart';
 import 'appbar_bottombar.dart';
 import 'popmodelmenu.dart';

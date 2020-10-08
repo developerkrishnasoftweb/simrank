@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:simrank/mainScreen/appbar_bottombar.dart';
+import 'appbar_bottombar.dart';
 import '../constant/colors.dart';
 import '../constant/strings.dart';
 class Chat extends StatefulWidget {
