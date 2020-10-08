@@ -48,6 +48,9 @@ flutter:
     - family: LogoText
       fonts:
         - asset: fonts/FredokaOne-Regular.ttf
+    - family: PrimaryFont
+      fonts:
+        - asset: fonts/Quicksand-Regular.ttf
   assets:
     - assets/images/download.jpg
     - assets/images/diamond.png

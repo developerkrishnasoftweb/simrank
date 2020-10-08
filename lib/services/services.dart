@@ -8,14 +8,14 @@ import '../static/loader.dart';
 import '../mainScreen/simran_home.dart';
 Dio dio = new Dio();
 class Services{
-  static Future<Data> userSignIn(body, context) async {
+  static Future<Data> userSignIn(body, context, GlobalKey<ScaffoldState> _scaffoldKey) async {
     String url = Urls.baseUrl +Urls.userSignIn;
     dio.options.contentType = Headers.jsonContentType;
     try {
       Loader(context: context, text: "Please Wait ...");
       final response = await dio.post(url, data: body, options: Options(contentType: Headers.jsonContentType));
       Navigator.pop(context);
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       if(response.statusCode == 401){
         print("Invalid username and password");
       }
@@ -52,24 +52,33 @@ class Services{
       } else {
         throw Exception("Something went Wrong");
       }
-    } on SocketException catch (_) {
-      throw Exception("Something went wrong");
+    } on DioError catch (e) {
+      Navigator.pop(context);
+      if(e.error.toString() == "Http status error [401]"){
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Invalid username or Password"),));
+      }
+      if(e.error.toString() == "Http status error [400]"){
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Your account is not activated. Please activate your account!"),));
+      }
     }
+    // on SocketException catch (_) {
+    //   throw Exception("Something went wrong");
+    // }
   }
-  static Future<Data> userSignUp(body, context) async {
-    String url = Urls.baseUrl +Urls.userSignIn;
+
+  static Future<Data> userSignUp(body, context, GlobalKey<ScaffoldState> _scaffoldKey) async {
+    String url = Urls.baseUrl +Urls.userSignUp;
     dio.options.contentType = Headers.jsonContentType;
     try {
       Loader(context: context, text: "Please Wait ...");
       final response = await dio.post(url, data: body, options: Options(contentType: Headers.jsonContentType));
       Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       if (response.statusCode == 200) {
         Data data = new Data();
         // print(response.data);
         // print("Data - " + json.decode(response.data.toString()));
         // final jsonResponse = json.decode(response.data.toString());
-        print("something wrong");
         final jsonResponse = response.data;
         data.message = jsonResponse['message'];
         data.response = jsonResponse['success'];
@@ -80,17 +89,11 @@ class Services{
             "first_name": jsonResponse['data']["first_name"],
             "model_name" : jsonResponse['data']["model_name"],
             "email" : jsonResponse['data']['email'],
-            "email_verified_at" : jsonResponse['data']['email_verified_at'],
             "mobile" : jsonResponse['data']['mobile'],
             "image" : jsonResponse['data']['image'],
-            "activation_code" : jsonResponse['data']['activation_code'],
-            "device_token" : jsonResponse['data']['device_token'],
-            "status" : jsonResponse['data']['status'],
+            "user_type" : jsonResponse['data']['user_type'],
             "created_at" : jsonResponse['data']['created_at'],
             "updated_at" : jsonResponse['data']['updated_at'],
-            "deleted_at" : jsonResponse['data']['deleted_at'],
-            "user_type" : jsonResponse['data']['user_type'],
-            "access_token" : jsonResponse['data']['access_token'],
           }
         ];
         data.data = list;
@@ -99,7 +102,8 @@ class Services{
         throw Exception("Something went Wrong");
       }
     } on DioError catch (e) {
-      print("Hello" + e.toString());
+      Navigator.pop(context);
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("The email address is already registered."),));
     }
   }
 }
