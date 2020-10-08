@@ -12,9 +12,9 @@ class string{
   static var menuListSettings = "Settings";
   static var menuListLogout = "Logout";
   static var shoutOutTitle = "ShoutOuts";
-  static String completedShoutOut = "Completed shoutouts - ";
-  static String pendingShoutOut = "Pending shoutouts - ";
-  static String rejectedShoutOut = "Rejected shoutouts - ";
+  static var completedShoutOut = "Completed shoutouts - ";
+  static var pendingShoutOut = "Pending shoutouts - ";
+  static var rejectedShoutOut = "Rejected shoutouts - ";
   static var shoutOutCompleteBtn = "Complete";
   static var shoutOutRejectBtn = "Reject";
   static var shoutOutPendingBtn = "Pending";
@@ -24,6 +24,13 @@ class string{
   static var validatePhoneNumberDigit = "Phone number must be of 10 digit";
   static var validateEmailId = "Please enter valid email";
   static var validatePasswordDigit = "Password must in between 8-15 digit";
+  static var loginText = "Log In";
+  static var signUpText = "Sign Up";
+  static var signUpValidateName = "Please enter name";
+  static var signUpValidateMobile = "Please enter mobile number";
+  static var signUpValidateEmailId = "Please enter email id";
+  static var signUpValidatePassword = "Please enter password";
+  static var validatePasswordAndVerifyPassword = "Password doesn't match !!";
 }
 class Strings {
   static var title = "Simran K";

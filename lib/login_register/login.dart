@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import '../constant/strings.dart';
 import '../static/loader.dart';
 import '../constant/strings.dart';
 import 'package:simrank/login_register/otp.dart';
@@ -20,9 +21,6 @@ class _Login extends State<Login>{
   Color circleIndicator1;
   String hintMobileText = "Enter Mobile No";
   String hintOtpPassword = "Enter OTP";
-
-  ///loginType stands for how the user wants to login Either with email or either phone number, if loginType = true that means with mobile number else with email
-
   bool loginType = true;
   TextEditingController emailPhone = TextEditingController();
   TextEditingController passwordOtp = TextEditingController();
@@ -40,12 +38,12 @@ class _Login extends State<Login>{
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Container(
-              height: size.height * 0.9607,
+              height: size.height - MediaQuery.of(context).padding.top,
               width: size.width,
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: Colors.white,
                 image: DecorationImage(
-                  image: NetworkImage("https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg"),
+                  image: NetworkImage("https://images.unsplash.com/photo-1467632499275-7a693a761056?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"),
                   fit: BoxFit.fill,
                   colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.darken),
                 ),
@@ -114,7 +112,7 @@ class _Login extends State<Login>{
                                                 borderRadius: BorderRadius.circular(60.0),
                                                 side: BorderSide(color: Color.fromRGBO(158, 138, 191, 1))
                                             ),
-                                            child: Text("Login",
+                                            child: Text(string.loginText,
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   color: Colors.white
@@ -137,7 +135,7 @@ class _Login extends State<Login>{
                                                 borderRadius: BorderRadius.circular(60.0),
                                                 side: BorderSide(color: Color.fromRGBO(0, 0, 0, 0.5))
                                             ),
-                                            child: Text("Sign Up",
+                                            child: Text(string.signUpText,
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   color: Colors.white
@@ -452,8 +450,7 @@ class _Login extends State<Login>{
     Services.userSignIn(formData, context).then((value) async {
       if(value.response){
         print(value.data.toString());
-        // Navigator.pop(context);
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       } else {
         _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Invalid username and password")));
       }
