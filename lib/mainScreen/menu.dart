@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:simrank/login_register/login.dart';
 import '../constant/strings.dart';
 import 'daimond.dart';
 import 'appbar_bottombar.dart';
+import '../services/data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Menu extends StatefulWidget {
   @override
   _Menu createState() => _Menu();
 }
 Alignment radioButton = Alignment.centerRight;
 class _Menu extends State<Menu>{
+  bool userType = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -340,38 +345,46 @@ class _Menu extends State<Menu>{
                             ),
                           ]
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            height: 60,
-                            width: size.width * 0.3,
-                            alignment: Alignment.center,
-                            child: Icon(Icons.exit_to_app, color: Color.fromRGBO(182, 164, 180, 1), size: 40,),
-                          ),
-                          Container(
-                            height: 40,
-                            width: 2,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5)
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Login()), (route) => false);
+                          // Future<SharedPreferences> _preferences = SharedPreferences.getInstance();
+                          // final SharedPreferences preferences = await _preferences;
+                          // print(preferences.get("data"));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              height: 60,
+                              width: size.width * 0.3,
+                              alignment: Alignment.center,
+                              child: Icon(Icons.exit_to_app, color: Color.fromRGBO(182, 164, 180, 1), size: 40,),
                             ),
-                          ),
-                          Container(
-                            height: 60,
-                            width: size.width * 0.59,
-                            padding: EdgeInsets.only(left: 20),
-                            alignment: Alignment(-1.0, 0.0),
-                            child: Text(string.menuListLogout,
-                              style: TextStyle(
-                                  fontSize: 20,
+                            Container(
+                              height: 40,
+                              width: 2,
+                              decoration: BoxDecoration(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600
+                                  borderRadius: BorderRadius.circular(5)
                               ),
                             ),
-                          ),
-                        ],
+                            Container(
+                              height: 60,
+                              width: size.width * 0.59,
+                              padding: EdgeInsets.only(left: 20),
+                              alignment: Alignment(-1.0, 0.0),
+                              child: Text(string.menuListLogout,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Container(
@@ -410,38 +423,18 @@ class _Menu extends State<Menu>{
                                 ),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: (){
-                                setState(() {
-                                  (radioButton == Alignment.centerRight) ? radioButton = Alignment.centerLeft : radioButton = Alignment.centerRight;
-                                });
-                              },
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    height: 25,
-                                    width: size.width * 0.13,
-                                    alignment: radioButton,
-                                    padding: EdgeInsets.only(left: 3, right: 3),
-                                    decoration: BoxDecoration(
-                                      color: Color.fromRGBO(158, 138, 191, 1),
-                                      borderRadius: BorderRadius.circular(60)
-                                    ),
-                                    child: Container(
-                                      child: Icon(Icons.radio_button_checked, size: 20, color: Color.fromRGBO(158, 138, 191, 1),),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Color.fromRGBO(0, 0, 0, 0.6),
-                                                spreadRadius: 0.5,
-                                                blurRadius: 5,
-                                            ),
-                                          ]
-                                      ),
-                                    ),
-                                  )
-                                ],
+                            Container(
+                              height: 30,
+                              width: 60,
+                              child: Switch(
+                                value: userType,
+                                activeTrackColor: Color.fromRGBO(0, 0, 0, 0.1),
+                                activeColor: Color.fromRGBO(158, 138, 191, 1),
+                                onChanged: (value){
+                                  setState(() {
+                                    userType = !userType;
+                                  });
+                                },
                               ),
                             ),
                             Container(

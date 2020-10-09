@@ -10,6 +10,7 @@ import '../constant/strings.dart';
 import '../constant/strings.dart';
 import '../services/services.dart';
 import '../login_register/login.dart';
+import '../static/innerShadow.dart';
 class Register extends StatefulWidget{
   @override
   _Register createState() => _Register();
@@ -44,6 +45,7 @@ class _Register extends State<Register>{
                 child: Container(
                   height: 70,
                   width: size.width,
+                  alignment: Alignment.center,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,7 +56,8 @@ class _Register extends State<Register>{
                               fontFamily: string.fontFamilyFont,
                               fontSize: 35,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white
+                              color: Colors.white,
+                              letterSpacing: 4
                           ),
                         ),
                       ),
@@ -63,7 +66,8 @@ class _Register extends State<Register>{
                           style: TextStyle(
                               fontFamily: string.fontFamilyText,
                               fontSize: 17,
-                              color: Colors.white
+                              color: Colors.white,
+                              letterSpacing: 2.5
                           ),
                         ),
                       )
@@ -90,35 +94,21 @@ class _Register extends State<Register>{
                               children: <Widget>[
                                 Container(
                                     decoration: BoxDecoration(
-                                        color: Color.fromRGBO(158, 138, 191, 1),
-                                        borderRadius: BorderRadius.circular(60),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color.fromRGBO(0, 0, 0, 0.5),
-                                              spreadRadius: 1,
-                                              blurRadius: 1,
-                                              offset: Offset(1, 1)
-                                          ),
-                                          BoxShadow(
-                                              color: Color.fromRGBO(0, 0, 0, 0.5),
-                                              spreadRadius: 1,
-                                              blurRadius: 1,
-                                              offset: Offset(-1, -1)
-                                          )
-                                        ]
+                                      color: Color.fromRGBO(126, 105, 148, 1),
+                                      borderRadius: BorderRadius.circular(60),
                                     ),
                                     child: SizedBox(
-                                      height: 55,
+                                      height: 65,
                                       width: size.width * 0.4,
                                       child: FlatButton(
                                         shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(60.0),
-                                            side: BorderSide(color: Color.fromRGBO(158, 138, 191, 1))
+                                            borderRadius: BorderRadius.circular(60.0)
                                         ),
                                         child: Text(string.loginText,
                                           style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.white
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold
                                           ),
                                         ),
                                         onPressed: (){
@@ -127,40 +117,45 @@ class _Register extends State<Register>{
                                       ),
                                     )
                                 ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                        color: Color.fromRGBO(158, 138, 191, 1),
-                                        borderRadius: BorderRadius.circular(60)
-                                    ),
-                                    child: SizedBox(
-                                      height: 55,
-                                      width: size.width * 0.4,
-                                      child: FlatButton(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(60.0),
-                                            side: BorderSide(color: Color.fromRGBO(0, 0, 0, 0.5))
-                                        ),
-                                        child: Text(string.signUpText,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.white
-                                          ),
-                                        ),
-                                        onPressed: (){},
+                                InnerShadow(
+                                  blur: 100,
+                                  color: const Color.fromRGBO(0, 0, 0, 0.5),
+                                  offset: const Offset(-2, 1),
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Color.fromRGBO(137, 123, 153, 01),
+                                          borderRadius: BorderRadius.circular(60)
                                       ),
-                                    )
+                                      child: SizedBox(
+                                        height: 65,
+                                        width: size.width * 0.4,
+                                        child: FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(60.0)
+                                          ),
+                                          child: Text(string.signUpText,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                          onPressed: (){},
+                                        ),
+                                      )
+                                  ),
                                 ),
                               ],
                             )
                         ),
                         Container(
-                          height: 55,
+                          height: 65,
                           margin: EdgeInsets.only(top: 30),
                           width: size.width * 0.9,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
+                              color: Color.fromRGBO(137, 123, 153, 1),
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -168,8 +163,8 @@ class _Register extends State<Register>{
                               hintText: "Name",
                               hintStyle: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20
                               ),
                               border: InputBorder.none,
                             ),
@@ -189,19 +184,19 @@ class _Register extends State<Register>{
                               });
                             },
                             style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 20,
                                 color: Colors.white
                             ),
                           ),
                         ),
                         Container(
-                          height: 55,
+                          height: 65,
                           margin: EdgeInsets.only(top: 14),
                           width: size.width * 0.9,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
+                              color: Color.fromRGBO(137, 123, 153, 1),
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -209,13 +204,13 @@ class _Register extends State<Register>{
                               hintText: "Mobile Number",
                               hintStyle: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.bold,
                                   fontSize: 17
                               ),
                               border: InputBorder.none,
                             ),
                             style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 20,
                                 color: Colors.white
                             ),
                             cursorColor: Colors.black87,
@@ -253,13 +248,13 @@ class _Register extends State<Register>{
                           ),
                         ),
                         Container(
-                          height: 55,
+                          height: 65,
                           margin: EdgeInsets.only(top: 14),
                           width: size.width * 0.9,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
+                              color: Color.fromRGBO(137, 123, 153, 1),
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -267,13 +262,13 @@ class _Register extends State<Register>{
                               hintText: "Verification Code",
                               hintStyle: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20
                               ),
                               border: InputBorder.none,
                             ),
                             style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 20,
                                 color: Colors.white
                             ),
                             cursorColor: Colors.black87,
@@ -292,13 +287,13 @@ class _Register extends State<Register>{
                           ),
                         ),
                         Container(
-                          height: 55,
+                          height: 65,
                           margin: EdgeInsets.only(top: 14),
                           width: size.width * 0.9,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
+                              color: Color.fromRGBO(137, 123, 153, 1),
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -306,13 +301,13 @@ class _Register extends State<Register>{
                               hintText: "Email Id",
                               hintStyle: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20
                               ),
                               border: InputBorder.none,
                             ),
                             style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 20,
                                 color: Colors.white
                             ),
                             cursorColor: Colors.black87,
@@ -340,13 +335,13 @@ class _Register extends State<Register>{
                           ),
                         ),
                         Container(
-                          height: 55,
+                          height: 65,
                           margin: EdgeInsets.only(top: 14),
                           width: size.width * 0.9,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
+                              color: Color.fromRGBO(137, 123, 153, 1),
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -354,13 +349,13 @@ class _Register extends State<Register>{
                               hintText: "Setup Password",
                               hintStyle: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20
                               ),
                               border: InputBorder.none,
                             ),
                             style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 20,
                                 color: Colors.white
                             ),
                             cursorColor: Colors.black87,
@@ -385,13 +380,13 @@ class _Register extends State<Register>{
                           ),
                         ),
                         Container(
-                          height: 55,
+                          height: 65,
                           margin: EdgeInsets.only(top: 14),
                           width: size.width * 0.9,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
+                              color: Color.fromRGBO(137, 123, 153, 1),
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -399,13 +394,13 @@ class _Register extends State<Register>{
                               hintText: "Re - Enter Password",
                               hintStyle: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20
                               ),
                               border: InputBorder.none,
                             ),
                             style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 20,
                                 color: Colors.white
                             ),
                             cursorColor: Colors.black87,
@@ -437,21 +432,21 @@ class _Register extends State<Register>{
                           margin: EdgeInsets.only(top: 30,),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
+                              color: Color.fromRGBO(126, 105, 148, 1),
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: SizedBox(
-                            height: 55,
+                            height: 65,
                             width: size.width * 0.9,
                             child: FlatButton(
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(60.0),
-                                  side: BorderSide(color: Color.fromRGBO(158, 138, 191, 1))
+                                  borderRadius: BorderRadius.circular(60.0)
                               ),
                               child: Text("Proceed",
                                 style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
                                 ),
                               ),
                               onPressed: (){
@@ -482,7 +477,7 @@ class _Register extends State<Register>{
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -106,4 +106,33 @@ class Services{
       _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("The email address is already registered."),));
     }
   }
+  static Future<Data> getModels(context, String token) async {
+    String url = Urls.baseUrl +Urls.getModels;
+    dio.options.contentType = Headers.jsonContentType;
+    dio.options.headers["Authorization"] = "Bearer " + token;
+    try {
+      Loader(context: context, text: "Please Wait ...");
+      final response = await dio.get(url, options: Options(contentType: Headers.jsonContentType));
+      Navigator.pop(context);
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      if (response.statusCode == 200) {
+        Data data = new Data();
+        // print(response.data);
+        // print("Data - " + json.decode(response.data.toString()));
+        // final jsonResponse = json.decode(response.data.toString());
+        final jsonResponse = response.data;
+        data.message = jsonResponse['message'];
+        data.response = jsonResponse['success'];
+        List list;
+        list = jsonResponse['data'];
+        data.data = list;
+        return data;
+      } else {
+        throw Exception("Something went Wrong");
+      }
+    } on DioError catch (e) {
+      Navigator.pop(context);
+      // _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("The email address is already registered."),));
+    }
+  }
 }

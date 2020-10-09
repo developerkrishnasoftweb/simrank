@@ -30,7 +30,7 @@ dependencies:
   intl: ^0.16.1
   dio:
   carousel_slider:
-
+  shared_preferences: ^0.5.12
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +68,7 @@ flutter:
     - assets/images/home_model_image_1.jpg
     - assets/images/home_model_image_2.jpg
     - assets/images/home_model_image_3.jpg
+    - assets/images/login_register_background.jpg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

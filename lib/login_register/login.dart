@@ -10,6 +10,8 @@ import 'package:simrank/login_register/otp.dart';
 import 'package:simrank/login_register/register.dart';
 import '../mainScreen/simran_home.dart';
 import '../services/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../static/innerShadow.dart';
 class Login extends StatefulWidget{
   @override
   _Login createState() => _Login();
@@ -37,10 +39,20 @@ class _Login extends State<Login>{
           width: size.width,
           decoration: BoxDecoration(
             color: Colors.white,
+            gradient: RadialGradient(
+              colors: [
+                Color.fromRGBO(141, 114, 183, 0.9),
+                Color.fromRGBO(141, 114, 183, 0.9)
+              ],
+              stops: [
+                0.1,
+                0.9
+              ]
+            ),
             image: DecorationImage(
-              image: NetworkImage("https://images.unsplash.com/photo-1467632499275-7a693a761056?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"),
+              image: AssetImage("assets/images/login_register_background.jpg"),
               fit: BoxFit.fill,
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.darken),
+              colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.7), BlendMode.srcATop),
             ),
           ),
           child: Form(
@@ -66,7 +78,8 @@ class _Login extends State<Login>{
                                       fontFamily: string.fontFamilyFont,
                                       fontSize: 35,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white
+                                      color: Colors.white,
+                                      letterSpacing: 6
                                   ),
                                 ),
                               ),
@@ -75,7 +88,8 @@ class _Login extends State<Login>{
                                   style: TextStyle(
                                       fontFamily: string.fontFamilyText,
                                       fontSize: 17,
-                                      color: Colors.white
+                                      color: Colors.white,
+                                    letterSpacing: 2.5
                                   ),
                                 ),
                               )
@@ -87,53 +101,65 @@ class _Login extends State<Login>{
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
+                                InnerShadow(
+                                  blur: 100,
+                                  color: const Color.fromRGBO(0, 0, 0, 1),
+                                  offset: const Offset(-2, 1),
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Color.fromRGBO(137, 123, 153, 1),
+                                        borderRadius: BorderRadius.circular(60),
+                                      ),
+                                      child: SizedBox(
+                                        height: 65,
+                                        width: size.width * 0.38,
+                                        child: FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(60.0)
+                                          ),
+                                          child: Text(string.loginText,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                          onPressed: (){},
+                                        ),
+                                      )
+                                  ),
+                                ),
                                 Container(
                                     decoration: BoxDecoration(
-                                        color: Color.fromRGBO(158, 138, 191, 1),
+                                        color: Color.fromRGBO(126, 105, 148, 1),
                                         borderRadius: BorderRadius.circular(60),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: Color.fromRGBO(0, 0, 0, 0.7),
-                                              spreadRadius: 0.1,
-                                              blurRadius: 10
+                                              color: Colors.black.withOpacity(0.2),
+                                              spreadRadius: 1,
+                                              blurRadius: 15,
+                                              offset: Offset(5, 5)
+                                          ),
+                                          BoxShadow(
+                                              color: Colors.black.withOpacity(0.2),
+                                              spreadRadius: 1,
+                                              blurRadius: 15,
+                                              offset: Offset(-5, -5)
                                           )
                                         ]
                                     ),
                                     child: SizedBox(
-                                      height: 55,
-                                      width: size.width * 0.4,
+                                      height: 65,
+                                      width: size.width * 0.38,
                                       child: FlatButton(
                                         shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(60.0),
-                                            side: BorderSide(color: Color.fromRGBO(158, 138, 191, 1))
-                                        ),
-                                        child: Text(string.loginText,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.white
-                                          ),
-                                        ),
-                                        onPressed: (){},
-                                      ),
-                                    )
-                                ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                        color: Color.fromRGBO(158, 138, 191, 1),
-                                        borderRadius: BorderRadius.circular(60)
-                                    ),
-                                    child: SizedBox(
-                                      height: 55,
-                                      width: size.width * 0.4,
-                                      child: FlatButton(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(60.0),
-                                            side: BorderSide(color: Color.fromRGBO(0, 0, 0, 0.5))
+                                            borderRadius: BorderRadius.circular(60.0)
                                         ),
                                         child: Text(string.signUpText,
                                           style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.white
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold
                                           ),
                                         ),
                                         onPressed: (){
@@ -150,21 +176,26 @@ class _Login extends State<Login>{
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Container(
-                                  height: 55,
-                                  width: size.width * 0.35,
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.only(left: 10, right: 10),
-                                  decoration: BoxDecoration(
-                                      color: Color.fromRGBO(158, 138, 191, 1),
-                                      borderRadius: BorderRadius.circular(60)
-                                  ),
-                                  child: Text(
-                                    "Email Id",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 17
+                                InnerShadow(
+                                  blur: 100,
+                                  color: const Color.fromRGBO(0, 0, 0, 0.5),
+                                  offset: const Offset(-2, 1),
+                                  child: Container(
+                                    height: 65,
+                                    width: size.width * 0.35,
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.only(left: 10, right: 10),
+                                    decoration: BoxDecoration(
+                                        color: Color.fromRGBO(137, 123, 153, 1),
+                                        borderRadius: BorderRadius.circular(60)
+                                    ),
+                                    child: Text(
+                                      "Email Id",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -191,40 +222,62 @@ class _Login extends State<Login>{
                                         child: Text("VIA",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w600
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold
                                           ),
                                         ),
                                       ),
-                                      Container(
-                                        height: 25,
+                                      AnimatedContainer(
+                                        duration: Duration(milliseconds: 200),
+                                        height: 30,
                                         width: size.width * 0.13,
                                         alignment: radioButton,
                                         padding: EdgeInsets.only(left: 3, right: 3),
                                         decoration: BoxDecoration(
-                                            color: Color.fromRGBO(158, 138, 191, 1),
+                                            color: Color.fromRGBO(126, 105, 148, 1),
                                             borderRadius: BorderRadius.circular(60)
                                         ),
-                                        child: Icon(Icons.radio_button_checked, size: 20, color: Color.fromRGBO(0, 0, 0, 0.3),),
+                                        child: Container(
+                                          height: 23,
+                                          width: 23,
+                                          decoration: BoxDecoration(
+                                            color: Color.fromRGBO(126, 105, 148, 1),
+                                            borderRadius: BorderRadius.circular(25),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.5),
+                                                spreadRadius: 1,
+                                                blurRadius: 15,
+                                                offset: Offset(5, 5)
+                                              ),
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.5),
+                                                spreadRadius: 1,
+                                                blurRadius: 15,
+                                                offset: Offset(-5, -5)
+                                              )
+                                            ]
+                                          ),
+                                        ),
                                       )
                                     ],
                                   ),
                                 ),
                                 Container(
-                                  height: 55,
+                                  height: 65,
                                   width: size.width * 0.35,
                                   alignment: Alignment.center,
                                   padding: EdgeInsets.only(left: 10, right: 10),
                                   decoration: BoxDecoration(
-                                      color: Color.fromRGBO(158, 138, 191, 1),
+                                      color: Color.fromRGBO(126, 105, 148, 1),
                                       borderRadius: BorderRadius.circular(60)
                                   ),
                                   child: Text(
                                     "Mobile No.",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 17
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20
                                     ),
                                   ),
                                 )
@@ -232,13 +285,13 @@ class _Login extends State<Login>{
                             )
                         ),
                         Container(
-                          height: 55,
+                          height: 65,
                           margin: EdgeInsets.only(top: 20),
                           width: size.width * 0.9,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
+                              color: Color.fromRGBO(137, 123, 153, 1),
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -276,8 +329,8 @@ class _Login extends State<Login>{
                               ),
                               hintStyle: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20
                               ),
                               border: InputBorder.none,
                             ),
@@ -292,19 +345,19 @@ class _Login extends State<Login>{
                               });
                             },
                             style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 20,
                                 color: Colors.white
                             ),
                           ),
                         ),
                         Container(
-                          height: 60,
+                          height: 65,
                           margin: EdgeInsets.only(top: 14),
                           width: size.width * 0.9,
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
+                              color: Color.fromRGBO(137, 123, 153, 1),
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -332,9 +385,9 @@ class _Login extends State<Login>{
                                         borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: Color.fromRGBO(0, 0, 0, 0.5),
-                                              spreadRadius: 0.5,
-                                              blurRadius: 0.5
+                                            color: Color.fromRGBO(0, 0, 0, 0.5),
+                                            spreadRadius: 0.5,
+                                            blurRadius: 0.5
                                           )
                                         ]
                                     ),
@@ -342,13 +395,13 @@ class _Login extends State<Login>{
                               ),
                               hintStyle: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20
                               ),
                               border: InputBorder.none,
                             ),
                             style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 20,
                                 color: Colors.white
                             ),
                             cursorColor: Colors.white,
@@ -367,21 +420,36 @@ class _Login extends State<Login>{
                           margin: EdgeInsets.only(top: 30),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(158, 138, 191, 1),
-                              borderRadius: BorderRadius.circular(60)
+                            color: Color.fromRGBO(126, 105, 148, 1),
+                            borderRadius: BorderRadius.circular(60),
+                            boxShadow:[
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                spreadRadius: 1,
+                                blurRadius: 15,
+                                offset: Offset(5, 5)
+                              ),
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                spreadRadius: 1,
+                                blurRadius: 15,
+                                offset: Offset(-5, -5)
+                              )
+                            ]
                           ),
                           child: SizedBox(
-                            height: 55,
+                            height: 65,
                             width: size.width * 0.9,
                             child: FlatButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(60.0),
-                                  side: BorderSide(color: Color.fromRGBO(158, 138, 191, 1))
+                                  side: BorderSide(color: Color.fromRGBO(126, 105, 148, 1))
                               ),
                               child: Text("Proceed",
                                 style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
                                 ),
                               ),
                               onPressed: (){
@@ -441,7 +509,6 @@ class _Login extends State<Login>{
     });
     Services.userSignIn(formData, context, _scaffoldKey).then((value) async {
       if(value.response){
-        // print(value.data.toString());
         Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       }
     });
