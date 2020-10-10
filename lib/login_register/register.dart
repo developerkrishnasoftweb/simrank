@@ -3,11 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../constant/strings.dart';
-import 'package:simrank/login_register/otp.dart';
-import '../constant/strings.dart';
-import '../constant/strings.dart';
-import '../constant/strings.dart';
-import '../constant/strings.dart';
 import '../services/services.dart';
 import '../login_register/login.dart';
 import '../static/innerShadow.dart';
@@ -31,7 +26,7 @@ class _Register extends State<Register>{
         decoration: BoxDecoration(
           color: Colors.white,
           image: DecorationImage(
-            image: NetworkImage("https://images.unsplash.com/photo-1467632499275-7a693a761056?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"),
+            image: AssetImage("assets/images/login_register_background.jpg"),
             fit: BoxFit.fill,
             colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.darken),
           ),

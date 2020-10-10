@@ -1,23 +1,28 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constant/strings.dart';
-import '../static/loader.dart';
-import '../constant/strings.dart';
-import 'package:simrank/login_register/otp.dart';
 import 'package:simrank/login_register/register.dart';
 import '../mainScreen/simran_home.dart';
 import '../services/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../static/innerShadow.dart';
 class Login extends StatefulWidget{
   @override
   _Login createState() => _Login();
 }
 class _Login extends State<Login>{
   @override
+  void initState(){
+    checkStatus();
+    super.initState();
+  }
+  Future checkStatus() async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    if(_preferences.get("data") != null){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    }
+  }
   Alignment radioButton = Alignment.centerLeft;
   Color circleIndicator;
   Color circleIndicator1;
@@ -29,6 +34,8 @@ class _Login extends State<Login>{
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String email = "", password = "";
+  Color btnColors = Color.fromRGBO(142, 114, 184, 1);
+  Color activeBtnColors = Color.fromRGBO(126, 105, 148, 1);
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -101,72 +108,71 @@ class _Login extends State<Login>{
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                InnerShadow(
-                                  blur: 100,
-                                  color: const Color.fromRGBO(0, 0, 0, 1),
-                                  offset: const Offset(-2, 1),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Color.fromRGBO(137, 123, 153, 1),
-                                        borderRadius: BorderRadius.circular(60),
+                                Container(
+                                    height: 65,
+                                    width: size.width * 0.38,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(45),
+                                      // gradient: LinearGradient(
+                                      //     begin: Alignment.bottomRight,
+                                      //     end: Alignment.topLeft,
+                                      //     colors: [activebtnColors,Colors.black],
+                                      //     // Add one stop for each color
+                                      //     // Values should increase from 0.0 to 1.0
+                                      //     stops: [0.8, 0.2]
+                                      // ),
+                                    ),
+                                    child:  FlatButton(
+                                      color: activeBtnColors,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(60.0)
                                       ),
-                                      child: SizedBox(
-                                        height: 65,
-                                        width: size.width * 0.38,
-                                        child: FlatButton(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(60.0)
-                                          ),
-                                          child: Text(string.loginText,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold
-                                            ),
-                                          ),
-                                          onPressed: (){},
+                                      child: Text(string.loginText,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold
                                         ),
-                                      )
-                                  ),
+                                      ),
+                                      onPressed: (){},
+                                    )
                                 ),
                                 Container(
-                                    decoration: BoxDecoration(
-                                        color: Color.fromRGBO(126, 105, 148, 1),
-                                        borderRadius: BorderRadius.circular(60),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black.withOpacity(0.2),
-                                              spreadRadius: 1,
-                                              blurRadius: 15,
-                                              offset: Offset(5, 5)
-                                          ),
-                                          BoxShadow(
-                                              color: Colors.black.withOpacity(0.2),
-                                              spreadRadius: 1,
-                                              blurRadius: 15,
-                                              offset: Offset(-5, -5)
-                                          )
-                                        ]
-                                    ),
-                                    child: SizedBox(
-                                      height: 65,
-                                      width: size.width * 0.38,
-                                      child: FlatButton(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(60.0)
-                                        ),
-                                        child: Text(string.signUpText,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold
-                                          ),
-                                        ),
-                                        onPressed: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
-                                        },
+                                  height: 65,
+                                  width: size.width * 0.38,
+                                  decoration: BoxDecoration(
+                                    color: btnColors,
+                                    borderRadius: BorderRadius.circular(60),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.2),
+                                        spreadRadius: 1,
+                                        blurRadius: 15,
+                                        offset: Offset(5, 5)
                                       ),
-                                    )
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.2),
+                                        spreadRadius: 1,
+                                        blurRadius: 15,
+                                        offset: Offset(-5, -5)
+                                      )
+                                    ]
+                                  ),
+                                  child: FlatButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(60.0)
+                                    ),
+                                    child: Text(string.signUpText,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    onPressed: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
+                                    },
+                                  )
                                 ),
                               ],
                             )
@@ -176,26 +182,22 @@ class _Login extends State<Login>{
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                InnerShadow(
-                                  blur: 100,
-                                  color: const Color.fromRGBO(0, 0, 0, 0.5),
-                                  offset: const Offset(-2, 1),
-                                  child: Container(
-                                    height: 65,
-                                    width: size.width * 0.35,
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.only(left: 10, right: 10),
-                                    decoration: BoxDecoration(
-                                        color: Color.fromRGBO(137, 123, 153, 1),
-                                        borderRadius: BorderRadius.circular(60)
-                                    ),
-                                    child: Text(
-                                      "Email Id",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20
-                                      ),
+                                Container(
+                                  height: 65,
+                                  width: size.width * 0.35,
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  decoration: BoxDecoration(
+                                    color: activeBtnColors,
+                                    borderRadius: BorderRadius.circular(60),
+
+                                  ),
+                                  child: Text(
+                                    "Email Id",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20
                                     ),
                                   ),
                                 ),
@@ -234,14 +236,14 @@ class _Login extends State<Login>{
                                         alignment: radioButton,
                                         padding: EdgeInsets.only(left: 3, right: 3),
                                         decoration: BoxDecoration(
-                                            color: Color.fromRGBO(126, 105, 148, 1),
+                                            color: btnColors,
                                             borderRadius: BorderRadius.circular(60)
                                         ),
                                         child: Container(
                                           height: 23,
                                           width: 23,
                                           decoration: BoxDecoration(
-                                            color: Color.fromRGBO(126, 105, 148, 1),
+                                            color: btnColors,
                                             borderRadius: BorderRadius.circular(25),
                                             boxShadow: [
                                               BoxShadow(
@@ -269,7 +271,7 @@ class _Login extends State<Login>{
                                   alignment: Alignment.center,
                                   padding: EdgeInsets.only(left: 10, right: 10),
                                   decoration: BoxDecoration(
-                                      color: Color.fromRGBO(126, 105, 148, 1),
+                                      color: btnColors,
                                       borderRadius: BorderRadius.circular(60)
                                   ),
                                   child: Text(
@@ -291,7 +293,7 @@ class _Login extends State<Login>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(137, 123, 153, 1),
+                              color: activeBtnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -357,7 +359,7 @@ class _Login extends State<Login>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(137, 123, 153, 1),
+                              color: activeBtnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -420,7 +422,7 @@ class _Login extends State<Login>{
                           margin: EdgeInsets.only(top: 30),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(126, 105, 148, 1),
+                            color: btnColors,
                             borderRadius: BorderRadius.circular(60),
                             boxShadow:[
                               BoxShadow(
@@ -502,15 +504,44 @@ class _Login extends State<Login>{
       ),
     );
   }
-  void signIn(username, password, context) {
-    FormData formData = new FormData.fromMap({
-      "email" : username,
-      "password" : password
-    });
-    Services.userSignIn(formData, context, _scaffoldKey).then((value) async {
-      if(value.response){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-      }
-    });
+  void signIn(username, password, context) async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    if(_preferences.get("data") == null){
+      FormData formData = new FormData.fromMap({
+        "email" : username,
+        "password" : password
+      });
+      Services.userSignIn(formData, context, _scaffoldKey).then((value) async {
+        if(value.response){
+          storeLoginData(value.data);
+          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+        }
+      });
+    } else {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    }
+  }
+  Future<bool> storeLoginData(List data) async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    List<String> userData = [
+      data[0]["id"].toString(),
+      data[0]["first_name"].toString(),
+      data[0]["model_name"].toString(),
+      data[0]["email"].toString(),
+      data[0]["email_verified_at"].toString(),
+      data[0]["mobile"].toString(),
+      data[0]["image"].toString(),
+      data[0]["activation_code"].toString(),
+      data[0]["device_token"].toString(),
+      data[0]["status"].toString(),
+      data[0]["created_at"].toString(),
+      data[0]["updated_at"].toString(),
+      data[0]["deleted_at"].toString(),
+      data[0]["user_type"].toString(),
+      data[0]["access_token"].toString(),
+    ];
+    _preferences.clear();
+    return _preferences.setStringList("data", userData);
   }
 }

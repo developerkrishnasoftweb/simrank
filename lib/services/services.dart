@@ -1,11 +1,10 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'dart:io';
 import 'url.dart';
 import 'data.dart';
 import '../static/loader.dart';
-import '../mainScreen/simran_home.dart';
 Dio dio = new Dio();
 class Services{
   static Future<Data> userSignIn(body, context, GlobalKey<ScaffoldState> _scaffoldKey) async {
@@ -15,7 +14,7 @@ class Services{
       Loader(context: context, text: "Please Wait ...");
       final response = await dio.post(url, data: body, options: Options(contentType: Headers.jsonContentType));
       Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       if(response.statusCode == 401){
         print("Invalid username and password");
       }
@@ -60,10 +59,9 @@ class Services{
       if(e.error.toString() == "Http status error [400]"){
         _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Your account is not activated. Please activate your account!"),));
       }
+    } on SocketException catch (_) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Please check your internet connection"),));
     }
-    // on SocketException catch (_) {
-    //   throw Exception("Something went wrong");
-    // }
   }
 
   static Future<Data> userSignUp(body, context, GlobalKey<ScaffoldState> _scaffoldKey) async {

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
@@ -6,17 +5,18 @@ import '../services/data.dart';
 import 'carousel.dart';
 import 'appbar_bottombar.dart';
 import '../services/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 List statusItem = [
-  {"imageUrl" : "https://images.unsplash.com/photo-1515463892140-58a22e37ff72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
-  {"imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQ_u-gnmeOdsfZMOpBTzqqcnBZwo8dWu38-Q&usqp=CAU"},
-  {"imageUrl" : "https://images.unsplash.com/photo-1516029637308-3adce832dbec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
-  {"imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSkZD-VsytAMF7-0NASGAtycgVAt5g-6ln4gQ&usqp=CAU"},
-  {"imageUrl" : "https://images.unsplash.com/photo-1586299485759-f62264d6b63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
-  {"imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT5Ei5MpqMeBdzn6kCVjz2xJM8VtEaVw2FOqw&usqp=CAU"},
+  {"image" : "https://images.unsplash.com/photo-1515463892140-58a22e37ff72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
+  {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQ_u-gnmeOdsfZMOpBTzqqcnBZwo8dWu38-Q&usqp=CAU"},
+  {"image" : "https://images.unsplash.com/photo-1516029637308-3adce832dbec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
+  {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSkZD-VsytAMF7-0NASGAtycgVAt5g-6ln4gQ&usqp=CAU"},
+  {"image" : "https://images.unsplash.com/photo-1586299485759-f62264d6b63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
+  {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT5Ei5MpqMeBdzn6kCVjz2xJM8VtEaVw2FOqw&usqp=CAU"},
 ];
 List latestContent = [
   {"image" : "https://images.unsplash.com/photo-1515463892140-58a22e37ff72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "first_name" : "SONALI X"},
@@ -27,34 +27,38 @@ List latestContent = [
   {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT5Ei5MpqMeBdzn6kCVjz2xJM8VtEaVw2FOqw&usqp=CAU", "first_name" : "SHIPLA C"},
 ];
 List topPhotos = [
-  {"imageUrl" : "https://images.unsplash.com/photo-1515463892140-58a22e37ff72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "locked" : false},
-  {"imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQ_u-gnmeOdsfZMOpBTzqqcnBZwo8dWu38-Q&usqp=CAU", "locked" : false},
-  {"imageUrl" : "https://images.unsplash.com/photo-1516029637308-3adce832dbec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "locked" : true},
-  {"imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSkZD-VsytAMF7-0NASGAtycgVAt5g-6ln4gQ&usqp=CAU", "locked" : true},
-  {"imageUrl" : "https://images.unsplash.com/photo-1586299485759-f62264d6b63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "locked" : false},
-  {"imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT5Ei5MpqMeBdzn6kCVjz2xJM8VtEaVw2FOqw&usqp=CAU", "locked" : true},
+  {"image" : "https://images.unsplash.com/photo-1515463892140-58a22e37ff72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "locked" : false},
+  {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQ_u-gnmeOdsfZMOpBTzqqcnBZwo8dWu38-Q&usqp=CAU", "locked" : false},
+  {"image" : "https://images.unsplash.com/photo-1516029637308-3adce832dbec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "locked" : true},
+  {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSkZD-VsytAMF7-0NASGAtycgVAt5g-6ln4gQ&usqp=CAU", "locked" : true},
+  {"image" : "https://images.unsplash.com/photo-1586299485759-f62264d6b63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "locked" : false},
+  {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT5Ei5MpqMeBdzn6kCVjz2xJM8VtEaVw2FOqw&usqp=CAU", "locked" : true},
 ];
 List topVideos = [
-  {"imageUrl" : "https://images.unsplash.com/photo-1515463892140-58a22e37ff72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
-  {"imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQ_u-gnmeOdsfZMOpBTzqqcnBZwo8dWu38-Q&usqp=CAU"},
-  {"imageUrl" : "https://images.unsplash.com/photo-1516029637308-3adce832dbec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
-  {"imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSkZD-VsytAMF7-0NASGAtycgVAt5g-6ln4gQ&usqp=CAU"},
-  {"imageUrl" : "https://images.unsplash.com/photo-1586299485759-f62264d6b63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
-  {"imageUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT5Ei5MpqMeBdzn6kCVjz2xJM8VtEaVw2FOqw&usqp=CAU"},
+  {"image" : "https://images.unsplash.com/photo-1515463892140-58a22e37ff72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
+  {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQ_u-gnmeOdsfZMOpBTzqqcnBZwo8dWu38-Q&usqp=CAU"},
+  {"image" : "https://images.unsplash.com/photo-1516029637308-3adce832dbec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
+  {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSkZD-VsytAMF7-0NASGAtycgVAt5g-6ln4gQ&usqp=CAU"},
+  {"image" : "https://images.unsplash.com/photo-1586299485759-f62264d6b63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
+  {"image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT5Ei5MpqMeBdzn6kCVjz2xJM8VtEaVw2FOqw&usqp=CAU"},
 ];
 
 class _HomeState extends State<Home> {
   @override
+  void initState(){
+    getData();
+    super.initState();
+  }
   Future<Data> getData() async{
-    String accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU5NTcxZmVlYzExODE5ODQ5ZjEwMGI3ZDJmMTIyYWE5Y2U3NmQ5NjY4MjI3ZDllYzAzMGFhY2Q2MjQ1MmEzOWFkODA4MWRjNzFkMTJmMTZkIn0.eyJhdWQiOiIzIiwianRpIjoiNTk1NzFmZWVjMTE4MTk4NDlmMTAwYjdkMmYxMjJhYTljZTc2ZDk2NjgyMjdkOWVjMDMwYWFjZDYyNDUyYTM5YWQ4MDgxZGM3MWQxMmYxNmQiLCJpYXQiOjE2MDIyMTY3NTgsIm5iZiI6MTYwMjIxNjc1OCwiZXhwIjoxNjMzNzUyNzU4LCJzdWIiOiIxMSIsInNjb3BlcyI6W119.KnSqWMJ5cX200XqBz5WLFIss07Hvw9G2-UV2L54AF0OnsYSsaEm4rTeF_ZCO8U6ow6jFLgapHy1plr9DVDGctyUz9qdr394SNstW0NTqvoxLWbne1mH4-NaOXcPR-7bFDSZZGg_au6ufOIgQZfNMsgs98LJMY4VSlR-_ukfXAy-092-JE0z8fln55NALyWAa3vyRXR2f0vjkDqBVnWl7UrM11eVkfbBtAwbj-tMFQwVDqWLPge-szG7TR9PZgSvj0pFNxEKy2wOUlmO5xD5MqIrKzggSxbvvkeApnXwZAecDDYHwNFAHkzay0xyuCnamaKy97CYkL8ObWqMny_6oaqj-1jn4KN6UATlXA4749nHH4imVCdO9UJlysxzwAVofmzqzeVGOpP5OwBTagBVWhWQze-GxljvfccJgD1rCNb8fhSH2dkuq6-M95BgrnwiBQx61phLUyt17UbSwszM3yA45C5FMbC_11AS4y7bevJDZRajAJhHCC3L-H_obw9_NRWD1WcGkgxa5T3A5URtbuNqk-MOzkcRH6Ss9r-OiskBUtUhk5gGjkSi4sP2yd3QXBd8w7DUIEw2C5LrvJk3DCG-08Oha5Z7TcSu54aFgDTcZ7iiCSf_rpXUm59pByRWEfJ7cIivrxi1odCKa2Ia2_vpo_6FehPC6CLstWyP0CNo";
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    String accessToken = _preferences.getStringList("data")[14];
     await Services.getModels(context, accessToken).then((value) async{
       setState(() {
         latestContent = value.data;
+        topVideos = value.data;
+        print(value.data);
       });
     });
-  }
-  void initState(){
-    super.initState();
   }
   double statusHeight = 51.5;
   double statusWidth = 51.5;
@@ -172,7 +176,7 @@ class _HomeState extends State<Home> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(49),
                                 image: DecorationImage(
-                                    image: NetworkImage(statusItem[index]["imageUrl"],),
+                                    image: NetworkImage(statusItem[index]["image"],),
                                     fit: BoxFit.fill
                                 )
                             ),
@@ -219,10 +223,9 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         onTap: (){
-                          getData();
                           setState(() {
-                            (circular == 5.0) ? circular = 100.0 : circular = 5.0;
-                            (align.y == 0.9) ? align = Alignment(0.0, 0.0) : align = Alignment(0.0, 0.9);
+                            // (circular == 5.0) ? circular = 100.0 : circular = 5.0;
+                            // (align.y == 0.9) ? align = Alignment(0.0, 0.0) : align = Alignment(0.0, 0.9);
                           });
                         },
                       )
@@ -326,7 +329,7 @@ class _HomeState extends State<Home> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(5.0),
                                 image: DecorationImage(
-                                  image: NetworkImage(topPhotos[index]["imageUrl"],),
+                                  image: NetworkImage(topPhotos[index]["image"],),
                                   fit: BoxFit.fill,
                                   colorFilter: (topPhotos[index]["locked"]) ? ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken) : null
                                 )
@@ -392,7 +395,7 @@ class _HomeState extends State<Home> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(5.0),
                                 image: DecorationImage(
-                                    image: NetworkImage(topVideos[index]["imageUrl"],),
+                                    image: NetworkImage(topVideos[index]["image"],),
                                     fit: BoxFit.fill
                                 )
                             ),

@@ -6,7 +6,6 @@ import 'package:simrank/login_register/login.dart';
 import '../constant/strings.dart';
 import 'daimond.dart';
 import 'appbar_bottombar.dart';
-import '../services/data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Menu extends StatefulWidget {
   @override
@@ -346,11 +345,11 @@ class _Menu extends State<Menu>{
                           ]
                       ),
                       child: GestureDetector(
-                        onTap: (){
+                        onTap: () async {
+                          Future<SharedPreferences> _preferences = SharedPreferences.getInstance();
+                          final SharedPreferences preferences = await _preferences;
+                          preferences.remove("data");
                           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Login()), (route) => false);
-                          // Future<SharedPreferences> _preferences = SharedPreferences.getInstance();
-                          // final SharedPreferences preferences = await _preferences;
-                          // print(preferences.get("data"));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
