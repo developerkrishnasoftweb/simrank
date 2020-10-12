@@ -105,7 +105,7 @@ class Services{
     }
   }
   static Future<Data> getModels(context, String token) async {
-    String url = Urls.baseUrl +Urls.getModels;
+    String url = Urls.baseUrl + Urls.getModels;
     dio.options.contentType = Headers.jsonContentType;
     dio.options.headers["Authorization"] = "Bearer " + token;
     try {
@@ -131,6 +131,21 @@ class Services{
     } on DioError catch (e) {
       Navigator.pop(context);
       // _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("The email address is already registered."),));
+    }
+  }
+  static Future<Data> saveMedia(context, String token) async {
+    String url = Urls.baseUrl + Urls.saveMedia;
+    dio.options.contentType = Headers.jsonContentType;
+    dio.options.headers["Authorization"] = "Bearer " + token;
+    try{
+      Loader(context: context, text: "Uploading media ...");
+      final response = await dio.get(url);
+      Navigator.pop(context);
+      if(response.statusCode == 200){
+        print(response.data);
+      }
+    } on DioError catch (e) {
+      print(e.toString());
     }
   }
 }

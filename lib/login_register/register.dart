@@ -15,6 +15,8 @@ class _Register extends State<Register>{
   String name = "", mobile_number = "", email_id = "", password = "", verify_password = "";
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  Color btnColors = Color.fromRGBO(142, 114, 184, 1);
+  Color activeBtnColors = Color.fromRGBO(126, 105, 148, 1);
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -89,7 +91,7 @@ class _Register extends State<Register>{
                               children: <Widget>[
                                 Container(
                                     decoration: BoxDecoration(
-                                      color: Color.fromRGBO(126, 105, 148, 1),
+                                      color: btnColors,
                                       borderRadius: BorderRadius.circular(60),
                                     ),
                                     child: SizedBox(
@@ -112,33 +114,36 @@ class _Register extends State<Register>{
                                       ),
                                     )
                                 ),
-                                InnerShadow(
-                                  blur: 100,
-                                  color: const Color.fromRGBO(0, 0, 0, 0.5),
-                                  offset: const Offset(-2, 1),
-                                  child: Container(
+                                Container(
+                                    height: 65,
+                                    width: size.width * 0.38,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black45,
+                                      borderRadius: BorderRadius.circular(60),
+                                    ),
+                                    child: Container(
+                                      height: 62,
+                                      margin: EdgeInsets.only(top: 3, left: size.width * 0.007),
+                                      width: size.width * 0.37,
                                       decoration: BoxDecoration(
-                                          color: Color.fromRGBO(137, 123, 153, 01),
+                                          color: activeBtnColors,
                                           borderRadius: BorderRadius.circular(60)
                                       ),
-                                      child: SizedBox(
-                                        height: 65,
-                                        width: size.width * 0.4,
-                                        child: FlatButton(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(60.0)
-                                          ),
-                                          child: Text(string.signUpText,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold
-                                            ),
-                                          ),
-                                          onPressed: (){},
+                                      child: FlatButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(60.0),
                                         ),
-                                      )
-                                  ),
+                                        child: Text(string.signUpText,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        onPressed: (){
+                                        },
+                                      ),
+                                    )
                                 ),
                               ],
                             )
@@ -150,7 +155,7 @@ class _Register extends State<Register>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(137, 123, 153, 1),
+                              color: btnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -191,7 +196,7 @@ class _Register extends State<Register>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(137, 123, 153, 1),
+                              color: activeBtnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -200,7 +205,7 @@ class _Register extends State<Register>{
                               hintStyle: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17
+                                  fontSize: 20
                               ),
                               border: InputBorder.none,
                             ),
@@ -249,7 +254,7 @@ class _Register extends State<Register>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(137, 123, 153, 1),
+                              color: activeBtnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -288,7 +293,7 @@ class _Register extends State<Register>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(137, 123, 153, 1),
+                              color: activeBtnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -336,7 +341,7 @@ class _Register extends State<Register>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(137, 123, 153, 1),
+                              color: activeBtnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -381,7 +386,7 @@ class _Register extends State<Register>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(137, 123, 153, 1),
+                              color: activeBtnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -427,7 +432,7 @@ class _Register extends State<Register>{
                           margin: EdgeInsets.only(top: 30,),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(126, 105, 148, 1),
+                              color: btnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: SizedBox(

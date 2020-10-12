@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:simrank/login_register/login.dart';
+import 'package:simrank/static/loader.dart';
 import '../constant/strings.dart';
 import 'daimond.dart';
 import 'appbar_bottombar.dart';
@@ -349,6 +350,7 @@ class _Menu extends State<Menu>{
                           Future<SharedPreferences> _preferences = SharedPreferences.getInstance();
                           final SharedPreferences preferences = await _preferences;
                           preferences.remove("data");
+                          Loader(context: context);
                           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Login()), (route) => false);
                         },
                         child: Row(

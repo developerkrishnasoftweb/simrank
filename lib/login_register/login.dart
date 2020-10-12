@@ -2,11 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:neuomorphic_container/neuomorphic_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simrank/static/concave_decoration.dart';
 import '../constant/strings.dart';
 import 'package:simrank/login_register/register.dart';
 import '../mainScreen/simran_home.dart';
 import '../services/services.dart';
+Color color;
+final intensity = 0.2;
 class Login extends StatefulWidget{
   @override
   _Login createState() => _Login();
@@ -59,7 +63,7 @@ class _Login extends State<Login>{
             image: DecorationImage(
               image: AssetImage("assets/images/login_register_background.jpg"),
               fit: BoxFit.fill,
-              colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.7), BlendMode.srcATop),
+              colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.6), BlendMode.srcATop),
             ),
           ),
           child: Form(
@@ -82,11 +86,11 @@ class _Login extends State<Login>{
                               Container(
                                 child: Text(string.appTitle,
                                   style: TextStyle(
-                                      fontFamily: string.fontFamilyFont,
-                                      fontSize: 35,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      letterSpacing: 6
+                                    fontFamily: string.fontFamilyFont,
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    letterSpacing: 6
                                   ),
                                 ),
                               ),
@@ -112,29 +116,31 @@ class _Login extends State<Login>{
                                     height: 65,
                                     width: size.width * 0.38,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(45),
-                                      // gradient: LinearGradient(
-                                      //     begin: Alignment.bottomRight,
-                                      //     end: Alignment.topLeft,
-                                      //     colors: [activebtnColors,Colors.black],
-                                      //     // Add one stop for each color
-                                      //     // Values should increase from 0.0 to 1.0
-                                      //     stops: [0.8, 0.2]
-                                      // ),
+                                      color: Colors.black45,
+                                      borderRadius: BorderRadius.circular(60),
                                     ),
-                                    child:  FlatButton(
-                                      color: activeBtnColors,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(60.0)
+                                    child: Container(
+                                      height: 62,
+                                      margin: EdgeInsets.only(top: 3, left: size.width * 0.007),
+                                      width: size.width * 0.37,
+                                      decoration: BoxDecoration(
+                                          color: activeBtnColors,
+                                          borderRadius: BorderRadius.circular(60)
                                       ),
-                                      child: Text(string.loginText,
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold
+                                      child: FlatButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(60.0),
                                         ),
+                                        child: Text(string.loginText,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        onPressed: (){
+                                        },
                                       ),
-                                      onPressed: (){},
                                     )
                                 ),
                                 Container(
@@ -143,24 +149,10 @@ class _Login extends State<Login>{
                                   decoration: BoxDecoration(
                                     color: btnColors,
                                     borderRadius: BorderRadius.circular(60),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.2),
-                                        spreadRadius: 1,
-                                        blurRadius: 15,
-                                        offset: Offset(5, 5)
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.2),
-                                        spreadRadius: 1,
-                                        blurRadius: 15,
-                                        offset: Offset(-5, -5)
-                                      )
-                                    ]
                                   ),
                                   child: FlatButton(
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(60.0)
+                                      borderRadius: BorderRadius.circular(60.0),
                                     ),
                                     child: Text(string.signUpText,
                                       style: TextStyle(
@@ -183,23 +175,35 @@ class _Login extends State<Login>{
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Container(
-                                  height: 65,
-                                  width: size.width * 0.35,
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.only(left: 10, right: 10),
-                                  decoration: BoxDecoration(
-                                    color: activeBtnColors,
-                                    borderRadius: BorderRadius.circular(60),
-
-                                  ),
-                                  child: Text(
-                                    "Email Id",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20
+                                    height: 65,
+                                    width: size.width * 0.38,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black45,
+                                      borderRadius: BorderRadius.circular(60),
                                     ),
-                                  ),
+                                    child: Container(
+                                      height: 62,
+                                      margin: EdgeInsets.only(top: 3, left: size.width * 0.007),
+                                      width: size.width * 0.35,
+                                      decoration: BoxDecoration(
+                                          color: activeBtnColors,
+                                          borderRadius: BorderRadius.circular(60)
+                                      ),
+                                      child: FlatButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(60.0),
+                                        ),
+                                        child: Text("Email ID",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        onPressed: (){
+                                        },
+                                      ),
+                                    )
                                 ),
                                 GestureDetector(
                                   onTap: (){
@@ -293,7 +297,7 @@ class _Login extends State<Login>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: activeBtnColors,
+                              color: btnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -359,7 +363,7 @@ class _Login extends State<Login>{
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 25, right: 20),
                           decoration: BoxDecoration(
-                              color: activeBtnColors,
+                              color: btnColors,
                               borderRadius: BorderRadius.circular(60)
                           ),
                           child: TextFormField(
@@ -387,9 +391,9 @@ class _Login extends State<Login>{
                                         borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Color.fromRGBO(0, 0, 0, 0.5),
-                                            spreadRadius: 0.5,
-                                            blurRadius: 0.5
+                                              color: Color.fromRGBO(0, 0, 0, 0.5),
+                                              spreadRadius: 0.5,
+                                              blurRadius: 0.5
                                           )
                                         ]
                                     ),

@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../constant/strings.dart';
 import 'shoutout_detail.dart';
 import 'appbar_bottombar.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:file/file.dart';
+import 'package:flutter/services.dart';
 class ShoutOutUploadPhotos extends StatefulWidget{
   @override
   _ShoutOutUploadPhotos createState() => _ShoutOutUploadPhotos();
@@ -355,7 +360,13 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                                 icon: Icon(Icons.edit,
                                   color: Colors.white,
                                 ),
-                                onPressed: (){},
+                                onPressed: () async {
+                                  FilePickerResult filePicker = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
+                                  if(filePicker != null){
+                                    // print(filePicker);
+                                    print(filePicker.files.single.path);
+                                  }
+                                },
                               ),
                             ),
                           ),
