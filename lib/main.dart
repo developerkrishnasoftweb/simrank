@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simrank/constant/strings.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:simrank/static/image_picker.dart';
 import './login_register/login.dart';
 void main() {
   runApp(MyApp());

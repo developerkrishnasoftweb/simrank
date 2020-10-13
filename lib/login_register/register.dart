@@ -117,6 +117,7 @@ class _Register extends State<Register>{
                                 Container(
                                     height: 65,
                                     width: size.width * 0.38,
+                                    alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                       color: Colors.black45,
                                       borderRadius: BorderRadius.circular(60),

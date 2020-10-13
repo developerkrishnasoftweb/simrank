@@ -1,19 +1,33 @@
-import 'dart:io';
 
+import 'dart:io';
+import 'package:firebase/firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:image_picker/image_picker.dart';
 import '../constant/strings.dart';
 import 'shoutout_detail.dart';
 import 'appbar_bottombar.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:file/file.dart';
-import 'package:flutter/services.dart';
+import '../constant/data.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class ShoutOutUploadPhotos extends StatefulWidget{
   @override
   _ShoutOutUploadPhotos createState() => _ShoutOutUploadPhotos();
 }
 class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
+  File _image;
+  final picker = ImagePicker();
+  Future getImage() async {
+    final image = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      if (image != null) {
+        _image = File(image.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -351,7 +365,7 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 image: DecorationImage(
-                                  image: AssetImage("assets/images/download.jpg"),
+                                  image: (_image != null ? FileImage(_image) : AssetImage("assets/images/icon-image-512.png")),
                                   fit: BoxFit.fill,
                                   colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.4), BlendMode.darken),
                                 ),
@@ -360,12 +374,8 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                                 icon: Icon(Icons.edit,
                                   color: Colors.white,
                                 ),
-                                onPressed: () async {
-                                  FilePickerResult filePicker = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
-                                  if(filePicker != null){
-                                    // print(filePicker);
-                                    print(filePicker.files.single.path);
-                                  }
+                                onPressed: () {
+                                  getImage();
                                 },
                               ),
                             ),
@@ -496,7 +506,9 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                                     ),
                                     color: Color.fromRGBO(158, 138, 191, 1),
                                     onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutDetail()));
+                                      final StorageReference ref = FirebaseStorage.instance.ref().child("myimage.png");
+                                      final StorageUploadTask task = ref.putFile(_image);
+                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutDetail()));
                                     },
                                   ),
                                 )

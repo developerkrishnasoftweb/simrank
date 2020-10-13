@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:neuomorphic_container/neuomorphic_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simrank/static/concave_decoration.dart';
@@ -9,8 +10,8 @@ import '../constant/strings.dart';
 import 'package:simrank/login_register/register.dart';
 import '../mainScreen/simran_home.dart';
 import '../services/services.dart';
+import 'package:clay_containers/clay_containers.dart';
 Color color;
-final intensity = 0.2;
 class Login extends StatefulWidget{
   @override
   _Login createState() => _Login();
@@ -19,6 +20,10 @@ class _Login extends State<Login>{
   @override
   void initState(){
     checkStatus();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
     super.initState();
   }
   Future checkStatus() async {
@@ -30,7 +35,7 @@ class _Login extends State<Login>{
   Alignment radioButton = Alignment.centerLeft;
   Color circleIndicator;
   Color circleIndicator1;
-  String hintMobileText = "Enter Email ID";
+  String hintMobileText = "Enter Email Id";
   String hintOtpPassword = "Enter Password";
   bool loginType = false;
   TextEditingController emailPhone = TextEditingController();
@@ -40,8 +45,12 @@ class _Login extends State<Login>{
   String email = "", password = "";
   Color btnColors = Color.fromRGBO(142, 114, 184, 1);
   Color activeBtnColors = Color.fromRGBO(126, 105, 148, 1);
+  Color emailBtnColors = Color.fromRGBO(126, 105, 148, 1);
+  Color passwordBtnColors = Color.fromRGBO(126, 105, 148, 1);
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    double height = 48;
     return Scaffold(
       key:  _scaffoldKey,
       body: SingleChildScrollView(
@@ -61,15 +70,48 @@ class _Login extends State<Login>{
               ]
             ),
             image: DecorationImage(
-              image: AssetImage("assets/images/login_register_background.jpg"),
-              fit: BoxFit.fill,
-              colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.6), BlendMode.srcATop),
+              image: AssetImage("assets/images/login_register_background.jpg",),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0), BlendMode.srcATop),
             ),
           ),
           child: Form(
             key: _formKey,
             child: Stack(
               children: <Widget>[
+                Positioned(
+                  top: MediaQuery.of(context).padding.top + 10,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    width: size.width,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          child: Text(string.appTitle,
+                            style: TextStyle(
+                                fontFamily: string.fontFamilyFont,
+                                fontSize: 35,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                letterSpacing: 6
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Text(string.appSubtitle,
+                            style: TextStyle(
+                                fontFamily: string.fontFamilyText,
+                                fontSize: 17,
+                                color: Colors.white,
+                                letterSpacing: 2.5
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -80,51 +122,35 @@ class _Login extends State<Login>{
                     child: Column(
                       children: <Widget>[
                         Container(
-                          width: size.width,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: Text(string.appTitle,
-                                  style: TextStyle(
-                                    fontFamily: string.fontFamilyFont,
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    letterSpacing: 6
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                child: Text(string.appSubtitle,
-                                  style: TextStyle(
-                                      fontFamily: string.fontFamilyText,
-                                      fontSize: 17,
-                                      color: Colors.white,
-                                    letterSpacing: 2.5
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
                             margin: EdgeInsets.only(top: 20),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 Container(
-                                    height: 65,
+                                    height: height,
                                     width: size.width * 0.38,
+                                    alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                      color: Colors.black45,
-                                      borderRadius: BorderRadius.circular(60),
+                                        borderRadius: BorderRadius.circular(60),
+                                        gradient: LinearGradient(
+                                            colors: [
+                                              Colors.black.withOpacity(0.3),
+                                              Colors.black.withOpacity(0.2),
+                                              Colors.black.withOpacity(0.1),
+                                            ],
+                                            stops: [
+                                              0.1,
+                                              0.2,
+                                              0.3
+                                            ]
+                                        )
                                     ),
                                     child: Container(
-                                      height: 62,
-                                      margin: EdgeInsets.only(top: 3, left: size.width * 0.007),
+                                      height: height - 3,
+                                      margin: EdgeInsets.only(top: 3, left: size.width * 0.002),
                                       width: size.width * 0.37,
                                       decoration: BoxDecoration(
-                                          color: activeBtnColors,
+                                          color: btnColors,
                                           borderRadius: BorderRadius.circular(60)
                                       ),
                                       child: FlatButton(
@@ -144,318 +170,373 @@ class _Login extends State<Login>{
                                     )
                                 ),
                                 Container(
-                                  height: 65,
+                                  height: height,
                                   width: size.width * 0.38,
+                                  alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    color: btnColors,
+                                    color: Colors.black.withOpacity(0.3),
                                     borderRadius: BorderRadius.circular(60),
                                   ),
-                                  child: FlatButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(60.0),
-                                    ),
-                                    child: Text(string.signUpText,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold
+                                  child: Container(
+                                      height: height - 3,
+                                      margin: EdgeInsets.only(bottom: 3, left: size.width * 0.004),
+                                      width: size.width * 0.37,
+                                      decoration: BoxDecoration(
+                                          color: btnColors,
+                                          borderRadius: BorderRadius.circular(60)
                                       ),
-                                    ),
-                                    onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
-                                    },
-                                  )
+                                    child: FlatButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(60.0),
+                                      ),
+                                      child: Text(string.signUpText,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                      onPressed: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
+                                      },
+                                    )
+                                  ),
                                 ),
                               ],
                             )
                         ),
                         Container(
-                            margin: EdgeInsets.only(top: 20),
+                            margin: EdgeInsets.only(top: 30, bottom: 30),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
-                                Container(
-                                    height: 65,
-                                    width: size.width * 0.38,
+                                ClayContainer(
+                                  height: height,
+                                  width: size.width * 0.32,
+                                  child: Container(
+                                    margin: EdgeInsets.only(top: 3, left: 2),
                                     decoration: BoxDecoration(
-                                      color: Colors.black45,
-                                      borderRadius: BorderRadius.circular(60),
+                                      borderRadius: BorderRadius.circular(60)
                                     ),
-                                    child: Container(
-                                      height: 62,
-                                      margin: EdgeInsets.only(top: 3, left: size.width * 0.007),
-                                      width: size.width * 0.35,
-                                      decoration: BoxDecoration(
-                                          color: activeBtnColors,
-                                          borderRadius: BorderRadius.circular(60)
+                                    child: FlatButton(
+                                      color: activeBtnColors,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(60.0),
                                       ),
-                                      child: FlatButton(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(60.0),
+                                      child: Text("Email Id",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold
                                         ),
-                                        child: Text("Email ID",
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold
-                                          ),
-                                        ),
-                                        onPressed: (){
-                                        },
                                       ),
-                                    )
+                                      onPressed: (){
+                                      },
+                                    ),
+                                  ),
+                                  emboss: true,
+                                  color: Color.fromRGBO(126, 105, 148, 0.5),
+                                  curveType: CurveType.convex,
+                                  borderRadius: 60,
+                                  spread: 0,
+                                  depth: 50,
+                                  surfaceColor: Colors.black12,
                                 ),
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      if(radioButton == Alignment.centerRight) {
-                                        radioButton = Alignment.centerLeft;
-                                        hintMobileText = "Enter Email ID";
-                                        hintOtpPassword = "Enter Password";
-                                        loginType = !loginType;
-                                      } else {
-                                        radioButton = Alignment.centerRight;
-                                        hintMobileText = "Enter Mobile No";
-                                        hintOtpPassword = "Enter OTP";
-                                        loginType = !loginType;
-                                      }
-                                    });
-                                  },
-                                  child: Column(
-                                    children: <Widget>[
-                                      Container(
-                                        padding: EdgeInsets.only(bottom: 2),
-                                        child: Text("VIA",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold
+                                Container(
+                                  height: 60,
+                                  child: GestureDetector(
+                                    onTap: (){
+                                      setState(() {
+                                        if(radioButton == Alignment.centerRight) {
+                                          radioButton = Alignment.centerLeft;
+                                          hintMobileText = "Enter Email Id";
+                                          hintOtpPassword = "Enter Password";
+                                          loginType = !loginType;
+                                        } else {
+                                          radioButton = Alignment.centerRight;
+                                          hintMobileText = "Enter Mobile No";
+                                          hintOtpPassword = "Enter OTP";
+                                          loginType = !loginType;
+                                        }
+                                      });
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text("VIA",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      AnimatedContainer(
-                                        duration: Duration(milliseconds: 200),
-                                        height: 30,
-                                        width: size.width * 0.13,
-                                        alignment: radioButton,
-                                        padding: EdgeInsets.only(left: 3, right: 3),
-                                        decoration: BoxDecoration(
-                                            color: btnColors,
-                                            borderRadius: BorderRadius.circular(60)
-                                        ),
-                                        child: Container(
-                                          height: 23,
-                                          width: 23,
+                                        AnimatedContainer(
+                                          duration: Duration(milliseconds: 200),
+                                          height: 25,
+                                          width: size.width * 0.11,
+                                          alignment: radioButton,
+                                          padding: EdgeInsets.only(left: 5, right: 5),
                                           decoration: BoxDecoration(
-                                            color: btnColors,
-                                            borderRadius: BorderRadius.circular(25),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.5),
-                                                spreadRadius: 1,
-                                                blurRadius: 15,
-                                                offset: Offset(5, 5)
-                                              ),
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.5),
-                                                spreadRadius: 1,
-                                                blurRadius: 15,
-                                                offset: Offset(-5, -5)
-                                              )
-                                            ]
+                                              color: btnColors,
+                                              borderRadius: BorderRadius.circular(60)
                                           ),
-                                        ),
-                                      )
-                                    ],
+                                          child: Container(
+                                            height: 16,
+                                            width: 16,
+                                            decoration: BoxDecoration(
+                                                color: btnColors,
+                                                borderRadius: BorderRadius.circular(25),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color: Colors.black.withOpacity(0.5),
+                                                      spreadRadius: 1,
+                                                      blurRadius: 15,
+                                                      offset: Offset(5, 5)
+                                                  ),
+                                                  BoxShadow(
+                                                      color: Colors.black.withOpacity(0.5),
+                                                      spreadRadius: 1,
+                                                      blurRadius: 15,
+                                                      offset: Offset(-5, -5)
+                                                  )
+                                                ]
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Container(
-                                  height: 65,
-                                  width: size.width * 0.35,
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  height: height,
+                                  width: size.width * 0.32,
                                   decoration: BoxDecoration(
-                                      color: btnColors,
-                                      borderRadius: BorderRadius.circular(60)
+                                    // color: Colors.black.withOpacity(0.2),
+                                    gradient: LinearGradient(
+                                        colors: [
+                                          Colors.black.withOpacity(0.3),
+                                          Colors.black.withOpacity(0.2),
+                                          Colors.black.withOpacity(0.1),
+                                        ],
+                                        stops: [
+                                          0.9,
+                                          0.7,
+                                          0.5
+                                        ]
+                                    ),
+                                    borderRadius: BorderRadius.circular(60),
                                   ),
-                                  child: Text(
-                                    "Mobile No.",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20
+                                  child: Container(
+                                    height: height - 3,
+                                    margin: EdgeInsets.only(bottom: 3, left: size.width * 0.004),
+                                    width: size.width * 0.31,
+                                    decoration: BoxDecoration(
+                                        color: btnColors,
+                                        borderRadius: BorderRadius.circular(60)
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Mobile No.",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20
+                                      ),
                                     ),
                                   ),
                                 )
                               ],
                             )
                         ),
-                        Container(
-                          height: 65,
-                          margin: EdgeInsets.only(top: 20),
-                          width: size.width * 0.9,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(left: 25, right: 20),
-                          decoration: BoxDecoration(
-                              color: btnColors,
+                        ClayContainer(
+                          height: height,
+                          width: size.width * 0.85,
+                          child: Container(
+                            padding: EdgeInsets.only(left: 25, right: 20),
+                            margin: EdgeInsets.only(top: 3, left: 2),
+                            decoration: BoxDecoration(
+                              color: emailBtnColors,
                               borderRadius: BorderRadius.circular(60)
-                          ),
-                          child: TextFormField(
-                            validator: (value){
-                              if(value == ""){
-                                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(string.validateEmail),));
-                              }
-                              return null;
-                            },
-                            controller: emailPhone,
-                            decoration: InputDecoration(
-                              hintText: hintMobileText,
-                              suffixIcon: Container(
-                                  width: 2,
-                                  height: 2,
+                            ),
+                            child: TextFormField(
+                              validator: (value){
+                                if(value == ""){
+                                  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(string.validateEmail),));
+                                }
+                                return null;
+                              },
+                              controller: emailPhone,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(top: 12),
+                                hintText: hintMobileText,
+                                suffixIcon: Container(
                                   alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50)
-                                  ),
                                   child: Container(
                                     height: 6,
                                     width: 6,
                                     decoration: BoxDecoration(
-                                        color: circleIndicator,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color.fromRGBO(0, 0, 0, 0.5),
-                                              spreadRadius: 0.5,
-                                              blurRadius: 0.5
-                                          )
-                                        ]
+                                      color: circleIndicator,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.5),
+                                          spreadRadius: 0.5,
+                                          blurRadius: 0,
+                                        )
+                                      ]
                                     ),
                                   )
-                              ),
-                              hintStyle: TextStyle(
+                                ),
+                                suffixIconConstraints: BoxConstraints.expand(width: 15, height: size.height),
+                                hintStyle: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20
+                                ),
+                                border: InputBorder.none,
                               ),
-                              border: InputBorder.none,
-                            ),
-                            cursorColor: Colors.white,
-                            cursorWidth: 2,
-                            cursorRadius: Radius.circular(5),
-                            // keyboardType: TextInputType.number,
-                            onChanged: (value){
-                              setState(() {
-                                email = value;
-                                (value.length > 0) ? circleIndicator = Color.fromRGBO(0, 255, 0, 1) : circleIndicator = Colors.black;
-                              });
-                            },
-                            style: TextStyle(
+                              cursorColor: Colors.white,
+                              cursorWidth: 2,
+                              cursorRadius: Radius.circular(5),
+                              onChanged: (value){
+                                setState(() {
+                                  (value.length > 0) ? emailBtnColors = btnColors : emailBtnColors = activeBtnColors;
+                                  email = value;
+                                  (value.length > 0) ? circleIndicator = Color.fromRGBO(0, 255, 0, 1) : circleIndicator = Colors.black;
+                                });
+                              },
+                              style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white
+                              ),
                             ),
                           ),
+                          emboss: true,
+                          color: Color.fromRGBO(126, 105, 148, 0.5),
+                          curveType: CurveType.convex,
+                          borderRadius: 60,
+                          spread: 0,
+                          depth: 30,
+                          surfaceColor: Colors.black12,
                         ),
-                        Container(
-                          height: 65,
-                          margin: EdgeInsets.only(top: 14),
-                          width: size.width * 0.9,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(left: 25, right: 20),
-                          decoration: BoxDecoration(
-                              color: btnColors,
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ClayContainer(
+                          height: height,
+                          width: size.width * 0.85,
+                          child: AnimatedContainer(
+                            duration: Duration(milliseconds: 200),
+                            padding: EdgeInsets.only(left: 25, right: 20),
+                            margin: EdgeInsets.only(top: 3, left: 2),
+                            decoration: BoxDecoration(
+                              color: passwordBtnColors,
                               borderRadius: BorderRadius.circular(60)
-                          ),
-                          child: TextFormField(
-                            validator: (value){
-                              if(value == ""){
-                                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(string.validatePassword),));
-                              }
-                              return null;
-                            },
-                            controller: passwordOtp,
-                            decoration: InputDecoration(
-                              hintText: hintOtpPassword,
-                              suffixIcon: Container(
-                                  width: 2,
-                                  height: 2,
+                            ),
+                            child: TextFormField(
+                              validator: (value){
+                                if(value == ""){
+                                  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(string.validatePassword),));
+                                }
+                                return null;
+                              },
+                              controller: passwordOtp,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(top: 12),
+                                hintText: hintOtpPassword,
+                                suffixIcon: Container(
                                   alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50)
-                                  ),
                                   child: Container(
                                     height: 6,
                                     width: 6,
                                     decoration: BoxDecoration(
-                                        color: circleIndicator1,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color.fromRGBO(0, 0, 0, 0.5),
-                                              spreadRadius: 0.5,
-                                              blurRadius: 0.5
-                                          )
-                                        ]
+                                      color: circleIndicator1,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.5),
+                                          spreadRadius: 0.5,
+                                          blurRadius: 0,
+                                        )
+                                      ]
                                     ),
                                   )
-                              ),
-                              hintStyle: TextStyle(
+                                ),
+                                suffixIconConstraints: BoxConstraints.expand(width: 15, height: size.height),
+                                hintStyle: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20
+                                ),
+                                border: InputBorder.none,
                               ),
-                              border: InputBorder.none,
-                            ),
-                            style: TextStyle(
+                              style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white
+                              ),
+                              cursorColor: Colors.white,
+                              cursorWidth: 2,
+                              cursorRadius: Radius.circular(5),
+                              obscureText: true,
+                              onChanged: (value){
+                                setState(() {
+                                  (value.length > 0) ? passwordBtnColors = btnColors : passwordBtnColors = activeBtnColors;
+                                  password = value;
+                                  (value.length > 0) ? circleIndicator1 = Color.fromRGBO(0, 255, 0, 1) : circleIndicator1 = Colors.black;
+                                });
+                              },
                             ),
-                            cursorColor: Colors.white,
-                            cursorWidth: 2,
-                            cursorRadius: Radius.circular(5),
-                            obscureText: true,
-                            onChanged: (value){
-                              setState(() {
-                                password = value;
-                                (value.length > 0) ? circleIndicator1 = Color.fromRGBO(0, 255, 0, 1) : circleIndicator1 = Colors.black;
-                              });
-                            },
                           ),
+                          emboss: true,
+                          color: Color.fromRGBO(126, 105, 148, 0.5),
+                          curveType: CurveType.concave,
+                          borderRadius: 60,
+                          spread: 0,
+                          depth: 30,
+                          surfaceColor: Colors.black12,
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 30),
+                          height: height,
+                          width: size.width * 0.84,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: btnColors,
+                            // color: Colors.black.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(60),
-                            boxShadow:[
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                spreadRadius: 1,
-                                blurRadius: 15,
-                                offset: Offset(5, 5)
-                              ),
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                spreadRadius: 1,
-                                blurRadius: 15,
-                                offset: Offset(-5, -5)
+                              gradient: LinearGradient(
+                                  colors: [
+                                    Colors.black.withOpacity(0.6),
+                                    Colors.black.withOpacity(0.4),
+                                    Colors.black.withOpacity(0.2),
+                                  ],
+                                  stops: [
+                                    0.1,
+                                    0.2,
+                                    0.3
+                                  ]
                               )
-                            ]
                           ),
-                          child: SizedBox(
-                            height: 65,
+                          child: Container(
+                            height: height - 4,
+                            margin: EdgeInsets.only(bottom: 4,),
                             width: size.width * 0.9,
+                            decoration: BoxDecoration(
+                                color: btnColors,
+                                borderRadius: BorderRadius.circular(60)
+                            ),
                             child: FlatButton(
+                              color: btnColors,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(60.0),
-                                  side: BorderSide(color: Color.fromRGBO(126, 105, 148, 1))
+                                borderRadius: BorderRadius.circular(60.0),
                               ),
                               child: Text("Proceed",
                                 style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold
                                 ),
                               ),
                               onPressed: (){
@@ -466,7 +547,7 @@ class _Login extends State<Login>{
                                         try{
                                           if(int.parse(email).runtimeType == int){
                                             if(password.length > 7 && password.length < 15){
-                                              signIn(email, password, context);
+                                              // signIn(email, password, context);
                                             } else {
                                               _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(string.validatePasswordDigit),));
                                             }
@@ -491,8 +572,6 @@ class _Login extends State<Login>{
                                     }
                                   }
                                 }
-                                // Navigator.pop(context);
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
                               },
                             ),
                           ),

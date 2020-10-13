@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "132138404965",
+    "firebase_url": "https://simrank-ec22f.firebaseio.com",
+    "project_id": "simrank-ec22f",
+    "storage_bucket": "simrank-ec22f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132138404965:android:d629e6b1459bd034b68a8c",
+        "android_client_info": {
+          "package_name": "com.example.simrank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132138404965-a6i0ofc0srvbs36g47phluc675fmelcj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_mQQawzrqVibPInproGyw5nSrFgH5OJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132138404965-a6i0ofc0srvbs36g47phluc675fmelcj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
