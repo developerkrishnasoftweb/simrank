@@ -1,22 +1,19 @@
-
 import 'dart:io';
-import 'package:firebase/firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
+import '../static/uploader.dart';
 import '../constant/strings.dart';
-import 'shoutout_detail.dart';
 import 'appbar_bottombar.dart';
-import '../constant/data.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 class ShoutOutUploadPhotos extends StatefulWidget{
   @override
   _ShoutOutUploadPhotos createState() => _ShoutOutUploadPhotos();
 }
 class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
   File _image;
+  File file;
   final picker = ImagePicker();
   Future getImage() async {
     final image = await picker.getImage(source: ImageSource.gallery);
@@ -28,8 +25,23 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
       }
     });
   }
+  Future getFile() async {
+    final fileData = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.video, allowedExtensions: ["mp4"]);
+
+  }
   @override
   Widget build(BuildContext context) {
+    void _showUploadDialog(File file, String path) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Uploader(file: file, path: path),
+          );
+        },
+      );
+    }
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -506,8 +518,8 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                                     ),
                                     color: Color.fromRGBO(158, 138, 191, 1),
                                     onPressed: (){
-                                      final StorageReference ref = FirebaseStorage.instance.ref().child("myimage.png");
-                                      final StorageUploadTask task = ref.putFile(_image);
+                                      String filepath = "images/${DateTime.now()}.png";
+                                      _showUploadDialog(_image, filepath);
                                       // Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutDetail()));
                                     },
                                   ),
