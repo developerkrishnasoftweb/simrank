@@ -25,10 +25,6 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
       }
     });
   }
-  Future getFile() async {
-    final fileData = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.video, allowedExtensions: ["mp4"]);
-
-  }
   @override
   Widget build(BuildContext context) {
     void _showUploadDialog(File file, String path) {
