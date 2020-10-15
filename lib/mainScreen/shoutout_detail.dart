@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -5,6 +6,9 @@ import '../constant/strings.dart';
 import 'shoutout_monetize.dart';
 import 'appbar_bottombar.dart';
 class ShoutOutDetail extends StatefulWidget{
+  final File file;
+  final String title, description, path, extension;
+  ShoutOutDetail({@required this.file, @required this.title, @required this.description, @required this.path, @required this.extension}) : assert (description != null && file != null && title != null && extension != null);
   @override
   _ShoutOutDetail createState() => _ShoutOutDetail();
 }

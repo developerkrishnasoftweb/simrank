@@ -133,13 +133,13 @@ class Services{
       // _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("The email address is already registered."),));
     }
   }
-  static Future<Data> saveMedia(context, String token) async {
+  static Future<Data> saveMedia(context, String token, body) async {
     String url = Urls.baseUrl + Urls.saveMedia;
     dio.options.contentType = Headers.jsonContentType;
     dio.options.headers["Authorization"] = "Bearer " + token;
     try{
       Loader(context: context, text: "Uploading media ...");
-      final response = await dio.get(url);
+      final response = await dio.post(url, data: body);
       Navigator.pop(context);
       if(response.statusCode == 200){
         print(response.data);

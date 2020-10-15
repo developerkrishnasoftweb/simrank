@@ -4,13 +4,18 @@ import 'package:flutter/rendering.dart';
 import '../constant/strings.dart';
 import 'shoutout_publish.dart';
 import 'appbar_bottombar.dart';
+import 'dart:io';
 class ShoutOutMonetize extends StatefulWidget{
+  final File file;
+  final String title, description, extension;
+  ShoutOutMonetize({@required this.file, @required this.title, @required this.description, @required this.extension}) : assert (description != null && file != null && title != null && extension != null);
   @override
   _ShoutOutMonetize createState() => _ShoutOutMonetize();
 }
 class _ShoutOutMonetize extends State<ShoutOutMonetize>{
+  String isPaid = "0";
+  int cost = 0;
   @override
-  String monetize = "free";
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -292,11 +297,11 @@ class _ShoutOutMonetize extends State<ShoutOutMonetize>{
                                         width: size.width,
                                         child: RadioListTile(
                                           title: Text("Free"),
-                                          groupValue: monetize,
-                                          value: "free",
+                                          groupValue: isPaid,
+                                          value: "0",
                                           onChanged: (value){
                                             setState(() {
-                                              monetize = value;
+                                              isPaid = value;
                                             });
                                           },
                                           activeColor: Colors.orangeAccent,
@@ -307,11 +312,11 @@ class _ShoutOutMonetize extends State<ShoutOutMonetize>{
                                         width: size.width,
                                         child: RadioListTile(
                                           title: Text("Paid"),
-                                          groupValue: monetize,
-                                          value: "paid",
+                                          groupValue: isPaid,
+                                          value: "1",
                                           onChanged: (value){
                                             setState(() {
-                                              monetize = value;
+                                              isPaid = value;
                                             });
                                           },
                                           activeColor: Colors.orangeAccent,
@@ -333,7 +338,7 @@ class _ShoutOutMonetize extends State<ShoutOutMonetize>{
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(8),
                                           image: DecorationImage(
-                                            image: AssetImage("assets/images/download.jpg"),
+                                            image: FileImage(widget.file),
                                             fit: BoxFit.fill,
                                             colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.4), BlendMode.darken),
                                           ),
@@ -378,6 +383,11 @@ class _ShoutOutMonetize extends State<ShoutOutMonetize>{
                                                       border: InputBorder.none,
                                                       contentPadding: EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 3),
                                                     ),
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        cost = int.parse(value);
+                                                      });
+                                                    },
                                                   ),
                                                 ),
                                                 Image(
@@ -431,7 +441,7 @@ class _ShoutOutMonetize extends State<ShoutOutMonetize>{
                                     ),
                                     color: Color.fromRGBO(158, 138, 191, 1),
                                     onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutPublish()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutPublish(file: widget.file, extension: widget.extension, description: widget.description, title: widget.title, cost: cost, isPaid: isPaid,)));
                                     },
                                   ),
                                 )

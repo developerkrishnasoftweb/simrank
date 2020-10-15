@@ -2,10 +2,13 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
+
+import 'package:shared_preferences/shared_preferences.dart';
 class Uploader extends StatefulWidget {
   final File file;
   final String path;
-  Uploader({Key key, @required this.file, @required this.path}) : super();
+  final StorageMetadata metaData;
+  Uploader({Key key, @required this.file, @required this.path, this.metaData}) : super();
   @override
   createState() => _UploaderState();
 }
@@ -18,8 +21,15 @@ class _UploaderState extends State<Uploader> {
     setState(() {
       if(widget.file != null) _storageUploadTask = _storage.putFile(widget.file);
     });
-    print(_storage.getDownloadURL());
+    getUrl() async{
+      SharedPreferences _preferences = await SharedPreferences.getInstance();
+      final StorageTaskSnapshot downloadUrl =
+      (await _storageUploadTask.onComplete);
+      _preferences.setString("firebaseFileUrl", await downloadUrl.ref.getDownloadURL());
+      return await downloadUrl.ref.getDownloadURL();
+    }
     if(_storageUploadTask != null){
+      getUrl();
       return StreamBuilder<StorageTaskEvent>(
         stream: _storageUploadTask.events,
         builder: (context, snapshot){

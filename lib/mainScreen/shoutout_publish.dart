@@ -4,17 +4,23 @@ import 'package:flutter/rendering.dart';
 import '../constant/strings.dart';
 import 'shoutout_publish_confirm.dart';
 import 'appbar_bottombar.dart';
+import 'dart:io';
 class ShoutOutPublish extends StatefulWidget{
+  final File file;
+  final String title, description, extension, isPaid;
+  final int cost;
+  ShoutOutPublish({@required this.file, @required this.title, @required this.description, @required this.extension, this.cost, this.isPaid}) : assert (description != null && file != null && title != null && extension != null);
   @override
   _ShoutOutPublish createState() => _ShoutOutPublish();
 }
 class _ShoutOutPublish extends State<ShoutOutPublish>{
-  @override
   Color backGroundColor = Colors.orange[700];
   Alignment align = Alignment.centerRight;
   double radioInnerCircleHeight = 18;
   double radioInnerCircleWidth = 18;
-  String uploadDropDown = "PHOTOS";
+  String uploadDropDown = "images";
+  int logoPosition = 2;
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -344,7 +350,7 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
                                       image: DecorationImage(
-                                        image: AssetImage("assets/images/download.jpg"),
+                                        image: FileImage(widget.file),
                                         fit: BoxFit.fill,
                                       ),
                                     ),
@@ -389,8 +395,8 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
                                     dropdownColor: Color.fromRGBO(158, 138, 191, 1),
                                     icon: Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 20,),
                                     items: [
-                                      DropdownMenuItem(child: Text("PHOTOS"), value: "PHOTOS",),
-                                      DropdownMenuItem(child: Text("VIDEOS"), value: "VIDEO",),
+                                      DropdownMenuItem(child: Text("PHOTOS"), value: "images",),
+                                      DropdownMenuItem(child: Text("VIDEOS"), value: "videos",),
                                     ],
                                   ),
                                 )
@@ -479,7 +485,7 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
                               ),
                               color: Colors.orangeAccent,
                               onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutPublishConfirm()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutPublishConfirm(title: widget.title, description: widget.description, extension: widget.extension, file: widget.file, isPaid: widget.isPaid, cost: widget.cost, uploadFolder: uploadDropDown, logoPosition: logoPosition,)));
                               },
                             ),
                           )

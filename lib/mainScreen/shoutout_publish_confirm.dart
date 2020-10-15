@@ -1,10 +1,19 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simrank/mainScreen/simran_home.dart';
 import '../constant/strings.dart';
-import 'shoutout_publish.dart';
+import 'dart:io';
 import 'appbar_bottombar.dart';
+import '../static/uploader.dart';
+import '../services/services.dart';
 class ShoutOutPublishConfirm extends StatefulWidget{
+  final File file;
+  final String title, description, extension, isPaid, uploadFolder;
+  final int cost, logoPosition;
+  ShoutOutPublishConfirm({@required this.file, @required this.title, @required this.description, @required this.extension, this.cost, this.isPaid, this.uploadFolder, this.logoPosition}) : assert (description != null && file != null && title != null && extension != null);
   @override
   _ShoutOutPublishConfirm createState() => _ShoutOutPublishConfirm();
 }
@@ -15,6 +24,17 @@ class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
   bool platformWeb = false;
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    void _showUploadDialog(File file, String path) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Uploader(file: file, path: path),
+          );
+        },
+      );
+    }
     return SafeArea(
       child: Scaffold(
         drawer: drawer(context),
@@ -366,15 +386,40 @@ class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
                                   width: size.width * 0.3,
                                   child: FlatButton(
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide.none),
-                                    child: Text("Next",
+                                    child: Text("Upload",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14
                                       ),
                                     ),
                                     color: Color.fromRGBO(158, 138, 191, 1),
-                                    onPressed: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutPublish()));
+                                    onPressed: () async {
+                                      _showUploadDialog(widget.file, "${widget.uploadFolder}/${DateTime.now()}.${widget.extension}");
+                                      int mediaType;
+                                      String mediaLink;
+                                      SharedPreferences _preferences = await SharedPreferences.getInstance();
+                                      setState(() {
+                                        mediaLink = _preferences.getString("firebaseFileUrl");
+                                      });
+                                      if(widget.extension == "png" || widget.extension == "jpg" || widget.extension == "jpeg"){
+                                        setState(() {
+                                          print("helo");
+                                          mediaType = 1;
+                                        });
+                                      }
+                                      if(widget.extension == "mp4" || widget.extension == "mkv"){
+                                        setState(() {
+                                          print(widget.extension);
+                                          mediaType = 2;
+                                        });
+                                      }
+                                      if(mediaType != null && mediaLink != null){
+                                        uploadMedia(mediaType, mediaLink, widget.title, widget.description, widget.isPaid, widget.cost, widget.logoPosition, "");
+                                      } else {
+                                        // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Home()), (route) => false);
+                                        print("something went wrong");
+                                      }
+
                                     },
                                   ),
                                 )
@@ -391,5 +436,33 @@ class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
         bottomNavigationBar: BottomBar(index: 3,),
       ),
     );
+  }
+
+  void uploadMedia(mediaType, mediaLink, title, description, isPaid, cost, logoPosition, mediaThumbnail) {
+    print(mediaType.toString() + " " + mediaLink.toString() + " " + title.toString() + " " + description + " " + isPaid.toString() + " " + cost.toString() + " " + logoPosition.toString() + " " + mediaThumbnail);
+    /*SharedPreferences _preferences = await SharedPreferences.getInstance();
+    if(_preferences.get("data") == null){
+      FormData formData = new FormData.fromMap({
+        "media_type" : mediaType,
+        "media_link" : mediaLink,
+        "title" : title,
+        "description" : description,
+        "is_paid" : isPaid,
+        "cost" : cost,
+        "logo_position" : logoPosition,
+        "media_thumbnail" : mediaThumbnail,
+      });
+      String token;
+      setState(() {
+        token = _preferences.getString("data")[14];
+      });
+      Services.saveMedia(context, token, formData).then((value) async {
+        if(value.response){
+          print(value.data);
+        }
+      });
+    } else {
+
+    }*/
   }
 }

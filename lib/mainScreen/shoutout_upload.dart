@@ -1,46 +1,69 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
+import 'shoutout_monetize.dart';
+import 'shoutout_detail.dart';
 import '../static/uploader.dart';
 import '../constant/strings.dart';
 import 'appbar_bottombar.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 class ShoutOutUploadPhotos extends StatefulWidget{
   @override
   _ShoutOutUploadPhotos createState() => _ShoutOutUploadPhotos();
 }
 class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
-  File _image;
-  File file;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  File file, image;
   final picker = ImagePicker();
-  Future getImage() async {
-    final image = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (image != null) {
-        _image = File(image.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+  String filepath, title, description, extension;
+  var thumbnail;
   @override
   Widget build(BuildContext context) {
-    void _showUploadDialog(File file, String path) {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Uploader(file: file, path: path),
-          );
-        },
-      );
-    }
     Size size = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
+    Future getFile() async {
+      final fileData = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ["png", "jpg", "mp4", "mkv", "jpeg"]);
+      extension = fileData.files.single.extension;
+      if(extension == "png" || extension == "jpg" || extension == "jpeg"){
+        setState(() {
+          file = File(fileData.files.single.path);
+          image = file;
+          filepath = "images/${DateTime.now().toString()}.${extension.toString()}";
+        });
+      }
+      if(extension == "mp4" || extension == "mkv"){
+        thumbnail = await VideoThumbnail.thumbnailFile(
+          video: fileData.files.single.path,
+          imageFormat: ImageFormat.PNG,
+          quality: 25,
+        );
+        setState(() {
+          image = File(thumbnail);
+          file = File(fileData.files.single.path);
+          filepath = "videos/${DateTime.now().toString()}.${extension.toString()}";
+        });
+      }
+    }
+    Future getImageByCamera() async {
+      final _image = await picker.getImage(source: ImageSource.camera);
+      setState(() {
+        if (_image != null) {
+          file = File(_image.path);
+          image = file;
+          print("hello");
+        } else {
+          print('No image selected.');
+        }
+      });
+    }
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         drawer: drawer(context),
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(158, 138, 191, 1),
@@ -319,7 +342,7 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                                   ),
                                 ),
                                 color: Color.fromRGBO(158, 138, 191, 1),
-                                onPressed: (){},
+                                onPressed: getFile,
                               ),
                             ),
                             SizedBox(
@@ -334,7 +357,9 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                                   ),
                                 ),
                                 color: Color.fromRGBO(158, 138, 191, 1),
-                                onPressed: (){},
+                                onPressed: (){
+                                  getImageByCamera();
+                                },
                               ),
                             )
                           ],
@@ -373,7 +398,7 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 image: DecorationImage(
-                                  image: (_image != null ? FileImage(_image) : AssetImage("assets/images/icon-image-512.png")),
+                                  image: image != null ? FileImage(image) : AssetImage("assets/images/icon-image-512.png"),
                                   fit: BoxFit.fill,
                                   colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.4), BlendMode.darken),
                                 ),
@@ -383,7 +408,6 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                                   color: Colors.white,
                                 ),
                                 onPressed: () {
-                                  getImage();
                                 },
                               ),
                             ),
@@ -391,91 +415,116 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                           Container(
                             width: size.width,
                             margin: EdgeInsets.only(top: 10, bottom: 10),
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      padding: EdgeInsets.only(right: 7),
-                                      alignment: Alignment.topRight,
-                                      width: size.width * 0.3,
-                                      child: Text("Title : ",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.only(right: 7),
+                                        alignment: Alignment.topRight,
+                                        width: size.width * 0.3,
+                                        child: Text("Title : ",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Color.fromRGBO(0, 0, 0, 0.2)
-                                      ),
-                                      child: SizedBox(
-                                        height: 50,
-                                        width: size.width * 0.6,
-                                        child: TextField(
-                                          style: TextStyle(
-                                              color: Colors.white
-                                          ),
-                                          decoration: InputDecoration(
-                                            hintText: "Enter Title",
-                                            hintStyle: TextStyle(
-                                              color: Colors.white38,
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: Color.fromRGBO(0, 0, 0, 0.2)
+                                        ),
+                                        child: SizedBox(
+                                          height: 50,
+                                          width: size.width * 0.6,
+                                          child: TextFormField(
+                                            validator: (value){
+                                              if(value == null){
+                                                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Please provide title")));
+                                              }
+                                              return null;
+                                            },
+                                            style: TextStyle(
+                                                color: Colors.white
                                             ),
-                                            border: InputBorder.none,
-                                            contentPadding: EdgeInsets.only(left: 10, right: 10)
+                                            decoration: InputDecoration(
+                                                hintText: "Enter Title",
+                                                hintStyle: TextStyle(
+                                                  color: Colors.white38,
+                                                ),
+                                                border: InputBorder.none,
+                                                contentPadding: EdgeInsets.only(left: 10, right: 10)
+                                            ),
+                                            onChanged: (value){
+                                              setState(() {
+                                                title = value;
+                                              });
+                                            },
                                           ),
                                         ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      padding: EdgeInsets.only(right: 7),
-                                      alignment: Alignment.topRight,
-                                      width: size.width * 0.3,
-                                      child: Text("Description : ",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Color.fromRGBO(0, 0, 0, 0.2)
-                                      ),
-                                      child: SizedBox(
-                                        height: 80,
-                                        width: size.width * 0.6,
-                                        child: TextField(
-                                          maxLines: 5,
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.only(right: 7),
+                                        alignment: Alignment.topRight,
+                                        width: size.width * 0.3,
+                                        child: Text("Description : ",
                                           style: TextStyle(
-                                            color: Colors.white
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600
                                           ),
-                                          decoration: InputDecoration(
-                                              hintText: "Enter Title",
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 10),
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: Color.fromRGBO(0, 0, 0, 0.2)
+                                        ),
+                                        child: SizedBox(
+                                          height: 80,
+                                          width: size.width * 0.6,
+                                          child: TextFormField(
+                                            validator: (value){
+                                              if(value == null){
+                                                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Please provide description")));
+                                              }
+                                              return null;
+                                            },
+                                            maxLines: 5,
+                                            style: TextStyle(
+                                                color: Colors.white
+                                            ),
+                                            decoration: InputDecoration(
+                                              hintText: "Enter Description",
                                               hintStyle: TextStyle(
                                                 color: Colors.white38,
                                               ),
                                               border: InputBorder.none,
                                               contentPadding: EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 3),
+                                            ),
+                                            onChanged: (value){
+                                              setState(() {
+                                                description = value;
+                                              });
+                                            },
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                )
-                              ],
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           Container(
@@ -514,9 +563,21 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                                     ),
                                     color: Color.fromRGBO(158, 138, 191, 1),
                                     onPressed: (){
-                                      String filepath = "images/${DateTime.now()}.png";
-                                      _showUploadDialog(_image, filepath);
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutDetail()));
+                                      if(_formKey.currentState.validate()){
+                                        if(file != null){
+                                          if(filepath != null){
+                                            if(extension != null){
+                                              if(title != null && description != null){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutMonetize(title: title, file: file, description: description, extension: extension)));
+                                              } else {
+                                                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Please enter Title or Description"),));
+                                              }
+                                            }
+                                          }
+                                        } else {
+                                          _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Please choose a file"),));
+                                        }
+                                      }
                                     },
                                   ),
                                 )
