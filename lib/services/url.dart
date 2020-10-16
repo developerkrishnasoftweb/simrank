@@ -4,4 +4,5 @@ class Urls{
   static String userSignUp = "api/sign-up";
   static String getModels = "api/models";
   static String saveMedia = "api/save-media";
+  static String mediaLike = "api/media-like/";
 }

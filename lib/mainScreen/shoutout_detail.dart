@@ -490,7 +490,7 @@ class _ShoutOutDetail extends State<ShoutOutDetail>{
                                     ),
                                     color: Color.fromRGBO(158, 138, 191, 1),
                                     onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutMonetize()));
+                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutMonetize(title: widget.title, file: widget.file, description: widget.description, extension: widget.extension, thumbnailImage: widget.image,)));
                                     },
                                   ),
                                 )

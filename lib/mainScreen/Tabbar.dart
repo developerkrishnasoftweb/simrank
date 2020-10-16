@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'ShoutOutMess.dart';
-import 'home_feed.dart';
+import '../services/services.dart';
 import 'image.dart';
 import '../constant/colors.dart';
 import 'appbar_bottombar.dart';
@@ -14,13 +15,14 @@ class Tablayout extends StatefulWidget {
 
 class _TablayoutState extends State<Tablayout> {
   var index = 0.0;
-
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        key: _scaffoldKey,
         drawer: drawer(context),
         backgroundColor: MyColors.primarycolors,
         appBar: AppBar(
@@ -28,7 +30,7 @@ class _TablayoutState extends State<Tablayout> {
           leading: lead(context),
           actions: [action(context)],
           title: titlename(context),
-          bottom: TabBar(indicatorColor: Colors.white, indicatorWeight: 4.0,tabs: [
+          bottom: TabBar(indicatorColor: Colors.white, indicatorWeight: 1.0,tabs: [
             Tab(
               child: Text("HomeFeed",
               style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold),
@@ -42,127 +44,123 @@ class _TablayoutState extends State<Tablayout> {
           ]),
         ),
         body: TabBarView(children: [
-          SingleChildScrollView(
-            child: Container(
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    height: size.height * 0.1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          height: size.height * 0.05,
-                          width: size.height * 0.05,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              color: MyColors.btncolorsprimary,
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    offset: const Offset(2.0, 2.0),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 2.0,
-                                    color: MyColors.btnsho)
-                              ]),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Images()));
-                            },
-                            child: Icon(
-                              Icons.perm_contact_calendar,
-                              size: 26.0,
-                              color: MyColors.whiteColor,
-                            ),
+          Container(
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10),
+                  height: size.height * 0.1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        height: size.height * 0.05,
+                        width: size.height * 0.05,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            color: MyColors.btncolorsprimary,
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  blurRadius: 5.0,
+                                  spreadRadius: 0.0,
+                                  color: MyColors.btnsho)
+                            ]),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Images()));
+                          },
+                          child: Icon(
+                            Icons.perm_contact_calendar,
+                            size: 26.0,
+                            color: MyColors.whiteColor,
                           ),
                         ),
-                        Container(
-                          height: size.height * 0.05,
-                          width: size.height * 0.05,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              color: MyColors.btncolorsprimary,
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    offset: const Offset(2.0, 2.0),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 2.0,
-                                    color: MyColors.btnsho)
-                              ]),
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Icon(
-                              Icons.view_module,
-                              size: 26.0,
-                              color: MyColors.whiteColor,
-                            ),
+                      ),
+                      Container(
+                        height: size.height * 0.05,
+                        width: size.height * 0.05,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            color: MyColors.btncolorsprimary,
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  blurRadius: 5.0,
+                                  spreadRadius: 0.0,
+                                  color: MyColors.btnsho)
+                            ]),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Icon(
+                            Icons.view_module,
+                            size: 26.0,
+                            color: MyColors.whiteColor,
                           ),
                         ),
-                        Container(
-                          height: size.height * 0.05,
-                          width: size.height * 0.05,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              color: MyColors.btncolorsprimary,
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    offset: const Offset(2.0, 2.0),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 2.0,
-                                    color: MyColors.btnsho)
-                              ]),
-                          child: GestureDetector(
+                      ),
+                      Container(
+                        height: size.height * 0.05,
+                        width: size.height * 0.05,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            color: MyColors.btncolorsprimary,
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  blurRadius: 5.0,
+                                  spreadRadius: 0.0,
+                                  color: MyColors.btnsho)
+                            ]),
+                        child: GestureDetector(
 
-                            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> PopModelMenu() ));},
-                            child: Icon(
-                              Icons.menu,
-                              size: 26.0,
-                              color: MyColors.whiteColor,
-                            ),
+                          onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> PopModelMenu() ));},
+                          child: Icon(
+                            Icons.menu,
+                            size: 26.0,
+                            color: MyColors.whiteColor,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    width: size.width,
-                    child: SingleChildScrollView(
-                        child: Container(
-                          color: Color(0xFF987bb0),
-                          height: size.height * 0.628,
-                          width: size.width,
-                          padding: EdgeInsets.only(bottom: 50),
-                          child: GridView.builder(
-                            itemCount: 20,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3),
-                            itemBuilder: (BuildContext context, int index) {
-                              return new Card(
-                                margin: EdgeInsets.all(5.0),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0)),
-                                color: MyColors.btndarkcolor,
-                                shadowColor: Colors.black,elevation: 21.0,
-                                child: new GridTile(
-                                  header: IconButton(
-                                    alignment: Alignment.topRight,
-                                    icon: Icon(Icons.more_horiz),
-                                    color: MyColors.whiteColor,
-                                    onPressed: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutMess()));
-                                    },
-                                  ),
-                                  footer: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.2),
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(10.0),
-                                            bottomRight: Radius.circular(10.0))),
-                                    child: new Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
+                ),
+                Container(
+                  width: size.width,
+                  child: SingleChildScrollView(
+                      child: Container(
+                        color: Color(0xFF987bb0),
+                        height: size.height * 0.58,
+                        width: size.width,
+                        child: GridView.builder(
+                          itemCount: 20,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3),
+                          itemBuilder: (BuildContext context, int index) {
+                            return new Card(
+                              margin: EdgeInsets.all(5.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              color: MyColors.btndarkcolor,
+                              shadowColor: Colors.black,elevation: 21.0,
+                              child: new GridTile(
+                                header: IconButton(
+                                  alignment: Alignment.topRight,
+                                  icon: Icon(Icons.more_horiz),
+                                  color: MyColors.whiteColor,
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutMess()));
+                                  },
+                                ),
+                                footer: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.black.withOpacity(0.2),
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(10.0),
+                                          bottomRight: Radius.circular(10.0))),
+                                  child: new Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                    children: [
+                                      GestureDetector(
+                                        child: Row(
                                           children: [
                                             Icon(
                                               Icons.favorite,
@@ -174,43 +172,54 @@ class _TablayoutState extends State<Tablayout> {
                                                     color: MyColors.whiteColor))
                                           ],
                                         ),
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.chat,
-                                              color: MyColors.whiteColor,
-                                              size: 15,
-                                            ),
-                                            Text(
-                                              "1.5K",
-                                              style: TextStyle(
-                                                  color: MyColors.whiteColor),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                        image: DecorationImage(
-                                          image: AssetImage("assets/images/avatar.jpg"),
-                                          fit: BoxFit.cover,
-                                        ),
+                                        onTap: () async {
+                                          String id = "1";
+                                          SharedPreferences _sharedPrefrences = await SharedPreferences.getInstance();
+                                          if(_sharedPrefrences.getStringList("data") != null){
+                                            String token = _sharedPrefrences.getStringList("data")[14];
+                                            await Services.mediaLike(context, token, id, _scaffoldKey).then((value) {
+                                              print(value.response);
+                                            });
+                                          }
+                                          // Services.mediaLike(context, token, id, _scaffoldKey);
+                                        },
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.chat,
+                                            color: MyColors.whiteColor,
+                                            size: 15,
+                                          ),
+                                          Text(
+                                            "1.5K",
+                                            style: TextStyle(
+                                                color: MyColors.whiteColor),
+                                          )
+                                        ],
                                       )
-
-                                    // child:
-                                    //     Image.asset('assets/images/avatar.jpg'),
-                                  ), //just for testing, will fill with image later
+                                    ],
+                                  ),
                                 ),
-                              );
-                            },
-                          ),
-                        )),
-                  ),
-                ],
-              ),
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      image: DecorationImage(
+                                        image: AssetImage("assets/images/avatar.jpg"),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+
+                                  // child:
+                                  //     Image.asset('assets/images/avatar.jpg'),
+                                ), //just for testing, will fill with image later
+                              ),
+                            );
+                          },
+                        ),
+                      )),
+                ),
+              ],
             ),
           ),
           SingleChildScrollView(

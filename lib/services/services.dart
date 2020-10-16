@@ -71,12 +71,8 @@ class Services{
       Loader(context: context, text: "Please Wait ...");
       final response = await dio.post(url, data: body, options: Options(contentType: Headers.jsonContentType));
       Navigator.pop(context);
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       if (response.statusCode == 200) {
         Data data = new Data();
-        // print(response.data);
-        // print("Data - " + json.decode(response.data.toString()));
-        // final jsonResponse = json.decode(response.data.toString());
         final jsonResponse = response.data;
         data.message = jsonResponse['message'];
         data.response = jsonResponse['success'];
@@ -109,14 +105,11 @@ class Services{
     dio.options.contentType = Headers.jsonContentType;
     dio.options.headers["Authorization"] = "Bearer " + token;
     try {
+      Loader(context: context, text: "Please Wait ...");
       final response = await dio.get(url, options: Options(contentType: Headers.jsonContentType));
       Navigator.pop(context);
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       if (response.statusCode == 200) {
         Data data = new Data();
-        // print(response.data);
-        // print("Data - " + json.decode(response.data.toString()));
-        // final jsonResponse = json.decode(response.data.toString());
         final jsonResponse = response.data;
         data.message = jsonResponse['message'];
         data.response = jsonResponse['success'];
@@ -166,6 +159,32 @@ class Services{
         _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Something went wrong !!!"),));
       }
     } on DioError catch (e) {
+    }
+  }
+  static Future<Data> mediaLike(context, String token, id, _scaffoldKey) async {
+    String url = Urls.baseUrl + Urls.mediaLike + id;
+    dio.options.contentType = Headers.jsonContentType;
+    dio.options.headers["Authorization"] = "Bearer " + token;
+    try{
+      final response = await dio.post(url);
+      if(response.statusCode == 200){
+        Data data = new Data();
+        final jsonResponse = response.data;
+        data.message = jsonResponse['message'];
+        data.response = jsonResponse['success'];
+        List list;
+        list = [
+          {
+
+          }
+        ];
+        data.data = list;
+        return data;
+      } else {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Something went wrong !!!"),));
+      }
+    } on DioError catch (e) {
+      print(e.request.connectTimeout);
     }
   }
 }

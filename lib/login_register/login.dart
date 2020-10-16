@@ -596,6 +596,7 @@ class _Login extends State<Login>{
       });
       Services.userSignIn(formData, context, _scaffoldKey).then((value) async {
         if(value.response){
+          print(value.data[0]["access_token"]);
           storeLoginData(value.data);
           Navigator.pop(context);
           Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));

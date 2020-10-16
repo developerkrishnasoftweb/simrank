@@ -23,9 +23,8 @@ Widget lead(BuildContext context) {
             color: MyColors.btncolorsprimary,
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  offset: const Offset(2.0, 2.0),
                   blurRadius: 5.0,
-                  spreadRadius: 2.0,
+                  spreadRadius: 0,
                   color: MyColors.btnsho)
             ]),
         child: GestureDetector(
@@ -51,13 +50,11 @@ Widget titlename(BuildContext context) {
         height: 40.0,
         width: 40.0,
         decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
+          shape: BoxShape.circle,
           color: MyColors.btncolorsprimary,
           boxShadow: <BoxShadow>[
             BoxShadow(
-                offset: const Offset(2.0, 2.0),
                 blurRadius: 5.0,
-                spreadRadius: 2.0,
                 color: MyColors.btnsho)
           ],
         ),
@@ -69,7 +66,7 @@ Widget titlename(BuildContext context) {
           },
           child: Icon(
             Icons.home,
-            size: 26.0,
+            size: 24.0,
           ),
         ),
       ),
@@ -105,8 +102,8 @@ Widget titlename(BuildContext context) {
               children: [
                 Image.asset(
                   'assets/images/diamond.png',
-                  height: 35,
-                  width: 35,
+                  height: 39,
+                  width: 39,
                 ),
                 Text(
                   "999",
@@ -130,9 +127,8 @@ Widget action(BuildContext context) {
           color: MyColors.btncolorsprimary,
           boxShadow: <BoxShadow>[
             BoxShadow(
-                offset: const Offset(2.0, 2.0),
                 blurRadius: 5.0,
-                spreadRadius: 2.0,
+                spreadRadius: 0.0,
                 color: MyColors.btnsho)
           ]),
       child: GestureDetector(
@@ -275,7 +271,7 @@ class _BottomBarState extends State<BottomBar> {
       showSelectedLabels: true,
       showUnselectedLabels: true,
       selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.black54,
+      unselectedItemColor: Colors.black.withOpacity(0.7),
       backgroundColor: Color.fromRGBO(158, 138, 191, 1),
       onTap: (index) {
         setState(() {
@@ -318,9 +314,8 @@ class _BottomBarState extends State<BottomBar> {
                   color: MyColors.btncolorsprimary,
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        offset: const Offset(2.0, 2.0),
                         blurRadius: 5.0,
-                        spreadRadius: 2.0,
+                        spreadRadius: 0.0,
                         color: MyColors.btnsho)
                   ]),
               child: Icon(
@@ -343,9 +338,8 @@ class _BottomBarState extends State<BottomBar> {
                   color: MyColors.btncolorsprimary,
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        offset: const Offset(2.0, 2.0),
                         blurRadius: 5.0,
-                        spreadRadius: 2.0,
+                        spreadRadius: 0,
                         color: MyColors.btnsho)
                   ]),
               child: Icon(
@@ -368,9 +362,8 @@ class _BottomBarState extends State<BottomBar> {
                   color: MyColors.btncolorsprimary,
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        offset: const Offset(2.0, 2.0),
                         blurRadius: 5.0,
-                        spreadRadius: 2.0,
+                        spreadRadius: 0.0,
                         color: MyColors.btnsho)
                   ]),
               child: Icon(
@@ -393,9 +386,8 @@ class _BottomBarState extends State<BottomBar> {
                   color: MyColors.btncolorsprimary,
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        offset: const Offset(2.0, 2.0),
                         blurRadius: 5.0,
-                        spreadRadius: 2.0,
+                        spreadRadius: 0,
                         color: MyColors.btnsho)
                   ]),
               child: Icon(
@@ -418,9 +410,8 @@ class _BottomBarState extends State<BottomBar> {
                   color: MyColors.btncolorsprimary,
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        offset: const Offset(2.0, 2.0),
                         blurRadius: 5.0,
-                        spreadRadius: 2.0,
+                        spreadRadius: 0,
                         color: MyColors.btnsho)
                   ]),
               child: Icon(
@@ -433,7 +424,7 @@ class _BottomBarState extends State<BottomBar> {
                 child: Text("DM",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15.0))),
-            backgroundColor: Color.fromRGBO(158, 138, 191, 1))
+            backgroundColor: Color.fromRGBO(158, 138, 191, 1)),
       ],
     );
   }
