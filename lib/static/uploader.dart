@@ -21,15 +21,7 @@ class _UploaderState extends State<Uploader> {
     setState(() {
       if(widget.file != null) _storageUploadTask = _storage.putFile(widget.file);
     });
-    setUrl() async{
-      SharedPreferences _preferences = await SharedPreferences.getInstance();
-      final StorageTaskSnapshot downloadUrl =
-      (await _storageUploadTask.onComplete);
-      _preferences.setString("firebaseFileUrl", await downloadUrl.ref.getDownloadURL());
-      return await downloadUrl.ref.getDownloadURL();
-    }
     if(_storageUploadTask != null){
-      setUrl();
       return StreamBuilder<StorageTaskEvent>(
         stream: _storageUploadTask.events,
         builder: (context, snapshot){

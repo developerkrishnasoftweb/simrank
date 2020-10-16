@@ -109,7 +109,6 @@ class Services{
     dio.options.contentType = Headers.jsonContentType;
     dio.options.headers["Authorization"] = "Bearer " + token;
     try {
-      Loader(context: context, text: "Please Wait ...");
       final response = await dio.get(url, options: Options(contentType: Headers.jsonContentType));
       Navigator.pop(context);
       // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
@@ -129,7 +128,6 @@ class Services{
         throw Exception("Something went Wrong");
       }
     } on DioError catch (e) {
-      Navigator.pop(context);
       // _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("The email address is already registered."),));
     }
   }

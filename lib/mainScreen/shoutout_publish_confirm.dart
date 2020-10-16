@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simrank/mainScreen/Tabbar.dart';
 import 'package:simrank/mainScreen/simran_home.dart';
+import 'package:simrank/static/loader.dart';
 import '../constant/strings.dart';
 import 'dart:io';
 import 'appbar_bottombar.dart';
@@ -397,31 +399,33 @@ class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
                                     ),
                                     color: Color.fromRGBO(158, 138, 191, 1),
                                     onPressed: () async {
-                                      SharedPreferences _preferences = await SharedPreferences.getInstance();
-                                      _preferences.remove("firebaseFileUrl");
-                                      _showUploadDialog(widget.file, "${widget.uploadFolder}/${DateTime.now()}.${widget.extension}");
                                       int mediaType;
-                                      String mediaLink;
+                                      String path = "${widget.uploadFolder}/${DateTime.now()}.${widget.extension}";
+                                      final StorageReference _storage = FirebaseStorage.instance.ref().child(path);
+                                      StorageUploadTask _storageUploadTask;
                                       setState(() {
-                                        mediaLink = _preferences.getString("firebaseFileUrl");
+                                        if(widget.file != null) _storageUploadTask = _storage.putFile(widget.file);
                                       });
-                                      if(widget.extension == "png" || widget.extension == "jpg" || widget.extension == "jpeg"){
-                                        setState(() {
-                                          mediaType = 1;
-                                        });
+                                      if(_storageUploadTask.isInProgress)
+                                        Loader(context: context, text: "Uploading Media ...");
+                                      final StorageTaskSnapshot downloadUrl = await _storageUploadTask.onComplete;
+                                      if(_storageUploadTask.isComplete){
+                                        if(widget.extension == "png" || widget.extension == "jpg" || widget.extension == "jpeg"){
+                                          setState(() {
+                                            mediaType = 1;
+                                          });
+                                        }
+                                        if(widget.extension == "mp4" || widget.extension == "mkv"){
+                                          setState(() {
+                                            mediaType = 2;
+                                          });
+                                        }
+                                        if(mediaType != null && await downloadUrl.ref.getDownloadURL() != null){
+                                          uploadMedia(mediaType, await downloadUrl.ref.getDownloadURL(), widget.title, widget.description, widget.isPaid, widget.cost, widget.logoPosition, "");
+                                        } else {
+                                          print("something went wrong");
+                                        }
                                       }
-                                      if(widget.extension == "mp4" || widget.extension == "mkv"){
-                                        setState(() {
-                                          mediaType = 2;
-                                        });
-                                      }
-                                      if(mediaType != null && mediaLink != null){
-                                        uploadMedia(mediaType, mediaLink, widget.title, widget.description, widget.isPaid, widget.cost, widget.logoPosition, "");
-                                      } else {
-                                        // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Home()), (route) => false);
-                                        print("something went wrong");
-                                      }
-
                                     },
                                   ),
                                 )
@@ -460,15 +464,14 @@ class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
       Services.saveMedia(context, token, formData, _scaffoldKey).then((value) async {
         if(value.response){
           print(value.data);
-          _preferences.remove("firebaseFileUrl");
-          // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Tablayout()), (route) => false);
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Tablayout()), (route) => false);
         }
         else {
           print(value.response);
         }
       });
     } else {
-
+      ///TODO : Show error message
     }
   }
 }
