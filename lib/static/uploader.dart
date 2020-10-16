@@ -21,7 +21,7 @@ class _UploaderState extends State<Uploader> {
     setState(() {
       if(widget.file != null) _storageUploadTask = _storage.putFile(widget.file);
     });
-    getUrl() async{
+    setUrl() async{
       SharedPreferences _preferences = await SharedPreferences.getInstance();
       final StorageTaskSnapshot downloadUrl =
       (await _storageUploadTask.onComplete);
@@ -29,7 +29,7 @@ class _UploaderState extends State<Uploader> {
       return await downloadUrl.ref.getDownloadURL();
     }
     if(_storageUploadTask != null){
-      getUrl();
+      setUrl();
       return StreamBuilder<StorageTaskEvent>(
         stream: _storageUploadTask.events,
         builder: (context, snapshot){
@@ -55,6 +55,6 @@ class _UploaderState extends State<Uploader> {
         },
       );
     }
-    return Scaffold(body: Center(child: Text("Something went wrong"),),);
+    return Scaffold(body: Container(height: 50, width: MediaQuery.of(context).size.width * 0.7, child: Center(child: Text("Something went wrong"),)),);
   }
 }

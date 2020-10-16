@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simrank/mainScreen/Tabbar.dart';
 import 'package:simrank/mainScreen/simran_home.dart';
 import '../constant/strings.dart';
 import 'dart:io';
@@ -18,13 +19,14 @@ class ShoutOutPublishConfirm extends StatefulWidget{
   _ShoutOutPublishConfirm createState() => _ShoutOutPublishConfirm();
 }
 class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
-  @override
   bool platformIos = true;
   bool platformAndroid = true;
   bool platformWeb = false;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    void _showUploadDialog(File file, String path) {
+    void _showUploadDialog(File file, String path) async {
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -37,6 +39,7 @@ class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
     }
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         drawer: drawer(context),
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(158, 138, 191, 1),
@@ -394,22 +397,21 @@ class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
                                     ),
                                     color: Color.fromRGBO(158, 138, 191, 1),
                                     onPressed: () async {
+                                      SharedPreferences _preferences = await SharedPreferences.getInstance();
+                                      _preferences.remove("firebaseFileUrl");
                                       _showUploadDialog(widget.file, "${widget.uploadFolder}/${DateTime.now()}.${widget.extension}");
                                       int mediaType;
                                       String mediaLink;
-                                      SharedPreferences _preferences = await SharedPreferences.getInstance();
                                       setState(() {
                                         mediaLink = _preferences.getString("firebaseFileUrl");
                                       });
                                       if(widget.extension == "png" || widget.extension == "jpg" || widget.extension == "jpeg"){
                                         setState(() {
-                                          print("helo");
                                           mediaType = 1;
                                         });
                                       }
                                       if(widget.extension == "mp4" || widget.extension == "mkv"){
                                         setState(() {
-                                          print(widget.extension);
                                           mediaType = 2;
                                         });
                                       }
@@ -438,10 +440,9 @@ class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
     );
   }
 
-  void uploadMedia(mediaType, mediaLink, title, description, isPaid, cost, logoPosition, mediaThumbnail) {
-    print(mediaType.toString() + " " + mediaLink.toString() + " " + title.toString() + " " + description + " " + isPaid.toString() + " " + cost.toString() + " " + logoPosition.toString() + " " + mediaThumbnail);
-    /*SharedPreferences _preferences = await SharedPreferences.getInstance();
-    if(_preferences.get("data") == null){
+  void uploadMedia(mediaType, mediaLink, title, description, isPaid, cost, logoPosition, mediaThumbnail) async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    if(_preferences.get("data") != null){
       FormData formData = new FormData.fromMap({
         "media_type" : mediaType,
         "media_link" : mediaLink,
@@ -454,15 +455,20 @@ class _ShoutOutPublishConfirm extends State<ShoutOutPublishConfirm>{
       });
       String token;
       setState(() {
-        token = _preferences.getString("data")[14];
+        token = _preferences.getStringList("data")[14];
       });
-      Services.saveMedia(context, token, formData).then((value) async {
+      Services.saveMedia(context, token, formData, _scaffoldKey).then((value) async {
         if(value.response){
           print(value.data);
+          _preferences.remove("firebaseFileUrl");
+          // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Tablayout()), (route) => false);
+        }
+        else {
+          print(value.response);
         }
       });
     } else {
 
-    }*/
+    }
   }
 }

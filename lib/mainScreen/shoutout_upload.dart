@@ -568,7 +568,7 @@ class _ShoutOutUploadPhotos extends State<ShoutOutUploadPhotos>{
                                           if(filepath != null){
                                             if(extension != null){
                                               if(title != null && description != null){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutMonetize(title: title, file: file, description: description, extension: extension)));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutMonetize(title: title, file: file, description: description, extension: extension, thumbnailImage: image,)));
                                               } else {
                                                 _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Please enter Title or Description"),));
                                               }

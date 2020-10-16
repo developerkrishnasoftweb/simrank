@@ -6,9 +6,9 @@ import 'shoutout_publish.dart';
 import 'appbar_bottombar.dart';
 import 'dart:io';
 class ShoutOutMonetize extends StatefulWidget{
-  final File file;
+  final File file, thumbnailImage;
   final String title, description, extension;
-  ShoutOutMonetize({@required this.file, @required this.title, @required this.description, @required this.extension}) : assert (description != null && file != null && title != null && extension != null);
+  ShoutOutMonetize({@required this.file, @required this.title, @required this.description, @required this.extension, @required this.thumbnailImage}) : assert (description != null && file != null && title != null && extension != null && thumbnailImage != null);
   @override
   _ShoutOutMonetize createState() => _ShoutOutMonetize();
 }
@@ -338,7 +338,7 @@ class _ShoutOutMonetize extends State<ShoutOutMonetize>{
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(8),
                                           image: DecorationImage(
-                                            image: FileImage(widget.file),
+                                            image: FileImage(widget.thumbnailImage),
                                             fit: BoxFit.fill,
                                             colorFilter: ColorFilter.mode(Color.fromRGBO(0, 0, 0, 0.4), BlendMode.darken),
                                           ),
@@ -441,7 +441,7 @@ class _ShoutOutMonetize extends State<ShoutOutMonetize>{
                                     ),
                                     color: Color.fromRGBO(158, 138, 191, 1),
                                     onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutPublish(file: widget.file, extension: widget.extension, description: widget.description, title: widget.title, cost: cost, isPaid: isPaid,)));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShoutOutPublish(file: widget.file, extension: widget.extension, description: widget.description, title: widget.title, cost: cost, isPaid: isPaid, thumbnailImage: widget.thumbnailImage,)));
                                     },
                                   ),
                                 )

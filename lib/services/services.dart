@@ -133,7 +133,7 @@ class Services{
       // _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("The email address is already registered."),));
     }
   }
-  static Future<Data> saveMedia(context, String token, body) async {
+  static Future<Data> saveMedia(context, String token, body, _scaffoldKey) async {
     String url = Urls.baseUrl + Urls.saveMedia;
     dio.options.contentType = Headers.jsonContentType;
     dio.options.headers["Authorization"] = "Bearer " + token;
@@ -142,10 +142,32 @@ class Services{
       final response = await dio.post(url, data: body);
       Navigator.pop(context);
       if(response.statusCode == 200){
-        print(response.data);
+        Data data = new Data();
+        final jsonResponse = response.data;
+        data.message = jsonResponse['message'];
+        data.response = jsonResponse['success'];
+        List list;
+        list = [
+          {
+            "user_id" : jsonResponse["data"]["user_id"],
+            "media_type" : jsonResponse["data"]["media_type"],
+            "title" : jsonResponse["data"]["title"],
+            "description" : jsonResponse["data"]["description"],
+            "media_link" : jsonResponse["data"]["media_link"],
+            "is_paid" : jsonResponse["data"]["is_paid"],
+            "cost" : jsonResponse["data"]["cost"],
+            "logo_position" : jsonResponse["data"]["logo_position"],
+            "updated_at" : jsonResponse["data"]["updated_at"],
+            "created_at" : jsonResponse["data"]["created_at"],
+            "id" : jsonResponse["data"]["id"],
+          }
+        ];
+        data.data = list;
+        return data;
+      } else {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Something went wrong !!!"),));
       }
     } on DioError catch (e) {
-      print(e.toString());
     }
   }
 }

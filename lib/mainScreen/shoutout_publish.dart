@@ -6,10 +6,10 @@ import 'shoutout_publish_confirm.dart';
 import 'appbar_bottombar.dart';
 import 'dart:io';
 class ShoutOutPublish extends StatefulWidget{
-  final File file;
+  final File file, thumbnailImage;
   final String title, description, extension, isPaid;
   final int cost;
-  ShoutOutPublish({@required this.file, @required this.title, @required this.description, @required this.extension, this.cost, this.isPaid}) : assert (description != null && file != null && title != null && extension != null);
+  ShoutOutPublish({@required this.file, @required this.title, @required this.description, @required this.extension, @required this.thumbnailImage, this.cost, this.isPaid}) : assert (description != null && file != null && title != null && extension != null && thumbnailImage != null);
   @override
   _ShoutOutPublish createState() => _ShoutOutPublish();
 }
@@ -350,7 +350,7 @@ class _ShoutOutPublish extends State<ShoutOutPublish>{
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
                                       image: DecorationImage(
-                                        image: FileImage(widget.file),
+                                        image: FileImage(widget.thumbnailImage),
                                         fit: BoxFit.fill,
                                       ),
                                     ),

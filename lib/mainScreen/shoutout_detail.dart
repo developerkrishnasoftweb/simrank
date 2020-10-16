@@ -6,9 +6,9 @@ import '../constant/strings.dart';
 import 'shoutout_monetize.dart';
 import 'appbar_bottombar.dart';
 class ShoutOutDetail extends StatefulWidget{
-  final File file;
+  final File file, thumbnailImage;
   final String title, description, path, extension;
-  ShoutOutDetail({@required this.file, @required this.title, @required this.description, @required this.path, @required this.extension}) : assert (description != null && file != null && title != null && extension != null);
+  ShoutOutDetail({@required this.file, @required this.title, @required this.description, @required this.path, @required this.extension, @required this.thumbnailImage}) : assert (description != null && file != null && title != null && extension != null && thumbnailImage != null);
   @override
   _ShoutOutDetail createState() => _ShoutOutDetail();
 }
